@@ -16,15 +16,5 @@
       ]
     }
   ],
-  "cleanUrls": true,
-  "rewrites": [
-    {
-      "source": "/captura",
-      "destination": "/captura.html"
-    },
-    {
-      "source": "/obrigado",
-      "destination": "/obrigado.html"
-    }
-  ]
-}
+  "cleanUrls": true
+} 

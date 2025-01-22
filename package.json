@@ -1,17 +1,21 @@
 {
   "name": "landing-page-romulo",
   "version": "1.0.0",
-  "description": "Landing Page Rômulo",
-  "main": "index.html",
+  "description": "Landing Page Romulo",
+  "main": "server.js",
   "scripts": {
-    "start": "serve -s . -l ${PORT:-80} --no-clipboard",
-    "dev": "serve -s . -l 3000 --no-clipboard"
+    "start": "node server.js",
+    "dev": "nodemon server.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "express": "^4.18.2",
     "serve": "^14.2.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
   },
   "engines": {
     "node": ">=14.0.0"

@@ -23,19 +23,33 @@ app.use((req, res, next) => {
     next();
 });
 
-// Rota para a página inicial
+// Redirecionar raiz para página de captura
 app.get('/', (req, res) => {
+    res.redirect('/lp-cp');
+});
+
+// Rota para a página de vendas (index)
+app.get('/lp-vd', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
 });
 
 // Rota para a página de captura
-app.get('/captura', (req, res) => {
+app.get('/lp-cp', (req, res) => {
     res.sendFile(path.join(__dirname, 'captura.html'));
 });
 
 // Rota para a página de obrigado
-app.get('/obrigado', (req, res) => {
+app.get('/lp-ob', (req, res) => {
     res.sendFile(path.join(__dirname, 'obrigado.html'));
+});
+
+// Redirecionar rotas antigas para as novas
+app.get('/captura', (req, res) => {
+    res.redirect('/lp-cp');
+});
+
+app.get('/obrigado', (req, res) => {
+    res.redirect('/lp-ob');
 });
 
 // Endpoint para processar o formulário

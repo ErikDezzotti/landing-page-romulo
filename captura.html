@@ -117,13 +117,23 @@
         }
 
         .btn-neon {
+            animation: pulse-scale 2s infinite;
             box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
-            animation: neon-pulse 2s infinite;
         }
 
-        @keyframes neon-pulse {
-            0%, 100% { box-shadow: 0 0 15px rgba(255, 215, 0, 0.3); }
-            50% { box-shadow: 0 0 25px rgba(255, 215, 0, 0.5); }
+        @keyframes pulse-scale {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+            }
+            50% {
+                transform: scale(1.02);
+                box-shadow: 0 0 25px rgba(255, 215, 0, 0.5);
+            }
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+            }
         }
 
         @keyframes subtle-glow {
@@ -237,7 +247,7 @@
                             <input 
                                 type="text" 
                                 placeholder="Seu nome completo" 
-                                class="w-full pl-8 xs:pl-10 sm:pl-12 pr-3 xs:pr-4 py-2 xs:py-3 sm:py-4 rounded-md xs:rounded-lg sm:rounded-xl text-xs xs:text-sm bg-white border-2 border-gold/50 hover:border-gold focus:border-gold text-darker placeholder-darker/50 focus:outline-none focus:ring-2 focus:ring-gold/30"
+                                class="w-full pl-8 xs:pl-10 sm:pl-12 pr-3 xs:pr-4 py-3 xs:py-4 sm:py-5 rounded-md xs:rounded-lg sm:rounded-xl text-xs xs:text-sm bg-white border-2 border-gold/50 hover:border-gold focus:border-gold text-darker placeholder-darker/50 focus:outline-none focus:ring-2 focus:ring-gold/30"
                                 required
                                 style="box-shadow: inset 0 2px 4px rgba(0,0,0,0.05); transition: all 0.3s ease;"
                             >
@@ -250,7 +260,7 @@
                             <input 
                                 type="email" 
                                 placeholder="Seu melhor e-mail" 
-                                class="w-full pl-8 xs:pl-10 sm:pl-12 pr-3 xs:pr-4 py-2 xs:py-3 sm:py-4 rounded-md xs:rounded-lg sm:rounded-xl text-xs xs:text-sm bg-white border-2 border-gold/50 hover:border-gold focus:border-gold text-darker placeholder-darker/50 focus:outline-none focus:ring-2 focus:ring-gold/30"
+                                class="w-full pl-8 xs:pl-10 sm:pl-12 pr-3 xs:pr-4 py-3 xs:py-4 sm:py-5 rounded-md xs:rounded-lg sm:rounded-xl text-xs xs:text-sm bg-white border-2 border-gold/50 hover:border-gold focus:border-gold text-darker placeholder-darker/50 focus:outline-none focus:ring-2 focus:ring-gold/30"
                                 required
                                 style="box-shadow: inset 0 2px 4px rgba(0,0,0,0.05); transition: all 0.3s ease;"
                             >
@@ -263,14 +273,15 @@
                             <input 
                                 type="tel" 
                                 placeholder="Seu WhatsApp" 
-                                class="w-full pl-8 xs:pl-10 sm:pl-12 pr-3 xs:pr-4 py-2 xs:py-3 sm:py-4 rounded-md xs:rounded-lg sm:rounded-xl text-xs xs:text-sm bg-white border-2 border-gold/50 hover:border-gold focus:border-gold text-darker placeholder-darker/50 focus:outline-none focus:ring-2 focus:ring-gold/30"
+                                class="w-full pl-8 xs:pl-10 sm:pl-12 pr-3 xs:pr-4 py-3 xs:py-4 sm:py-5 rounded-md xs:rounded-lg sm:rounded-xl text-xs xs:text-sm bg-white border-2 border-gold/50 hover:border-gold focus:border-gold text-darker placeholder-darker/50 focus:outline-none focus:ring-2 focus:ring-gold/30"
                                 required
                                 style="box-shadow: inset 0 2px 4px rgba(0,0,0,0.05); transition: all 0.3s ease;"
                             >
                         </div>
 
-                        <button class="w-full bg-gradient-to-r from-gold to-yellow-500 text-darker font-bold text-xs xs:text-sm sm:text-base px-3 xs:px-4 sm:px-6 py-2 xs:py-3 sm:py-4 rounded-md xs:rounded-lg hover:scale-[1.02] transition-all btn-neon">
+                        <button class="w-full bg-gradient-to-r from-gold to-yellow-500 text-darker font-bold text-xs xs:text-sm sm:text-base px-3 xs:px-4 sm:px-6 py-3 xs:py-4 sm:py-5 rounded-md xs:rounded-lg hover:scale-[1.02] active:scale-[0.98] transition-all btn-neon relative overflow-hidden group">
                             <span class="relative z-10">INSCRIÇÃO RÁPIDA E FÁCIL</span>
+                            <div class="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity"></div>
                         </button>
 
                         <!-- Mensagem de Segurança -->

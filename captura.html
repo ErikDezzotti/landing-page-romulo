@@ -275,68 +275,41 @@
                         </p>
                     </div>
 
-                    <!-- Form com Inputs Otimizados -->
-                    <form class="space-y-2 xs:space-y-3 sm:space-y-4 mb-4 xs:mb-6 sm:mb-8">
+                    <!-- Formulário com ID para ancoragem -->
+                    <div id="formulario-inscricao" class="space-y-2 xs:space-y-3 sm:space-y-4 mb-4 xs:mb-6 sm:mb-8">
                         <div class="relative group">
                             <div class="absolute inset-y-0 left-0 pl-2 xs:pl-3 sm:pl-4 flex items-center pointer-events-none">
                                 <i class="fas fa-user text-darker/70 text-xs xs:text-sm sm:text-base group-hover:text-gold group-focus-within:text-gold transition-colors"></i>
                             </div>
-                            <input 
-                                type="text" 
-                                placeholder="Seu nome completo" 
-                                class="w-full pl-8 xs:pl-10 sm:pl-12 pr-3 xs:pr-4 py-3 xs:py-4 sm:py-4 md:py-3 lg:py-3 rounded-md xs:rounded-lg sm:rounded-xl text-xs xs:text-sm bg-white border-2 border-gold/50 hover:border-gold focus:border-gold text-darker placeholder-darker/50 focus:outline-none focus:ring-2 focus:ring-gold/30"
-                                required
-                                style="box-shadow: inset 0 2px 4px rgba(0,0,0,0.05); transition: all 0.3s ease;"
-                            >
+                            <input type="text" name="nome" id="nome" required
+                                class="w-full py-2 xs:py-2.5 sm:py-3 pl-8 xs:pl-10 sm:pl-12 pr-4 xs:pr-5 sm:pr-6 rounded-xl text-sm xs:text-base text-darker placeholder-darker/50 bg-white/90 border-2 border-transparent focus:border-gold/50 focus:bg-white focus:outline-none transition-all"
+                                placeholder="Seu nome completo">
                         </div>
-
                         <div class="relative group">
                             <div class="absolute inset-y-0 left-0 pl-2 xs:pl-3 sm:pl-4 flex items-center pointer-events-none">
                                 <i class="fas fa-envelope text-darker/70 text-xs xs:text-sm sm:text-base group-hover:text-gold group-focus-within:text-gold transition-colors"></i>
                             </div>
-                            <input 
-                                type="email" 
-                                placeholder="Seu melhor e-mail" 
-                                class="w-full pl-8 xs:pl-10 sm:pl-12 pr-3 xs:pr-4 py-3 xs:py-4 sm:py-4 md:py-3 lg:py-3 rounded-md xs:rounded-lg sm:rounded-xl text-xs xs:text-sm bg-white border-2 border-gold/50 hover:border-gold focus:border-gold text-darker placeholder-darker/50 focus:outline-none focus:ring-2 focus:ring-gold/30"
-                                required
-                                style="box-shadow: inset 0 2px 4px rgba(0,0,0,0.05); transition: all 0.3s ease;"
-                            >
+                            <input type="email" name="email" id="email" required
+                                class="w-full py-2 xs:py-2.5 sm:py-3 pl-8 xs:pl-10 sm:pl-12 pr-4 xs:pr-5 sm:pr-6 rounded-xl text-sm xs:text-base text-darker placeholder-darker/50 bg-white/90 border-2 border-transparent focus:border-gold/50 focus:bg-white focus:outline-none transition-all"
+                                placeholder="Seu melhor e-mail">
                         </div>
-
                         <div class="relative group">
                             <div class="absolute inset-y-0 left-0 pl-2 xs:pl-3 sm:pl-4 flex items-center pointer-events-none">
-                                <i class="fab fa-whatsapp text-darker/70 text-xs xs:text-sm sm:text-base group-hover:text-gold group-focus-within:text-gold transition-colors"></i>
+                                <i class="fas fa-phone text-darker/70 text-xs xs:text-sm sm:text-base group-hover:text-gold group-focus-within:text-gold transition-colors"></i>
                             </div>
-                            <input 
-                                type="tel" 
-                                placeholder="Seu WhatsApp" 
-                                class="w-full pl-8 xs:pl-10 sm:pl-12 pr-3 xs:pr-4 py-3 xs:py-4 sm:py-4 md:py-3 lg:py-3 rounded-md xs:rounded-lg sm:rounded-xl text-xs xs:text-sm bg-white border-2 border-gold/50 hover:border-gold focus:border-gold text-darker placeholder-darker/50 focus:outline-none focus:ring-2 focus:ring-gold/30"
-                                required
-                                style="box-shadow: inset 0 2px 4px rgba(0,0,0,0.05); transition: all 0.3s ease;"
-                            >
+                            <input type="tel" name="telefone" id="telefone" required
+                                class="w-full py-2 xs:py-2.5 sm:py-3 pl-8 xs:pl-10 sm:pl-12 pr-4 xs:pr-5 sm:pr-6 rounded-xl text-sm xs:text-base text-darker placeholder-darker/50 bg-white/90 border-2 border-transparent focus:border-gold/50 focus:bg-white focus:outline-none transition-all"
+                                placeholder="Seu WhatsApp">
                         </div>
-
-                        <button class="w-full bg-gradient-to-r from-gold to-yellow-500 text-darker font-bold text-xs xs:text-sm sm:text-base px-3 xs:px-4 sm:px-6 py-3 xs:py-4 sm:py-5 rounded-md xs:rounded-lg hover:scale-[1.02] active:scale-[0.98] transition-all btn-neon relative overflow-hidden group">
-                            <span class="relative z-10">INSCRIÇÃO RÁPIDA E FÁCIL</span>
-                            <div class="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity"></div>
+                        <button type="submit" id="submitBtn"
+                            class="w-full py-3 xs:py-3.5 sm:py-4 px-6 xs:px-8 rounded-xl text-sm xs:text-base font-semibold text-darker bg-gradient-to-r from-gold to-yellow-500 hover:from-yellow-500 hover:to-gold transform hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 relative overflow-hidden group">
+                            <span class="relative z-10">QUERO COMEÇAR AGORA!</span>
+                            <div class="absolute inset-0 bg-gradient-to-r from-yellow-400 to-gold opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                         </button>
 
-                        <!-- Mensagem de Segurança -->
-                        <div class="flex flex-wrap items-center justify-center gap-2 xs:gap-3 mt-3 xs:mt-4">
-                            <div class="px-3 py-1.5 rounded-full" style="background: linear-gradient(145deg, rgba(255, 215, 0, 0.1), rgba(255, 215, 0, 0.05)); border: 1px solid rgba(255, 215, 0, 0.2);">
-                                <div class="flex items-center gap-2">
-                                    <div class="flex items-center">
-                                        <i class="fas fa-shield-alt text-darker text-xs"></i>
-                                        <span class="ml-1 text-xs font-bold text-darker">100% SEGURO</span>
-                                    </div>
-                                    <div class="flex items-center">
-                                        <i class="fas fa-lock text-darker text-xs"></i>
-                                        <span class="ml-1 text-xs text-darker">Dados protegidos</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
+                        <!-- Mensagem de feedback -->
+                        <div id="feedbackMessage" class="hidden mt-4 p-4 rounded-xl text-center font-medium"></div>
+                    </div>
 
                     <!-- Informações Compactas Repensadas -->
                     <div class="flex flex-row items-center justify-center gap-2 xs:gap-3 mt-6">
@@ -521,14 +494,13 @@
                                 <span class="text-gold">Conduza sua orquestra com maestria</span> e transforme cada apresentação 👇
                             </p>
                         </div>
-                        <!-- Novo Botão CTA -->
-                        <button class="w-full bg-gradient-to-r from-gold to-yellow-500 text-darker font-bold text-base px-8 py-6 rounded-xl hover:scale-105 transition-all relative overflow-hidden group btn-neon mx-auto whitespace-normal">
-                            <span class="relative z-10 flex items-center justify-center gap-3 text-center">
-                                <i class="fas fa-graduation-cap text-lg"></i>
+                        <!-- Botão CTA Principal -->
+                        <a href="#formulario-inscricao" class="w-full max-w-2xl mx-auto inline-block bg-gradient-to-r from-gold to-yellow-500 text-darker font-bold text-xl px-12 py-6 rounded-xl hover:scale-105 transition-all group relative overflow-hidden btn-neon scroll-smooth">
+                            <span class="relative z-10 flex items-center justify-center gap-2">
                                 QUERO PARTICIPAR DA MASTERCLASS
                             </span>
                             <div class="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity"></div>
-                        </button>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -651,9 +623,10 @@
 
                             <!-- CTA Premium -->
                             <div class="pt-4 flex justify-center">
-                                <a href="captura.html" class="inline-block bg-gradient-to-r from-gold to-yellow-500 text-darker font-bold text-lg px-8 py-4 rounded-xl hover:scale-105 transition-all group relative overflow-hidden btn-neon">
-                                    <span class="relative z-10 flex items-center justify-center gap-2">
-                                        <i class="fas fa-play-circle"></i>
+                                <!-- Botão CTA Secundário -->
+                                <a href="#formulario-inscricao" class="inline-block bg-gradient-to-r from-gold to-yellow-500 text-darker font-bold text-lg px-8 py-4 rounded-xl hover:scale-105 transition-all relative overflow-hidden group btn-neon scroll-smooth">
+                                    <span class="relative z-10 flex items-center justify-center gap-3 text-center">
+                                        <i class="fas fa-graduation-cap text-lg"></i>
                                         QUERO APRENDER COM O MAESTRO RÔMULO
                                     </span>
                                     <div class="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity"></div>
@@ -683,5 +656,68 @@
         let scrolled = (winScroll / height) * 100;
         document.getElementById("progressBar").style.width = scrolled + "%";
     };
+</script>
+<script>
+document.getElementById('leadForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    const submitBtn = document.getElementById('submitBtn');
+    const feedbackMessage = document.getElementById('feedbackMessage');
+    
+    // Desabilitar o botão durante o envio
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
+    
+    try {
+        const formData = {
+            nome: document.getElementById('nome').value,
+            email: document.getElementById('email').value,
+            telefone: document.getElementById('telefone').value
+        };
+        
+        const response = await fetch('/submit-form', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formData)
+        });
+        
+        const result = await response.json();
+        
+        if (result.success) {
+            feedbackMessage.className = 'mt-4 p-4 rounded-xl text-center font-medium bg-green-100 text-green-800';
+            feedbackMessage.textContent = 'Cadastro realizado com sucesso! Redirecionando...';
+            setTimeout(() => {
+                window.location.href = '/obrigado';
+            }, 2000);
+        } else {
+            throw new Error(result.message || 'Erro ao processar cadastro');
+        }
+    } catch (error) {
+        feedbackMessage.className = 'mt-4 p-4 rounded-xl text-center font-medium bg-red-100 text-red-800';
+        feedbackMessage.textContent = 'Erro ao processar seu cadastro. Por favor, tente novamente.';
+    } finally {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = '<span class="relative z-10">QUERO COMEÇAR AGORA!</span><div class="absolute inset-0 bg-gradient-to-r from-yellow-400 to-gold opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>';
+        feedbackMessage.classList.remove('hidden');
+    }
+});
+</script>
+<script>
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+            
+            if (targetElement) {
+                targetElement.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'center'
+                });
+            }
+        });
+    });
 </script>
 </html>

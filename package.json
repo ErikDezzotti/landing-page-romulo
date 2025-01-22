@@ -1,7 +1,7 @@
 {
   "name": "landing-page-romulo",
   "version": "1.0.0",
-  "description": "Landing Page Romulo",
+  "description": "Landing Page para captura de leads",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
@@ -12,6 +12,8 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.18.2",
+    "axios": "^1.6.2",
+    "body-parser": "^1.20.2",
     "serve": "^14.2.1"
   },
   "devDependencies": {

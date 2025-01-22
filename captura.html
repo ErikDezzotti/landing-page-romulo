@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Domine a Regência | Método D.O.M.</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        gold: '#FFD700',
+                        darker: '#0A0A0A',
+                        dark: '#111111',
+                        accent: '#1A1A1A'
+                    },
+                    screens: {
+                        'xs': '360px',
+                        'sm': '480px',
+                        'md': '768px',
+                        'lg': '1024px',
+                        'xl': '1280px'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        :root {
+            --gold: #FFD700;
+            --darker: #0A0A0A;
+        }
+
+        body {
+            background-color: var(--darker);
+            font-family: system-ui, -apple-system, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Otimizações Mobile */
+        @media (max-width: 480px) {
+            .container {
+                padding-left: 12px !important;
+                padding-right: 12px !important;
+            }
+            
+            .glass-card {
+                padding: 16px !important;
+            }
+        }
+
+        /* Estilização da barra de rolagem */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--darker);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(to bottom, var(--gold), #FFA500);
+            border-radius: 3px;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .glass-card:hover {
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateY(-5px);
+        }
+
+        .hero-gradient {
+            background: 
+                radial-gradient(circle at 70% 30%, rgba(255, 215, 0, 0.15) 0%, transparent 70%),
+                radial-gradient(circle at 30% 70%, rgba(255, 215, 0, 0.1) 0%, transparent 70%),
+                linear-gradient(to bottom, rgba(10, 10, 10, 0.95), rgba(10, 10, 10, 0.98));
+        }
+
+        @keyframes float-slow {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(20px, 20px) rotate(5deg); }
+            100% { transform: translate(0, 0) rotate(0deg); }
+        }
+
+        .animate-float-slow {
+            animation: float-slow 15s ease-in-out infinite;
+        }
+
+        .input-premium {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            backdrop-filter: blur(5px);
+            transition: all 0.3s ease;
+        }
+
+        .input-premium:focus {
+            border-color: var(--gold);
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+            transform: translateY(-1px);
+        }
+
+        .input-premium::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .input-premium:hover::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .btn-neon {
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+            animation: neon-pulse 2s infinite;
+        }
+
+        @keyframes neon-pulse {
+            0%, 100% { box-shadow: 0 0 15px rgba(255, 215, 0, 0.3); }
+            50% { box-shadow: 0 0 25px rgba(255, 215, 0, 0.5); }
+        }
+
+        @keyframes subtle-glow {
+            0%, 100% { filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.3)); }
+            50% { filter: drop-shadow(0 0 25px rgba(255, 215, 0, 0.5)); }
+        }
+
+        .bg-gradient-radial {
+            background: radial-gradient(circle at center, var(--tw-gradient-from), var(--tw-gradient-to));
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-darker text-white overflow-x-hidden">
+    <!-- Barra de Progresso -->
+    <div id="progressBar" class="progress-bar"></div>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-screen flex items-center justify-center py-8 sm:py-12 md:py-20 px-3 sm:px-4 overflow-hidden">
+        <!-- Background Layers -->
+        <div class="absolute inset-0 z-0">
+            <!-- Camada 1: Imagem da Orquestra -->
+            <img 
+                src="./assets/imagens-para-sessoes/533696_1_17115211336603bd6d11d70.webp" 
+                alt="Background" 
+                class="absolute inset-0 w-full h-full object-cover opacity-80"
+            >
+            
+            <!-- Camada 3: Gradientes e Efeitos -->
+            <div class="absolute inset-0 bg-gradient-to-b from-darker/95 via-darker/80 to-darker/95 z-20"></div>
+            <div class="absolute inset-0 bg-gradient-to-r from-darker/90 via-transparent to-darker/90 z-20"></div>
+            <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,215,0,0.15),transparent_70%)] z-20"></div>
+            <div class="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(255,215,0,0.2),transparent_50%)] z-20"></div>
+            
+            <!-- Camada 4: Efeito Dourado no Expert -->
+            <div class="absolute inset-0 flex items-center justify-center z-30">
+                <div class="absolute w-full h-full bg-gradient-radial from-gold/10 to-transparent opacity-50"></div>
+                <div class="absolute w-full h-full bg-gradient-to-tr from-gold/15 via-transparent to-gold/15 animate-pulse"></div>
+            </div>
+        </div>
+
+        <!-- Expert em Primeiro Plano -->
+        <div class="absolute inset-0 flex items-center justify-end z-20 pointer-events-none" style="transform: translateY(-5%);">
+            <!-- Desktop Version -->
+            <img 
+                src="./assets/imagens-para-sessoes/romulocursofoto-pg-cp.webp" 
+                alt="Maestro Expert" 
+                class="hidden md:block h-[110%] w-auto object-contain object-right transform -translate-x-[15%] scale-105"
+                style="filter: drop-shadow(0 0 30px rgba(255, 215, 0, 0.2));"
+            >
+        </div>
+
+        <!-- Mobile Expert Image -->
+        <div class="md:hidden absolute inset-0 flex items-start justify-center z-20 pointer-events-none pt-4">
+            <img 
+                src="./assets/imagens-para-sessoes/romulocursofoto-pg-cp.webp" 
+                alt="Maestro Expert" 
+                class="h-[60vh] w-auto object-contain object-top transform scale-110"
+                style="filter: drop-shadow(0 0 30px rgba(255, 215, 0, 0.2));"
+            >
+        </div>
+
+        <!-- Hero Content -->
+        <div class="container max-w-6xl mx-auto relative z-40">
+            <div class="grid md:grid-cols-2 gap-6 md:gap-12 items-start md:items-center">
+                <!-- Form Section -->
+                <div class="p-3 xs:p-4 sm:p-6 md:p-8 rounded-lg xs:rounded-xl sm:rounded-2xl relative z-50 mt-[45vh] md:mt-0 max-w-[95vw] xs:max-w-[90vw] sm:max-w-[85vw] md:max-w-none mx-auto backdrop-blur-md"
+                    style="background: linear-gradient(145deg, rgba(255, 255, 255, 0.85), rgba(255, 252, 245, 0.88));">
+                    
+                    <!-- Social Proof Compacto -->
+                    <div class="flex items-center justify-center gap-3 xs:gap-4 mb-4">
+                        <div class="flex items-center gap-1.5 px-2 py-1 rounded-full" style="background: linear-gradient(145deg, #FFD700, #FFC000); box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                            <i class="fas fa-users text-darker text-xs"></i>
+                            <span class="text-xs text-darker font-medium">+300 Encarregados</span>
+                        </div>
+                        <div class="flex items-center gap-1.5 px-2 py-1 rounded-full" style="background: linear-gradient(145deg, #FFD700, #FFC000); box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                            <i class="fas fa-check-circle text-darker text-xs"></i>
+                            <span class="text-xs text-darker font-medium">100% Gratuito</span>
+                        </div>
+                        <div class="flex items-center gap-1.5 px-2 py-1 rounded-full" style="background: linear-gradient(145deg, #FFD700, #FFC000); box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                            <i class="fas fa-star text-darker text-xs"></i>
+                            <span class="text-xs text-darker font-medium">4.9/5</span>
+                        </div>
+                    </div>
+
+                    <!-- Headline -->
+                    <div class="text-center mb-3 xs:mb-4 sm:mb-6">
+                        <h1 class="text-lg xs:text-xl sm:text-2xl lg:text-3xl font-bold mb-1.5 xs:mb-2 sm:mb-3 px-1 xs:px-2 text-darker">
+                            <div class="flex flex-col gap-0.5 xs:gap-1">
+                                <span class="relative text-darker font-black tracking-wide" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.15);">
+                                    MASTERCLASS DE REGÊNCIAA
+                                </span>
+                                <span class="text-darker font-extrabold text-[0.85em]" style="text-shadow: 1px 1px 2px rgba(0,0,0,0.1);">
+                                    PARA ENCARREGADOS DA CCB
+                                </span>
+                            </div>
+                        </h1>
+                        <h2 class="text-lg xs:text-xl sm:text-2xl lg:text-4xl font-black mb-2 xs:mb-3 sm:mb-4" style="background: linear-gradient(145deg, #FFD700, #DAA520); -webkit-background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 2px 2px rgba(0,0,0,0.2)); letter-spacing: 0.5px; line-height: 1.2;">
+                            "O DESTRAVAR DO DOM"
+                        </h2>
+                        <p class="text-darker/70 text-xs xs:text-sm sm:text-base lg:text-lg max-w-[95%] xs:max-w-[90%] sm:max-w-[480px] mx-auto mb-3 xs:mb-4 sm:mb-6 px-1 xs:px-2 sm:px-4">
+                            <span class="text-darker font-bold">Descubra na prática</span> o método em 
+                            <span class="px-2 py-0.5 rounded" style="background: linear-gradient(145deg, #FFD700, #DAA520); color: #0A0A0A; font-weight: 700;">3 passos</span> 
+                            para reger os hinos da CCB com 
+                            <span class="text-darker font-semibold">confiança, expressividade e maestria</span>, 
+                            dedicando apenas 
+                            <span class="bg-gold/5 px-2 py-0.5 rounded text-darker font-bold">15 minutos por dia</span>.
+                        </p>
+                    </div>
+
+                    <!-- Form com Inputs Otimizados -->
+                    <form class="space-y-2 xs:space-y-3 sm:space-y-4 mb-4 xs:mb-6 sm:mb-8">
+                        <div class="relative group">
+                            <div class="absolute inset-y-0 left-0 pl-2 xs:pl-3 sm:pl-4 flex items-center pointer-events-none">
+                                <i class="fas fa-user text-darker/70 text-xs xs:text-sm sm:text-base group-hover:text-gold group-focus-within:text-gold transition-colors"></i>
+                            </div>
+                            <input 
+                                type="text" 
+                                placeholder="Seu nome completo" 
+                                class="w-full pl-8 xs:pl-10 sm:pl-12 pr-3 xs:pr-4 py-2 xs:py-3 sm:py-4 rounded-md xs:rounded-lg sm:rounded-xl text-xs xs:text-sm bg-white border-2 border-gold/50 hover:border-gold focus:border-gold text-darker placeholder-darker/50 focus:outline-none focus:ring-2 focus:ring-gold/30"
+                                required
+                                style="box-shadow: inset 0 2px 4px rgba(0,0,0,0.05); transition: all 0.3s ease;"
+                            >
+                        </div>
+
+                        <div class="relative group">
+                            <div class="absolute inset-y-0 left-0 pl-2 xs:pl-3 sm:pl-4 flex items-center pointer-events-none">
+                                <i class="fas fa-envelope text-darker/70 text-xs xs:text-sm sm:text-base group-hover:text-gold group-focus-within:text-gold transition-colors"></i>
+                            </div>
+                            <input 
+                                type="email" 
+                                placeholder="Seu melhor e-mail" 
+                                class="w-full pl-8 xs:pl-10 sm:pl-12 pr-3 xs:pr-4 py-2 xs:py-3 sm:py-4 rounded-md xs:rounded-lg sm:rounded-xl text-xs xs:text-sm bg-white border-2 border-gold/50 hover:border-gold focus:border-gold text-darker placeholder-darker/50 focus:outline-none focus:ring-2 focus:ring-gold/30"
+                                required
+                                style="box-shadow: inset 0 2px 4px rgba(0,0,0,0.05); transition: all 0.3s ease;"
+                            >
+                        </div>
+
+                        <div class="relative group">
+                            <div class="absolute inset-y-0 left-0 pl-2 xs:pl-3 sm:pl-4 flex items-center pointer-events-none">
+                                <i class="fab fa-whatsapp text-darker/70 text-xs xs:text-sm sm:text-base group-hover:text-gold group-focus-within:text-gold transition-colors"></i>
+                            </div>
+                            <input 
+                                type="tel" 
+                                placeholder="Seu WhatsApp" 
+                                class="w-full pl-8 xs:pl-10 sm:pl-12 pr-3 xs:pr-4 py-2 xs:py-3 sm:py-4 rounded-md xs:rounded-lg sm:rounded-xl text-xs xs:text-sm bg-white border-2 border-gold/50 hover:border-gold focus:border-gold text-darker placeholder-darker/50 focus:outline-none focus:ring-2 focus:ring-gold/30"
+                                required
+                                style="box-shadow: inset 0 2px 4px rgba(0,0,0,0.05); transition: all 0.3s ease;"
+                            >
+                        </div>
+
+                        <button class="w-full bg-gradient-to-r from-gold to-yellow-500 text-darker font-bold text-xs xs:text-sm sm:text-base px-3 xs:px-4 sm:px-6 py-2 xs:py-3 sm:py-4 rounded-md xs:rounded-lg hover:scale-[1.02] transition-all btn-neon">
+                            <span class="relative z-10">INSCRIÇÃO RÁPIDA E FÁCIL</span>
+                        </button>
+
+                        <!-- Mensagem de Segurança -->
+                        <div class="flex flex-wrap items-center justify-center gap-2 xs:gap-3 mt-3 xs:mt-4">
+                            <div class="px-3 py-1.5 rounded-full" style="background: linear-gradient(145deg, rgba(255, 215, 0, 0.1), rgba(255, 215, 0, 0.05)); border: 1px solid rgba(255, 215, 0, 0.2);">
+                                <div class="flex items-center gap-2">
+                                    <div class="flex items-center">
+                                        <i class="fas fa-shield-alt text-darker text-xs"></i>
+                                        <span class="ml-1 text-xs font-bold text-darker">100% SEGURO</span>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <i class="fas fa-lock text-darker text-xs"></i>
+                                        <span class="ml-1 text-xs text-darker">Dados protegidos</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                    <!-- Informações Compactas Repensadas -->
+                    <div class="flex items-center justify-center gap-4 mt-4">
+                        <div class="px-3 py-1.5 rounded-full" style="background: linear-gradient(145deg, rgba(255, 215, 0, 0.1), rgba(255, 215, 0, 0.05)); border: 1px solid rgba(255, 215, 0, 0.2);">
+                            <div class="flex items-center gap-2">
+                                <i class="far fa-calendar-alt text-darker text-sm"></i>
+                                <div class="flex flex-col">
+                                    <span class="text-xs font-bold text-darker">29 DE JANEIRO</span>
+                                    <span class="text-[10px] text-darker">21:45 - Horário de Brasília</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="px-3 py-1.5 rounded-full" style="background: linear-gradient(145deg, rgba(255, 215, 0, 0.1), rgba(255, 215, 0, 0.05)); border: 1px solid rgba(255, 215, 0, 0.2);">
+                            <div class="flex items-center gap-2">
+                                <i class="fas fa-video text-darker text-sm"></i>
+                                <div class="flex flex-col">
+                                    <span class="text-xs font-bold text-darker">MASTERCLASS</span>
+                                    <span class="text-[10px] text-darker">100% Online ao Vivo</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Espaço para equilibrar o layout -->
+                <div class="hidden md:block"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Conteúdo Principal com Background Unificado -->
+    <section class="relative z-10 overflow-hidden bg-gradient-to-b from-darker via-darker/95 to-darker">
+        <!-- Background Elements -->
+        <div class="absolute inset-0">
+            <!-- Círculos Dourados -->
+            <div class="absolute w-[1000px] h-[1000px] bg-gold/5 rounded-full blur-3xl animate-float-slow" style="top: 10%; left: -20%"></div>
+            <div class="absolute w-[800px] h-[800px] bg-gold/5 rounded-full blur-3xl" style="top: 40%; right: -10%"></div>
+            <div class="absolute w-[600px] h-[600px] bg-gold/5 rounded-full blur-3xl" style="bottom: 5%; left: 30%"></div>
+            
+            <!-- Gradientes Adicionais -->
+            <div class="absolute inset-0 bg-gradient-to-tr from-gold/5 via-transparent to-gold/5 opacity-30"></div>
+            <div class="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(255,215,0,0.1),transparent_60%)]"></div>
+        </div>
+
+        <div class="relative">
+            <!-- O Que Você Vai Aprender -->
+            <div class="py-20 px-4">
+                <div class="container max-w-6xl mx-auto">
+                    <div class="text-center mb-16">
+                        <span class="text-gold/60 text-sm font-medium tracking-wider mb-4 block uppercase">Método Exclusivo CCB</span>
+                        <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
+                            <div class="inline-flex flex-col gap-2">
+                                <span class="bg-gradient-to-r from-gold to-yellow-500 text-transparent bg-clip-text">
+                                    O Que Você Vai Aprender
+                                </span>
+                                <span class="text-white">Nesta Masterclass</span>
+                            </div>
+                        </h2>
+                        <p class="text-gray-300 text-lg max-w-2xl mx-auto mt-4">
+                            Domine a regência dos hinos CCB com um método simples e eficaz, estudando apenas 15 minutos por dia
+                        </p>
+                    </div>
+
+                    <h3 class="text-xl text-center text-gray-400 mb-12">NESTA MASTERCLASS EXCLUSIVA</h3>
+
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <!-- Benefício 1 -->
+                        <div class="glass-card p-8 rounded-2xl border border-gold/20 hover:border-gold/40 transition-all">
+                            <div class="flex items-start gap-4">
+                                <div class="w-12 h-12 bg-gold/10 rounded-full flex items-center justify-center flex-shrink-0">
+                                    <i class="fas fa-play text-gold"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-xl font-bold mb-2">Como Iniciar na Regência</h4>
+                                    <p class="text-gray-400">
+                                        Mesmo que você nunca tenha segurado uma batuta, aprenda os primeiros passos para liderar ensaios com segurança e confiança.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Benefício 2 -->
+                        <div class="glass-card p-8 rounded-2xl border border-gold/20 hover:border-gold/40 transition-all">
+                            <div class="flex items-start gap-4">
+                                <div class="w-12 h-12 bg-gold/10 rounded-full flex items-center justify-center flex-shrink-0">
+                                    <i class="fas fa-star text-gold"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-xl font-bold mb-2">O Melhor Método para Regência</h4>
+                                    <p class="text-gray-400">
+                                        Conheça um sistema simples, eficaz e adaptado às necessidades dos encarregados da CCB, testado por maestros de nível mundial.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Benefício 3 -->
+                        <div class="glass-card p-8 rounded-2xl border border-gold/20 hover:border-gold/40 transition-all">
+                            <div class="flex items-start gap-4">
+                                <div class="w-12 h-12 bg-gold/10 rounded-full flex items-center justify-center flex-shrink-0">
+                                    <i class="fas fa-church text-gold"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-xl font-bold mb-2">As Particularidades da Regência na CCB</h4>
+                                    <p class="text-gray-400">
+                                        Descubra como alinhar técnicas profissionais ao louvor, respeitando a essência espiritual da música na igreja.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Benefício 4 -->
+                        <div class="glass-card p-8 rounded-2xl border border-gold/20 hover:border-gold/40 transition-all">
+                            <div class="flex items-start gap-4">
+                                <div class="w-12 h-12 bg-gold/10 rounded-full flex items-center justify-center flex-shrink-0">
+                                    <i class="fas fa-music text-gold"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-xl font-bold mb-2">Dominando Entradas em Contratempo</h4>
+                                    <p class="text-gray-400">
+                                        Aprenda a conduzir entradas com precisão, mesmo nos trechos mais desafiadores dos hinos.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Benefício 5 -->
+                        <div class="glass-card p-8 rounded-2xl border border-gold/20 hover:border-gold/40 transition-all">
+                            <div class="flex items-start gap-4">
+                                <div class="w-12 h-12 bg-gold/10 rounded-full flex items-center justify-center flex-shrink-0">
+                                    <i class="fas fa-heart text-gold"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-xl font-bold mb-2">Os Segredos da Regência Expressiva</h4>
+                                    <p class="text-gray-400">
+                                        Transmita emoção em sua regência e conecte músicos, orquestra e igreja em momentos de louvor inesquecíveis.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Benefício 6 -->
+                        <div class="glass-card p-8 rounded-2xl border border-gold/20 hover:border-gold/40 transition-all">
+                            <div class="flex items-start gap-4">
+                                <div class="w-12 h-12 bg-gold/10 rounded-full flex items-center justify-center flex-shrink-0">
+                                    <i class="fas fa-check-double text-gold"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-xl font-bold mb-2">Os 3 Passos para Dominar Qualquer Hino</h4>
+                                    <p class="text-gray-400">
+                                        Estude de forma eficiente e prática, aplicando um método que garante resultados consistentes, mesmo com pouco tempo disponível.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center mt-12">
+                        <div class="flex flex-col items-center justify-center gap-4">
+                            <div class="flex items-center gap-3">
+                                <i class="fas fa-music text-3xl text-gold animate-pulse"></i>
+                                <i class="fas fa-music text-3xl text-gold animate-pulse"></i>
+                            </div>
+                            <p class="text-2xl text-white font-bold mb-4 tracking-wide">
+                                Eleve Sua Regência ao Próximo Nível
+                            </p>
+                            <p class="text-lg text-gray-300 max-w-xl mb-8">
+                                Conduza sua orquestra com maestria e transforme cada apresentação
+                            </p>
+                        </div>
+                        <!-- Novo Botão CTA -->
+                        <button class="bg-gradient-to-r from-gold to-yellow-500 text-darker font-bold text-base px-12 py-6 rounded-xl hover:scale-105 transition-all relative overflow-hidden group btn-neon mx-auto">
+                            <span class="relative z-10 flex items-center justify-center gap-3 whitespace-nowrap">
+                                <i class="fas fa-graduation-cap text-lg"></i>
+                                QUERO PARTICIPAR DA MASTERCLASS
+                            </span>
+                            <div class="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity"></div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quem é o Maestro -->
+            <div class="py-20 px-4">
+                <div class="container max-w-6xl mx-auto">
+                    <!-- Título Principal -->
+                    <div class="text-center mb-16">
+                        <span class="text-gold/60 text-sm font-medium tracking-wider mb-4 block uppercase">Conheça Seu Mentor</span>
+                        <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
+                            <div class="inline-flex flex-col gap-2">
+                                <span class="bg-gradient-to-r from-gold to-yellow-500 text-transparent bg-clip-text">
+                                    Quem é o Maestro
+                                </span>
+                                <span class="text-white">Rômulo Moreira?</span>
+                            </div>
+                        </h2>
+                        <p class="text-gray-300 text-lg max-w-2xl mx-auto mt-4">
+                            Descubra a trajetória e experiência do seu mentor nesta jornada de transformação musical
+                        </p>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-12 items-center">
+                        <!-- Coluna da Foto -->
+                        <div class="relative group">
+                            <!-- Moldura Externa -->
+                            <div class="absolute inset-0 bg-gradient-to-tr from-gold/20 to-gold/5 rounded-3xl transform -rotate-1 scale-[1.02] group-hover:scale-[1.03] transition-transform"></div>
+                            
+                            <!-- Card Principal -->
+                            <div class="glass-card p-6 rounded-2xl border border-gold/30 relative transform rotate-1 group-hover:scale-[1.01] transition-all">
+                                <!-- Imagem -->
+                                <div class="relative overflow-hidden rounded-xl">
+                                    <img 
+                                        src="./assets/imagens-para-sessoes/WhatsApp Image 2025-01-19 at 14.24.41.jpeg" 
+                                        alt="Maestro Rômulo Moreira" 
+                                        class="w-full h-auto rounded-xl transform group-hover:scale-105 transition-transform duration-700"
+                                    >
+                                    <div class="absolute inset-0 bg-gradient-to-t from-darker/90 via-darker/20 to-transparent"></div>
+                                </div>
+
+                                <!-- Badges de Credenciais -->
+                                <div class="absolute bottom-10 left-10 right-10 flex flex-wrap justify-center gap-3">
+                                    <div class="glass-card px-4 py-2 rounded-full border border-gold/20 flex items-center gap-2">
+                                        <i class="fas fa-graduation-cap text-gold"></i>
+                                        <span class="text-sm">+10 Anos de Experiência</span>
+                                    </div>
+                                    <div class="glass-card px-4 py-2 rounded-full border border-gold/20 flex items-center gap-2">
+                                        <i class="fas fa-globe-americas text-gold"></i>
+                                        <span class="text-sm">5 Países</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Coluna da Biografia -->
+                        <div class="glass-card p-8 md:p-10 rounded-2xl border border-gold/20">
+                            <!-- Citação em Destaque -->
+                            <div class="relative mb-8">
+                                <i class="fas fa-quote-left text-4xl text-gold/20 absolute -top-4 -left-2"></i>
+                                <p class="text-xl md:text-2xl font-medium text-gold/90 pl-8">
+                                    Sou apaixonado por transformar vidas através da música.
+                                </p>
+                            </div>
+
+                            <!-- Texto Principal -->
+                            <div class="space-y-6 text-gray-300/90">
+                                <div class="flex gap-4 items-start">
+                                    <i class="fas fa-globe text-gold mt-1"></i>
+                                    <p>Após viajar para Alemanha, França, Inglaterra, México e Chile em busca dos segredos da regência com os maiores maestros do mundo, dedico minha vida a adaptar esses conhecimentos para a realidade dos encarregados da CCB.</p>
+                                </div>
+
+                                <div class="flex gap-4 items-start">
+                                    <i class="fas fa-star text-gold mt-1"></i>
+                                    <p>Com mais de uma década de experiência como professor de violino e regente, desenvolvi um método exclusivo, simples e poderoso que ensina encarregados a reger com franqueza, expressividade e maestria, mesmo nos hinos mais desafiadores.</p>
+                                </div>
+
+                                <div class="flex gap-4 items-start">
+                                    <i class="fas fa-bullseye text-gold mt-1"></i>
+                                    <p>Meu objetivo? Que você domine a regência, inspire sua orquestra e honre seu ministério com maestria.</p>
+                                </div>
+
+                                <!-- Citação Final -->
+                                <div class="glass-card p-6 rounded-xl border border-gold/20 mt-8">
+                                    <p class="text-gold font-medium italic text-lg">
+                                        "Se você acredita que é possível transformar sua forma de reger e alcançar um novo nível na parte musical, este masterclass foi feito para você."
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- CTA -->
+                            <button class="w-full mt-8 bg-gradient-to-r from-gold to-yellow-500 text-darker font-bold text-sm px-6 py-4 rounded-xl hover:scale-105 transition-all relative overflow-hidden group btn-neon">
+                                <span class="relative z-10 flex items-center justify-center gap-1.5 whitespace-nowrap">
+                                    <i class="fas fa-play-circle text-sm"></i>
+                                    QUERO APRENDER COM O MAESTRO
+                                </span>
+                                <div class="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity"></div>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+<script>
+    // Progress Bar
+    window.onscroll = function() {
+        let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+        let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        let scrolled = (winScroll / height) * 100;
+        document.getElementById("progressBar").style.width = scrolled + "%";
+    };
+</script>
+</html>

@@ -1,0 +1,47 @@
+# Sistema
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Dependências
+node_modules/
+/vendor/
+
+# Ambiente
+.env
+.env.local
+.env.*.local
+
+# Logs e dados temporários
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+logs/
+*.tmp
+*.temp
+
+# IDEs e editores
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+*.swp
+*.swo
+
+# Build e dist
+/dist/
+/build/
+/out/
+
+# Cache
+.cache/
+.npm/
+.eslintcache
+.stylelintcache
+
+# Arquivos de backup
+*.bak
+*.backup
+*~

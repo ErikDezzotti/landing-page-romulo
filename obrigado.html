@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Masterclass de Regência - Inscrição Quase Completa">
+    <title>Inscrição Quase Completa | Masterclass de Regência</title>
+
+    <!-- Anti-FOUC -->
+    <script>
+        (function() {
+            // Previne FOUC
+            document.documentElement.style.visibility = 'hidden';
+            document.addEventListener('DOMContentLoaded', function() {
+                document.documentElement.style.visibility = '';
+            });
+        })();
+    </script>
+    
+    <!-- Tailwind com purge CSS - Carregamento Crítico -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        gold: '#FFD700',
+                        darker: '#0A0A0A',
+                        dark: '#111111',
+                        accent: '#1A1A1A'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Font Awesome - Carregamento Otimizado -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" as="style">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Estilos Críticos Inline -->
+    <style>
+        /* Variáveis e Estilos Base */
+        :root {
+            --gold: #FFD700;
+            --darker: #0A0A0A;
+        }
+        
+        body {
+            background-color: var(--darker);
+            font-family: system-ui, -apple-system, sans-serif;
+            margin: 0;
+            color: white;
+            opacity: 1;
+            transition: opacity 0.1s;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            transition: background 0.3s ease;
+            will-change: background;
+        }
+    </style>
+
+    <!-- Defer non-critical CSS -->
+    <link rel="preload" as="style" href="data:text/css;base64,..." onload="this.onload=null;this.rel='stylesheet'">
+    
+    <!-- Otimização de animações -->
+    <style>
+        @media (prefers-reduced-motion: no-preference) {
+            .optimize-gpu {
+                transform: translateZ(0);
+                backface-visibility: hidden;
+                perspective: 1000;
+                will-change: transform;
+            }
+
+            .whatsapp-button {
+                transform: translateZ(0);
+                will-change: transform, box-shadow;
+            }
+
+            .progress-bar-neon {
+                will-change: width, box-shadow;
+            }
+
+            .neon-shine {
+                will-change: transform;
+            }
+        }
+
+        /* Reduzindo repaints */
+        .glass-card {
+            transform: translateZ(0);
+            contain: content;
+        }
+
+        /* Otimização de animações */
+        @keyframes whatsapp-pulse {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.2) rotate(5deg); }
+        }
+
+        @keyframes neon-pulse-whats {
+            0%, 100% { box-shadow: 0 0 25px rgba(37, 211, 102, 0.4); }
+            50% { box-shadow: 0 0 40px rgba(37, 211, 102, 0.6); }
+        }
+
+        /* Estilização da barra de rolagem */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--darker);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(to bottom, var(--gold), #FFA500);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(to bottom, #FFA500, var(--gold));
+        }
+
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(to right, var(--gold), #FFA500);
+            z-index: 1000;
+            transition: width 0.2s ease-out;
+        }
+
+        .glass-card:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        @keyframes pulse-border {
+            0% { border-color: rgba(255, 215, 0, 0.3); }
+            50% { border-color: rgba(255, 215, 0, 0.6); }
+            100% { border-color: rgba(255, 215, 0, 0.3); }
+        }
+
+        .animate-pulse-border {
+            animation: pulse-border 2s infinite;
+        }
+
+        @keyframes neon-slide {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        @keyframes count-up {
+            0%, 100% { content: "0%"; }
+            10% { content: "9%"; }
+            20% { content: "18%"; }
+            30% { content: "27%"; }
+            40% { content: "36%"; }
+            50% { content: "45%"; }
+            60% { content: "54%"; }
+            70% { content: "63%"; }
+            80% { content: "72%"; }
+            90% { content: "81%"; }
+            95% { content: "90%"; }
+        }
+
+        @keyframes progress-animation {
+            0%, 100% { width: 0%; }
+            95% { width: 90%; }
+        }
+
+        .progress-bar-neon {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 90%;
+            background: linear-gradient(90deg, 
+                #FF4136 0%,
+                #FFD700 100%);
+            animation: progress-animation 6s ease-in-out infinite;
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+            will-change: width;
+            transform: translateZ(0);
+            overflow: hidden;
+        }
+
+        .neon-shine {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 50%;
+            background: linear-gradient(90deg, 
+                transparent 0%,
+                rgba(255, 215, 0, 0.8) 50%,
+                transparent 100%);
+            animation: neon-slide 2s linear infinite;
+            pointer-events: none;
+            will-change: transform;
+            transform: translateZ(0);
+        }
+
+        .percentage::after {
+            content: "0%";
+            animation: count-up 6s ease-in-out infinite;
+        }
+
+        .progress-animation {
+            animation: progress-animation 3s ease-out forwards;
+            box-shadow: 0 0 20px rgba(255, 65, 54, 0.5);
+            height: 8px;
+        }
+
+        @keyframes pulse-scale {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .animate-pulse-scale {
+            animation: pulse-scale 2s infinite;
+        }
+
+        .btn-vip {
+            animation: neon-pulse 2s infinite;
+        }
+
+        @keyframes neon-pulse {
+            0% { box-shadow: 0 0 15px rgba(37, 211, 102, 0.3); }
+            50% { box-shadow: 0 0 25px rgba(37, 211, 102, 0.5); }
+            100% { box-shadow: 0 0 15px rgba(37, 211, 102, 0.3); }
+        }
+
+        /* Novo Botão WhatsApp */
+        .whatsapp-button {
+            background: #25D366;
+            padding: 1.5rem 3rem;
+            border-radius: 1rem;
+            transform-style: preserve-3d;
+            transform: perspective(1000px);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 0 25px rgba(37, 211, 102, 0.4);
+        }
+
+        .whatsapp-button:hover {
+            transform: perspective(1000px) scale(1.05) translateY(-5px);
+            box-shadow: 0 0 40px rgba(37, 211, 102, 0.6);
+        }
+
+        .whatsapp-button .icon-container {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1.5rem;
+        }
+
+        .whatsapp-button .icon-container i {
+            font-size: 2.5rem;
+            animation: whatsapp-pulse 2s ease-in-out infinite;
+        }
+
+        .whatsapp-button .text {
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+        }
+
+        .whatsapp-button::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            background: linear-gradient(45deg, #25D366, #128C7E);
+            border-radius: inherit;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: -1;
+        }
+
+        .whatsapp-button:hover::before {
+            opacity: 1;
+        }
+    </style>
+
+    <!-- Preload de Recursos Críticos -->
+    <link rel="preload" as="font" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/webfonts/fa-brands-400.woff2" crossorigin>
+    <link rel="preload" as="font" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/webfonts/fa-solid-900.woff2" crossorigin>
+
+    <!-- Ajustes Mobile -->
+    <style>
+    @media (max-width: 768px) {
+        .whatsapp-button {
+            padding: 1.25rem 2rem;
+        }
+        
+        .whatsapp-button .text {
+            font-size: 1.125rem;
+        }
+        
+        .whatsapp-button .icon-container i {
+            font-size: 2rem;
+        }
+        
+        .glass-card {
+            padding: 1.5rem !important;
+        }
+        
+        h1.text-5xl {
+            font-size: 2.5rem;
+            line-height: 1.2;
+        }
+        
+        h2.text-3xl {
+            font-size: 2rem;
+            line-height: 1.3;
+        }
+        
+        .container {
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+        
+        .grid {
+            gap: 1rem;
+        }
+        
+        .mb-16 {
+            margin-bottom: 3rem;
+        }
+        
+        .px-6 {
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+        
+        .py-20 {
+            padding-top: 4rem;
+            padding-bottom: 4rem;
+        }
+    }
+    </style>
+</head>
+<body class="min-h-screen bg-darker text-white">
+    <!-- Otimização de scroll -->
+    <div id="progressBar" class="progress-bar" style="contain: strict;"></div>
+
+    <!-- Conteúdo principal com lazy loading -->
+    <section class="relative min-h-screen flex items-center justify-center py-20 px-4">
+        <!-- Lazy load de imagens de fundo -->
+        <div class="absolute inset-0 z-0" style="contain: strict;">
+            <div class="absolute inset-0 bg-gradient-to-b from-darker via-darker/95 to-darker"></div>
+            <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,215,0,0.1),transparent_70%)]" loading="lazy"></div>
+            <div class="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(255,215,0,0.15),transparent_50%)]" loading="lazy"></div>
+        </div>
+
+        <!-- Conteúdo Principal -->
+        <div class="container max-w-4xl mx-auto relative z-10">
+            <!-- Header Reformulado -->
+            <div class="text-center mb-16">
+                <!-- Badge de Status -->
+                <div class="inline-block px-6 py-2 bg-gold/10 rounded-full text-gold text-sm font-medium tracking-wider uppercase mb-8 border border-gold/20">
+                    🎯 Última Etapa da Inscrição
+                </div>
+
+                <!-- Título Principal -->
+                <div class="mb-8">
+                    <h1 class="text-5xl md:text-6xl lg:text-7xl font-extrabold mb-4 tracking-tight">
+                        <div class="flex flex-col gap-4">
+                            <span class="bg-gradient-to-r from-gold via-yellow-500 to-gold text-transparent bg-clip-text inline-block">
+                                🚀 PARABÉNS!
+                            </span>
+                            <span class="text-3xl md:text-4xl lg:text-5xl text-white font-bold tracking-normal">
+                                SUA INSCRIÇÃO ESTÁ<br/>QUASE COMPLETA
+                            </span>
+                        </div>
+                    </h1>
+                </div>
+
+                <!-- Subtítulo -->
+                <p class="text-lg md:text-xl lg:text-2xl text-gray-300 mb-12 md:mb-16 max-w-2xl mx-auto leading-relaxed">
+                    Falta apenas <span class="text-gold font-semibold">um passo final</span> para você garantir seu acesso total à<br class="hidden md:block"/> <span class="text-gold font-semibold">Masterclass de Regência para Encarregados da CCB</span>
+                </p>
+
+                <!-- Barra de Progresso Melhorada -->
+                <div class="glass-card p-8 rounded-xl border border-gold/20 mb-16 max-w-2xl mx-auto">
+                    <div class="flex items-center justify-between mb-6">
+                        <span class="text-gold font-bold text-lg tracking-wide">🔒 Status da Inscrição</span>
+                        <div class="flex items-center gap-3">
+                            <span class="text-3xl font-bold bg-gradient-to-r from-gold to-yellow-500 text-transparent bg-clip-text percentage"></span>
+                            <span class="text-green-400 font-medium">Quase lá!</span>
+                        </div>
+                    </div>
+                    <div class="h-12 bg-darker rounded-full overflow-hidden border border-gold/10 relative optimize-gpu">
+                        <div class="progress-bar-neon rounded-full optimize-gpu">
+                            <div class="neon-shine optimize-gpu"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CTA Principal -->
+                <div class="space-y-6">
+                    <p class="text-2xl text-gray-300 font-medium">
+                        👉 <span class="text-gold">Toque no botão</span> e entre para o <span class="text-gold">GRUPO VIP</span> agora mesmo:
+                    </p>
+                    <a href="#" class="whatsapp-button relative inline-flex items-center group">
+                        <span class="icon-container">
+                            <i class="fab fa-whatsapp text-2xl"></i>
+                        </span>
+                        <span class="text">ENTRAR NO GRUPO VIP AGORA</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Por que entrar -->
+            <div class="glass-card p-6 md:p-12 rounded-2xl border border-gold/20 mb-16">
+                <!-- Título com Hierarquia Padrão -->
+                <div class="text-center mb-8 md:mb-12">
+                    <span class="text-gold/60 text-sm font-medium tracking-wider mb-3 block uppercase">Grupo Exclusivo</span>
+                    <h2 class="text-2xl md:text-4xl lg:text-5xl font-bold mb-4">
+                        <div class="flex flex-col gap-2">
+                            <span class="text-white">
+                                Por Que Entrar no <span class="text-gold">Grupo VIP</span>
+                            </span>
+                            <span class="text-white text-xl md:text-3xl">
+                                É <span class="text-gold">Essencial</span>?
+                            </span>
+                        </div>
+                    </h2>
+                </div>
+
+                <!-- Grid de Benefícios -->
+                <div class="flex flex-col gap-8 md:gap-10 md:grid md:grid-cols-2 md:gap-x-8 md:gap-y-10">
+                    <!-- Benefício 1 -->
+                    <div class="glass-card p-8 md:p-10 rounded-2xl border border-gold/20 hover:border-gold/40 transition-all">
+                        <div class="flex flex-col md:flex-row items-center md:items-start gap-6 text-center md:text-left">
+                            <div class="w-16 h-16 md:w-12 md:h-12 bg-gold/10 rounded-full flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-key text-gold text-2xl md:text-xl"></i>
+                            </div>
+                            <div class="space-y-4">
+                                <h3 class="text-2xl md:text-xl font-bold text-white">
+                                    Acesso <span class="text-gold">Exclusivo</span>
+                                </h3>
+                                <p class="text-lg md:text-base text-gray-300 leading-relaxed">
+                                    Este é um grupo privado e silencioso, onde apenas informações importantes serão compartilhadas.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Benefício 2 -->
+                    <div class="glass-card p-8 md:p-10 rounded-2xl border border-gold/20 hover:border-gold/40 transition-all">
+                        <div class="flex flex-col md:flex-row items-center md:items-start gap-6 text-center md:text-left">
+                            <div class="w-16 h-16 md:w-12 md:h-12 bg-gold/10 rounded-full flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-gift text-gold text-2xl md:text-xl"></i>
+                            </div>
+                            <div class="space-y-4">
+                                <h3 class="text-2xl md:text-xl font-bold text-white">
+                                    Conteúdo <span class="text-gold">Privilegiado</span>
+                                </h3>
+                                <p class="text-lg md:text-base text-gray-300 leading-relaxed">
+                                    Receba materiais complementares, estratégias práticas e lembretes para garantir que você aproveite 100% da experiência.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Benefício 3 -->
+                    <div class="glass-card p-8 md:p-10 rounded-2xl border border-gold/20 hover:border-gold/40 transition-all md:col-span-2">
+                        <div class="flex flex-col md:flex-row items-center md:items-start gap-6 text-center md:text-left">
+                            <div class="w-16 h-16 md:w-12 md:h-12 bg-gold/10 rounded-full flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-bell text-gold text-2xl md:text-xl"></i>
+                            </div>
+                            <div class="space-y-4">
+                                <h3 class="text-2xl md:text-xl font-bold text-white">
+                                    Avisos em <span class="text-gold">Primeira Mão</span>
+                                </h3>
+                                <p class="text-lg md:text-base text-gray-300 leading-relaxed">
+                                    Não corra o risco de perder nada! No grupo, você será notificado sobre o link da aula e todas as atualizações importantes.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CTA após os benefícios -->
+                <div class="text-center mt-8 md:mt-12">
+                    <a href="#" class="whatsapp-button relative inline-flex items-center group">
+                        <span class="icon-container">
+                            <i class="fab fa-whatsapp text-2xl"></i>
+                        </span>
+                        <span class="text">QUERO FAZER PARTE DO GRUPO VIP</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Seção de Urgência -->
+            <div class="glass-card p-8 md:p-12 rounded-2xl border-2 border-gold/30 animate-pulse-border mb-16">
+                <div class="text-center">
+                    <!-- Header -->
+                    <div class="mb-12">
+                        <span class="text-gold/60 text-sm font-medium tracking-wider mb-3 block uppercase">Momento Decisivo</span>
+                        <h2 class="text-3xl md:text-4xl font-bold mb-8">
+                            <div class="flex flex-col gap-3 items-center">
+                                <span class="text-white">
+                                    Grupo <span class="text-gold">VIP</span> em Formação
+                                </span>
+                                <span class="text-xl md:text-2xl text-gold/80">
+                                    Últimas Vagas Disponíveis
+                                </span>
+                            </div>
+                        </h2>
+                    </div>
+
+                    <!-- Grid de Benefícios -->
+                    <div class="grid md:grid-cols-3 gap-6 mb-12 max-w-4xl mx-auto">
+                        <!-- Card 1 -->
+                        <div class="glass-card p-6 rounded-xl border border-gold/20 hover:border-gold/40 transition-all">
+                            <div class="flex flex-col items-center gap-4">
+                                <span class="w-12 h-12 rounded-full bg-gold/10 flex items-center justify-center">
+                                    <i class="fas fa-users text-gold text-xl"></i>
+                                </span>
+                                <div>
+                                    <h3 class="text-xl font-bold text-white mb-2">Comunidade <span class="text-gold">Seleta</span></h3>
+                                    <p class="text-gray-300">Encarregados comprometidos com a maestria musical</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card 2 -->
+                        <div class="glass-card p-6 rounded-xl border border-gold/20 hover:border-gold/40 transition-all">
+                            <div class="flex flex-col items-center gap-4">
+                                <span class="w-12 h-12 rounded-full bg-gold/10 flex items-center justify-center">
+                                    <i class="fas fa-crown text-gold text-xl"></i>
+                                </span>
+                                <div>
+                                    <h3 class="text-xl font-bold text-white mb-2">Conteúdo <span class="text-gold">Premium</span></h3>
+                                    <p class="text-gray-300">Acesso exclusivo e suporte dedicado</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card 3 -->
+                        <div class="glass-card p-6 rounded-xl border border-gold/20 hover:border-gold/40 transition-all">
+                            <div class="flex flex-col items-center gap-4">
+                                <span class="w-12 h-12 rounded-full bg-gold/10 flex items-center justify-center">
+                                    <i class="fas fa-star text-gold text-xl"></i>
+                                </span>
+                                <div>
+                                    <h3 class="text-xl font-bold text-white mb-2">Jornada <span class="text-gold">Transformadora</span></h3>
+                                    <p class="text-gray-300">Eleve seu ministério a outro nível</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Badge de Urgência -->
+                    <div class="inline-block glass-card px-8 py-4 rounded-xl border border-gold/20 mb-12 animate-pulse-scale">
+                        <div class="flex items-center gap-3">
+                            <i class="fas fa-clock text-gold text-xl"></i>
+                            <p class="text-xl font-medium text-gold">
+                                Reserve sua vaga para esta turma especial
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- CTA Final -->
+                    <a href="#" class="whatsapp-button relative inline-flex items-center group">
+                        <span class="icon-container">
+                            <i class="fab fa-whatsapp text-2xl"></i>
+                        </span>
+                        <span class="text">GARANTIR MINHA VAGA NO GRUPO VIP</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Mensagem Final -->
+            <div class="glass-card p-10 md:p-12 rounded-2xl border border-gold/20 text-center mt-16">
+                <div class="max-w-2xl mx-auto">
+                    <div class="flex flex-col gap-8 items-center">
+                        <span class="w-16 h-16 rounded-full bg-gold/10 flex items-center justify-center">
+                            <i class="fas fa-music text-gold text-2xl"></i>
+                        </span>
+                        <p class="text-xl text-gray-300 leading-relaxed">
+                            Estamos ansiosos para guiá-lo nesta jornada transformadora que elevará seu ministério musical a um novo patamar de excelência.
+                        </p>
+                        <p class="text-2xl font-bold bg-gradient-to-r from-gold to-yellow-500 text-transparent bg-clip-text">
+                            Vamos juntos glorificar a Deus através da regência! ✨
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Otimização de scripts -->
+    <script>
+        // Intersection Observer para lazy loading
+        if ('IntersectionObserver' in window) {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            });
+
+            document.querySelectorAll('.glass-card').forEach(card => {
+                observer.observe(card);
+            });
+        }
+
+        // Debounce para scroll
+        let scrollTimeout;
+        window.onscroll = () => {
+            if (scrollTimeout) {
+                window.cancelAnimationFrame(scrollTimeout);
+            }
+
+            scrollTimeout = window.requestAnimationFrame(() => {
+                const winScroll = document.documentElement.scrollTop;
+                const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                const scrolled = (winScroll / height) * 100;
+                document.getElementById("progressBar").style.width = scrolled + "%";
+            });
+        };
+
+        // Preconnect para recursos externos
+        const preconnectLinks = ['https://cdnjs.cloudflare.com'];
+        preconnectLinks.forEach(url => {
+            const link = document.createElement('link');
+            link.rel = 'preconnect';
+            link.href = url;
+            document.head.appendChild(link);
+        });
+    </script>
+</body>
+</html> 

@@ -1,71 +1,50 @@
-// Router Profissional
-class Router {
-  constructor() {
-    this.routes = {
-      "/": "/index.html",
-      "/captura": "/captura.html",
-      "/obrigado": "/obrigado.html",
-    };
+// Sistema de Roteamento Simplificado
+const routes = {
+  "/": "/index.html",
+  "/captura": "/captura.html",
+  "/obrigado": "/obrigado.html",
+};
 
-    this.init();
+// Função principal de navegação
+function navegarPara(pagina) {
+  const destinos = {
+    captura: "/captura",
+    obrigado: "/obrigado",
+    home: "/",
+  };
+
+  const destino = destinos[pagina];
+  if (destino) {
+    window.location.href = destino;
+  }
+}
+
+// Inicialização
+document.addEventListener("DOMContentLoaded", function () {
+  // Limpa URLs com .html
+  const path = window.location.pathname;
+  if (path.endsWith(".html")) {
+    const newPath = path.replace(".html", "");
+    window.history.replaceState({}, "", newPath);
   }
 
-  init() {
-    // Intercepta todos os cliques em links
-    document.addEventListener("click", (e) => this.handleClick(e));
-
-    // Manipula navegação do browser
-    window.addEventListener("popstate", (e) => this.handlePopState(e));
-
-    // Inicializa a rota atual
-    this.handleRoute(window.location.pathname);
-  }
-
-  handleClick(e) {
+  // Intercepta cliques em links
+  document.addEventListener("click", function (e) {
     const link = e.target.closest("a");
     if (!link) return;
 
     const href = link.getAttribute("href");
     if (href && href.startsWith("/")) {
       e.preventDefault();
-      this.navigate(href);
+      window.location.href = href;
     }
-  }
+  });
 
-  handlePopState(e) {
-    this.handleRoute(window.location.pathname);
-  }
-
-  handleRoute(pathname) {
-    const route = this.routes[pathname] || this.routes["/"];
-    const cleanPath = pathname.replace(".html", "");
-
-    // Atualiza URL se necessário
-    if (pathname !== cleanPath) {
-      window.history.replaceState({}, "", cleanPath);
+  // Atualiza links existentes
+  document.querySelectorAll("a[href]").forEach((link) => {
+    const href = link.getAttribute("href");
+    if (href && href.endsWith(".html")) {
+      link.setAttribute("href", href.replace(".html", ""));
     }
-  }
-
-  navigate(path) {
-    const cleanPath = path.replace(".html", "");
-    window.history.pushState({}, "", cleanPath);
-    window.location.href = cleanPath;
-  }
-}
-
-// Função global para navegação
-function navegarPara(pagina) {
-  const paginas = {
-    captura: "/captura",
-    obrigado: "/obrigado",
-    home: "/",
-  };
-
-  if (paginas[pagina]) {
-    const router = window.routerInstance;
-    router.navigate(paginas[pagina]);
-  }
-}
-
-// Inicializa o router
-window.routerInstance = new Router();
+  });
+});

@@ -276,7 +276,7 @@
                         </span>
                         <br>
                         <span class="text-3xl md:text-5xl">
-                            Para a Glória de Deuss
+                            Para a Glória de Deus
                         </span>
                     </h1>
                     <p class="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed">
@@ -1234,6 +1234,16 @@
 
         document.querySelectorAll('.scroll-reveal').forEach((element) => {
             observer.observe(element);
+        });
+    </script>
+    <script src="/router.js"></script>
+    <script>
+        // Atualiza todos os links do site
+        document.querySelectorAll('a[href]').forEach(link => {
+            const href = link.getAttribute('href');
+            if (href.endsWith('.html')) {
+                link.setAttribute('href', href.replace('.html', ''));
+            }
         });
     </script>
 </body>

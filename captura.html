@@ -576,6 +576,15 @@
             </div>
         </div>
     </section>
+    <script src="/router.js"></script>
+    <script>
+        document.querySelectorAll('a[href]').forEach(link => {
+            const href = link.getAttribute('href');
+            if (href.endsWith('.html')) {
+                link.setAttribute('href', href.replace('.html', ''));
+            }
+        });
+    </script>
 </body>
 <script>
     // Progress Bar

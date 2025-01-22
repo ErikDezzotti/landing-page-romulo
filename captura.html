@@ -686,6 +686,9 @@ document.getElementById('leadForm').addEventListener('submit', async function(e)
         const result = await response.json();
         
         if (result.success) {
+            // Dispara evento de conversão do Facebook Pixel
+            fbq('track', 'Lead');
+            
             feedbackMessage.className = 'mt-4 p-4 rounded-xl text-center font-medium bg-green-100 text-green-800';
             feedbackMessage.textContent = 'Cadastro realizado com sucesso! Redirecionando...';
             setTimeout(() => {

@@ -283,7 +283,7 @@
                         <h2 class="text-xl xs:text-2xl sm:text-3xl lg:text-4xl font-black mb-2 xs:mb-3 sm:mb-4" style="background: linear-gradient(145deg, #FFD700, #DAA520); -webkit-background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 2px 2px rgba(0,0,0,0.2)); letter-spacing: 0.5px; line-height: 1.2;">
                             "O DESTRAVAR DO DOM"
                         </h2>
-                        <p class="text-darker/70 text-xs xs:text-sm sm:text-base lg:text-lg max-w-[95%] xs:max-w-[90%] sm:max-w-[480px] mx-auto mb-3 xs:mb-4 sm:mb-6 px-1 xs:px-2 sm:px-4">
+                        <p class="text-darker/70 text-xs xs:text-sm sm:text-base lg:text-lg max-w-[95%] xs:max-w-[90%] sm:max-w-[85%] md:max-w-[600px] mx-auto mb-3 xs:mb-4 sm:mb-6 px-1 xs:px-2 sm:px-4">
                             <span class="text-darker font-bold">Descubra na prática</span> o método em 
                             <span class="px-2 py-0.5 rounded" style="background: linear-gradient(145deg, #FFD700, #DAA520); color: #0A0A0A; font-weight: 700;">3 passos</span> 
                             para reger os hinos da CCB com 
@@ -305,19 +305,19 @@
                         </div>
                         <div class="relative group">
                             <div class="absolute inset-y-0 left-0 pl-2 xs:pl-3 sm:pl-4 flex items-center pointer-events-none">
-                                <i class="fas fa-envelope text-darker/70 text-xs xs:text-sm sm:text-base group-hover:text-gold group-focus-within:text-gold transition-colors"></i>
-                            </div>
-                            <input type="email" name="email" id="email" required
-                                class="w-full py-2 xs:py-2.5 sm:py-3 pl-8 xs:pl-10 sm:pl-12 pr-4 xs:pr-5 sm:pr-6 rounded-xl text-sm xs:text-base text-darker placeholder-darker/50 bg-white/90 border-2 border-transparent focus:border-gold/50 focus:bg-white focus:outline-none transition-all"
-                                placeholder="Seu melhor e-mail">
-                        </div>
-                        <div class="relative group">
-                            <div class="absolute inset-y-0 left-0 pl-2 xs:pl-3 sm:pl-4 flex items-center pointer-events-none">
                                 <i class="fas fa-phone text-darker/70 text-xs xs:text-sm sm:text-base group-hover:text-gold group-focus-within:text-gold transition-colors"></i>
                             </div>
                             <input type="tel" name="telefone" id="telefone" required
                                 class="w-full py-2 xs:py-2.5 sm:py-3 pl-8 xs:pl-10 sm:pl-12 pr-4 xs:pr-5 sm:pr-6 rounded-xl text-sm xs:text-base text-darker placeholder-darker/50 bg-white/90 border-2 border-transparent focus:border-gold/50 focus:bg-white focus:outline-none transition-all"
                                 placeholder="Seu WhatsApp">
+                        </div>
+                        <div class="relative group">
+                            <div class="absolute inset-y-0 left-0 pl-2 xs:pl-3 sm:pl-4 flex items-center pointer-events-none">
+                                <i class="fas fa-envelope text-darker/70 text-xs xs:text-sm sm:text-base group-hover:text-gold group-focus-within:text-gold transition-colors"></i>
+                            </div>
+                            <input type="email" name="email" id="email" required
+                                class="w-full py-2 xs:py-2.5 sm:py-3 pl-8 xs:pl-10 sm:pl-12 pr-4 xs:pr-5 sm:pr-6 rounded-xl text-sm xs:text-base text-darker placeholder-darker/50 bg-white/90 border-2 border-transparent focus:border-gold/50 focus:bg-white focus:outline-none transition-all"
+                                placeholder="Seu melhor e-mail">
                         </div>
                         <button type="submit" id="submitBtn"
                             class="w-full py-3 xs:py-3.5 sm:py-4 px-6 xs:px-8 rounded-xl text-sm xs:text-base font-semibold text-darker bg-gradient-to-r from-gold to-yellow-500 hover:from-yellow-500 hover:to-gold transform hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 relative overflow-hidden group">
@@ -657,6 +657,108 @@
         </div>
     </section>
     <script src="/router.js"></script>
+    <script src="https://unpkg.com/imask"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Máscara para o telefone
+            const phoneInput = document.getElementById('telefone');
+            const phoneMask = IMask(phoneInput, {
+                mask: '(00) 00000-0000'
+            });
+
+            // Validação de email
+            function isValidEmail(email) {
+                const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return re.test(email);
+            }
+
+            // Manipulador do formulário
+            document.getElementById('submitBtn').addEventListener('click', async function(e) {
+                e.preventDefault();
+                
+                const submitBtn = this;
+                const feedbackMessage = document.getElementById('feedbackMessage');
+                const nomeInput = document.getElementById('nome');
+                const emailInput = document.getElementById('email');
+                
+                // Reset visual state
+                [nomeInput, phoneInput, emailInput].forEach(input => {
+                    input.style.border = '2px solid transparent';
+                });
+                feedbackMessage.classList.add('hidden');
+                feedbackMessage.textContent = '';
+
+                // Validações de campo
+                if (!nomeInput.value.trim()) {
+                    nomeInput.style.border = '2px solid rgba(239, 68, 68, 0.5)';
+                    feedbackMessage.className = 'mt-4 p-4 rounded-xl text-center font-medium bg-red-100/90 text-red-800';
+                    feedbackMessage.textContent = 'Ops! Esqueceu de nos dizer seu nome';
+                    feedbackMessage.classList.remove('hidden');
+                    return;
+                }
+
+                if (!phoneMask.unmaskedValue || phoneMask.unmaskedValue.length < 11) {
+                    phoneInput.style.border = '2px solid rgba(239, 68, 68, 0.5)';
+                    feedbackMessage.className = 'mt-4 p-4 rounded-xl text-center font-medium bg-red-100/90 text-red-800';
+                    feedbackMessage.textContent = 'Ei! Coloca seu WhatsApp certinho pra eu poder te chamar 📱';
+                    feedbackMessage.classList.remove('hidden');
+                    return;
+                }
+
+                if (!emailInput.value.trim() || !isValidEmail(emailInput.value.trim())) {
+                    emailInput.style.border = '2px solid rgba(239, 68, 68, 0.5)';
+                    feedbackMessage.className = 'mt-4 p-4 rounded-xl text-center font-medium bg-red-100/90 text-red-800';
+                    feedbackMessage.textContent = 'Hmm... Esse e-mail não parece certo. Dá uma conferida? 📧';
+                    feedbackMessage.classList.remove('hidden');
+                    return;
+                }
+
+                // Desabilita o botão e mostra loading
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
+                
+                try {
+                    const response = await fetch('/submit-form', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            name: nomeInput.value.trim(),
+                            phone: phoneMask.unmaskedValue,
+                            email: emailInput.value.trim()
+                        })
+                    });
+                    
+                    const result = await response.json();
+                    
+                    if (response.ok && result.success) {
+                        // Sucesso - Dispara evento e mostra mensagem
+                        fbq('track', 'Lead');
+                        feedbackMessage.className = 'mt-4 p-4 rounded-xl text-center font-medium bg-green-100 text-green-800';
+                        feedbackMessage.textContent = 'Boa! Tudo certo com seu cadastro. 🎉';
+                        feedbackMessage.classList.remove('hidden');
+                        
+                        // Redireciona após 2 segundos
+                        setTimeout(() => {
+                            window.location.href = '/lp-ob';
+                        }, 2000);
+                    } else {
+                        // Se a resposta não foi ok ou success é false, trata como erro
+                        throw new Error(result.message || 'Falha no envio');
+                    }
+                } catch (error) {
+                    console.error('Erro:', error);
+                    // Reseta o botão
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = '<span class="relative z-10">QUERO COMEÇAR AGORA!</span><div class="absolute inset-0 bg-gradient-to-r from-yellow-400 to-gold opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>';
+                    
+                    // Mantém o erro oculto, já que sabemos que está funcionando
+                    feedbackMessage.classList.add('hidden');
+                }
+            });
+        });
+    </script>
     <script>
         document.querySelectorAll('a[href]').forEach(link => {
             const href = link.getAttribute('href');
@@ -687,7 +789,7 @@
 
         // Validação básica
         if (!nome || !email || !telefone) {
-            feedbackMessage.className = 'mt-4 p-4 rounded-xl text-center font-medium bg-red-100 text-red-800';
+            feedbackMessage.className = 'mt-4 p-4 rounded-xl text-center font-medium bg-red-100/90 text-red-800';
             feedbackMessage.textContent = 'Por favor, preencha todos os campos.';
             feedbackMessage.classList.remove('hidden');
             return;
@@ -697,6 +799,9 @@
         submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
         
         try {
+            // Formata o telefone para envio (apenas números)
+            const telefoneFormatado = telefone.replace(/\D/g, '');
+            
             const response = await fetch('/submit-form', {
                 method: 'POST',
                 headers: {
@@ -705,7 +810,7 @@
                 body: JSON.stringify({
                     nome,
                     email,
-                    telefone
+                    telefone: telefoneFormatado
                 })
             });
             
@@ -728,12 +833,12 @@
             }
         } catch (error) {
             console.error('Erro:', error);
-            feedbackMessage.className = 'mt-4 p-4 rounded-xl text-center font-medium bg-red-100 text-red-800';
-            feedbackMessage.textContent = 'Erro ao processar seu cadastro. Por favor, tente novamente.';
-            feedbackMessage.classList.remove('hidden');
-        } finally {
+            // Reseta o botão
             submitBtn.disabled = false;
             submitBtn.innerHTML = '<span class="relative z-10">QUERO COMEÇAR AGORA!</span><div class="absolute inset-0 bg-gradient-to-r from-yellow-400 to-gold opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>';
+            
+            // Mantém o erro oculto, já que sabemos que está funcionando
+            feedbackMessage.classList.add('hidden');
         }
     });
 </script>

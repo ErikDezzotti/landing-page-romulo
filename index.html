@@ -538,7 +538,7 @@
 
                         <!-- CTA -->
                         <div class="text-center mt-16">
-                            <a href="captura.html" class="bg-gradient-to-r from-gold to-yellow-500 text-darker font-bold text-xl px-12 py-4 rounded-xl hover:scale-105 transition-all group relative overflow-hidden inline-block">
+                            <a href="/captura" class="bg-gradient-to-r from-gold to-yellow-500 text-darker font-bold text-xl px-12 py-4 rounded-xl hover:scale-105 transition-all group relative overflow-hidden inline-block">
                                 <span class="relative z-10">QUERO DOMINAR ESTE MÉTODO</span>
                                 <div class="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity"></div>
                             </a>
@@ -707,9 +707,7 @@
                                     <span class="bg-gradient-to-r from-gold to-yellow-500 text-transparent bg-clip-text">
                                     +R$ 3.991
                                     </span>
-                                em Bônus
-                            </h2>
-                            <p class="text-xl text-gray-400 mt-4">Tudo incluso no seu acesso</p>
+                                </h2>
                             </div>
 
                         <!-- Bônus Grid -->
@@ -993,7 +991,7 @@
                 <!-- Última Chamada -->
                 <div class="mt-12 text-center">
                     <p class="text-gray-400 mb-4">
-                        Não deixe a insegurança impedir você de glorificar a Deus com excelência.
+                        Não deixe a insegurança impedir você de glorificar a Deuss com excelência.
                         <span class="text-gold">Sua transformação começa hoje.</span>
                     </p>
                     <div class="flex items-center justify-center gap-2 text-sm">
@@ -1191,7 +1189,7 @@
                             </h3>
 
                             <div class="flex flex-col items-center gap-6">
-                                <a href="captura.html" class="w-full max-w-2xl bg-gradient-to-r from-gold to-yellow-500 text-darker font-bold text-2xl px-12 py-6 rounded-xl hover:scale-105 transition-all relative overflow-hidden group inline-block">
+                                <a href="/captura" class="w-full max-w-2xl bg-gradient-to-r from-gold to-yellow-500 text-darker font-bold text-2xl px-12 py-6 rounded-xl hover:scale-105 transition-all relative overflow-hidden group inline-block">
                                     <span class="relative z-10">SIM, EU QUERO ME INSCREVER AGORA!</span>
                                     <div class="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity"></div>
                                 </a>
@@ -1207,49 +1205,5 @@
             </div>
         </div>
     </main>
-
-    <script>
-        // Progress Bar
-        window.onscroll = function() {
-            let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-            let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            let scrolled = (winScroll / height) * 100;
-            document.getElementById("progressBar").style.width = scrolled + "%";
-        };
-
-        // Scroll Reveal Animation
-        const observerOptions = {
-            root: null,
-            rootMargin: '0px',
-            threshold: 0.1
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.scroll-reveal').forEach((element) => {
-            observer.observe(element);
-        });
-    </script>
-    <script>
-        // Garante que os links funcionem corretamente
-        document.addEventListener('DOMContentLoaded', function() {
-            const links = document.querySelectorAll('a[href]');
-            links.forEach(link => {
-                link.addEventListener('click', function(e) {
-                    const href = this.getAttribute('href');
-                    if (href.includes('.html')) {
-                        e.preventDefault();
-                        window.location.href = href;
-                    }
-                });
-            });
-        });
-    </script>
 </body>
 </html>

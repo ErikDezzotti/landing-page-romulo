@@ -16,11 +16,9 @@
       ]
     }
   ],
-  "routes": {
-    "/": "index.html",
-    "/captura": "captura.html",
-    "/captura.html": "captura.html",
-    "/obrigado": "obrigado.html",
-    "/obrigado.html": "obrigado.html"
-  }
+  "rewrites": [
+    { "source": "/", "destination": "/index.html" },
+    { "source": "/captura", "destination": "/captura.html" },
+    { "source": "/obrigado", "destination": "/obrigado.html" }
+  ]
 } 

@@ -7,13 +7,18 @@
   ],
   "headers": [
     {
-      "source": "**/*",
+      "source": "**/*.html",
       "headers": [
         {
           "key": "Cache-Control",
-          "value": "no-cache"
+          "value": "no-store, no-cache, must-revalidate"
         }
       ]
     }
+  ],
+  "rewrites": [
+    { "source": "/", "destination": "/index.html" },
+    { "source": "/captura", "destination": "/captura.html" },
+    { "source": "/obrigado", "destination": "/obrigado.html" }
   ]
 } 

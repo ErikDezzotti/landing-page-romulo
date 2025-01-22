@@ -276,7 +276,7 @@
                         </span>
                         <br>
                         <span class="text-3xl md:text-5xl">
-                            Para a Glória de Deuss
+                            Para a Glória de Deus
                         </span>
                     </h1>
                     <p class="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed">
@@ -1191,10 +1191,10 @@
                             </h3>
 
                             <div class="flex flex-col items-center gap-6">
-                                <button class="w-full max-w-2xl bg-gradient-to-r from-gold to-yellow-500 text-darker font-bold text-2xl px-12 py-6 rounded-xl hover:scale-105 transition-all relative overflow-hidden group">
+                                <a href="captura.html" class="w-full max-w-2xl bg-gradient-to-r from-gold to-yellow-500 text-darker font-bold text-2xl px-12 py-6 rounded-xl hover:scale-105 transition-all relative overflow-hidden group inline-block">
                                     <span class="relative z-10">SIM, EU QUERO ME INSCREVER AGORA!</span>
                                     <div class="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity"></div>
-                                </button>
+                                </a>
 
                                 <div class="flex items-center gap-3 text-gray-400">
                                     <i class="fas fa-lock text-gold"></i>
@@ -1236,14 +1236,19 @@
             observer.observe(element);
         });
     </script>
-    <script src="/router.js"></script>
     <script>
-        // Atualiza todos os links do site
-        document.querySelectorAll('a[href]').forEach(link => {
-            const href = link.getAttribute('href');
-            if (href.endsWith('.html')) {
-                link.setAttribute('href', href.replace('.html', ''));
-            }
+        // Garante que os links funcionem corretamente
+        document.addEventListener('DOMContentLoaded', function() {
+            const links = document.querySelectorAll('a[href]');
+            links.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    const href = this.getAttribute('href');
+                    if (href.includes('.html')) {
+                        e.preventDefault();
+                        window.location.href = href;
+                    }
+                });
+            });
         });
     </script>
 </body>

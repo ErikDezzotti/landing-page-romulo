@@ -182,6 +182,24 @@
             }
         }
     </style>
+    <!-- Meta Pixel Code -->
+    <script>
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '696368755825539');
+        fbq('track', 'PageView');
+    </script>
+    <noscript>
+        <img height="1" width="1" style="display:none"
+        src="https://www.facebook.com/tr?id=696368755825539&ev=PageView&noscript=1"/>
+    </noscript>
+    <!-- End Meta Pixel Code -->
 </head>
 <body class="min-h-screen bg-darker text-white overflow-x-hidden">
     <!-- Barra de Progresso -->
@@ -664,7 +682,6 @@ document.getElementById('leadForm').addEventListener('submit', async function(e)
     const submitBtn = document.getElementById('submitBtn');
     const feedbackMessage = document.getElementById('feedbackMessage');
     
-    // Desabilitar o botão durante o envio
     submitBtn.disabled = true;
     submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
     
@@ -672,7 +689,8 @@ document.getElementById('leadForm').addEventListener('submit', async function(e)
         const formData = {
             nome: document.getElementById('nome').value,
             email: document.getElementById('email').value,
-            telefone: document.getElementById('telefone').value
+            telefone: document.getElementById('telefone').value,
+            access_token: 'EAAOv1S7EJPUBOyt4Kn1vZA1RLR198SA0QtDucTTZAWb2fMOBD7QupM1ZAUPKjBvOOLieav5GiaGKhH3oWOQPAQTXtJuAqFGYFwZAnAsZCPX09FLZBNabZBa0F3ZCOCmlabq3FG85x5433JPMO9ZCons6b7CGKHK2uQS2tQJS7A2tReZBDbAbmkcTDP1OL6PElZAB5ARRAZDZD'
         };
         
         const response = await fetch('/submit-form', {
@@ -686,9 +704,6 @@ document.getElementById('leadForm').addEventListener('submit', async function(e)
         const result = await response.json();
         
         if (result.success) {
-            // Dispara evento de conversão do Facebook Pixel
-            fbq('track', 'Lead');
-            
             feedbackMessage.className = 'mt-4 p-4 rounded-xl text-center font-medium bg-green-100 text-green-800';
             feedbackMessage.textContent = 'Cadastro realizado com sucesso! Redirecionando...';
             setTimeout(() => {

@@ -8,20 +8,27 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "rewrites": [
-    { "source": "/", "destination": "/index.html" },
-    { "source": "/captura", "destination": "/captura.html" },
-    { "source": "/obrigado", "destination": "/obrigado.html" }
+    { 
+      "source": "/", 
+      "destination": "/index.html",
+      "headers": { "Cache-Control": "no-cache" }
+    },
+    { 
+      "source": "/captura", 
+      "destination": "/captura.html",
+      "headers": { "Cache-Control": "no-cache" }
+    },
+    { 
+      "source": "/obrigado", 
+      "destination": "/obrigado.html",
+      "headers": { "Cache-Control": "no-cache" }
+    },
+    {
+      "source": "/**", 
+      "destination": "/index.html"
+    }
   ],
   "headers": [
-    {
-      "source": "**/*.html",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "no-cache"
-        }
-      ]
-    },
     {
       "source": "**/*",
       "headers": [
@@ -36,8 +43,16 @@
         {
           "key": "X-XSS-Protection",
           "value": "1; mode=block"
+        },
+        {
+          "key": "Strict-Transport-Security",
+          "value": "max-age=31536000; includeSubDomains"
         }
       ]
     }
+  ],
+  "redirects": [
+    { "source": "/captura.html", "destination": "/captura", "type": 301 },
+    { "source": "/obrigado.html", "destination": "/obrigado", "type": 301 }
   ]
 } 

@@ -43,7 +43,7 @@ app.post('/submit-form', async (req, res) => {
     try {
         const { nome, email, telefone } = req.body;
 
-        // Criar o objeto JSON personalizado para o webhook
+        // Criar o objeto JSON no formato esperado pelo Sellflux
         const webhookData = {
             nome: nome,
             email: email,
@@ -63,23 +63,30 @@ app.post('/submit-form', async (req, res) => {
         // URL do webhook Sellflux
         const webhookUrl = 'https://webhook.sellflux.app/webhook/custom/lead/70e1907e37e97c2c49800f7182ee9c8e';
 
-        if (!webhookUrl) {
-            throw new Error('URL do webhook não configurada');
-        }
+        // Configuração específica para o Sellflux
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            }
+        };
 
-        // Enviar dados para o webhook
-        const webhookResponse = await axios.post(webhookUrl, webhookData);
+        // Enviar dados para o webhook como RAW JSON
+        const webhookResponse = await axios.post(webhookUrl, JSON.stringify(webhookData), config);
 
-        if (webhookResponse.status === 200) {
+        console.log('Resposta do Webhook:', webhookResponse.data);
+
+        if (webhookResponse.status === 200 || webhookResponse.status === 201) {
             res.json({ success: true, message: 'Lead cadastrado com sucesso!' });
         } else {
             throw new Error('Falha ao enviar dados para o webhook');
         }
     } catch (error) {
-        console.error('Erro ao processar formulário:', error);
+        console.error('Erro ao processar formulário:', error.response ? error.response.data : error.message);
         res.status(500).json({ 
             success: false, 
-            message: 'Erro ao processar sua solicitação' 
+            message: 'Erro ao processar sua solicitação',
+            error: error.message
         });
     }
 });

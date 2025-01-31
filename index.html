@@ -551,7 +551,7 @@
                                             <div class="w-6 h-6 bg-gold/10 rounded-full flex items-center justify-center flex-shrink-0">
                                                 <i class="fas fa-check text-gold text-xs"></i>
                                             </div>
-                                            <span class="text-gray-300">Adoração</span>
+                                            <span class="text-gray-300">Adoração que toca corações e transmite a verdadeira mensagem do hino</span>
                                     </li>
                                 </ul>
                             </div>
@@ -1341,82 +1341,33 @@ document.getElementById('leadForm').addEventListener('submit', async function(e)
         </div>
     </div>
 
-    <!-- Script do Contador com Efeito de Rolagem -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const counterElement = document.getElementById('vagasCounter');
-            let currentValue = 392;
-            const targetValue = 41;
-            const interval = 4000; // 7 segundos
-
-            function animateValue(start, end, duration) {
-                const range = start - end;
-                const minTimer = 50; // Mínimo de tempo entre frames
-                const stepCount = duration / minTimer;
-                const valueIncrement = range / stepCount;
-                let currentNumber = start;
-                let currentStep = 0;
-
-                function easeOutQuad(t) {
-                    return t * (2 - t);
-                }
-
-                const timer = setInterval(function() {
-                    currentStep++;
-                    const progress = easeOutQuad(currentStep / stepCount);
-                    currentNumber = Math.round(start - (range * progress));
-                    
-                    if (currentNumber <= end) {
-                        clearInterval(timer);
-                        currentNumber = end;
-                    }
-                    
-                    // Adiciona efeito de rolagem para cada dígito
-                    const digits = currentNumber.toString().split('');
-                    counterElement.textContent = currentNumber;
-                    
-                    // Efeito visual sutil
-                    counterElement.style.transform = 'scale(1.05)';
-                    setTimeout(() => {
-                        counterElement.style.transform = 'scale(1)';
-                    }, 150);
-                    
-                }, minTimer);
-            }
-
-            function updateCounter() {
-                if (currentValue > targetValue) {
-                    const decrement = Math.floor(Math.random() * 4) + 1;
-                    const nextValue = Math.max(targetValue, currentValue - decrement);
-                    
-                    animateValue(currentValue, nextValue, 600); // 600ms para a animação
-                    currentValue = nextValue;
-                    
-                    if (currentValue > targetValue) {
-                        setTimeout(updateCounter, interval);
-                    }
-                }
-            }
-
-            // Inicia o contador após 3 segundos
-            setTimeout(updateCounter, 3000);
-        });
-    </script>
-
-    <!-- Script do Contador Atualizado -->
+    <!-- Script do Contador Unificado -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const counterElement = document.getElementById('vagasCounter');
             const badgeElement = document.getElementById('vagasBadge');
-            let currentValue = 392;
+            let currentValue = 392; // Valor inicial fixo
             const targetValue = 41;
-            const interval = 7000; // 7 segundos
+            const interval = 4000; // 7 segundos
+
+            function updateDisplays(number) {
+                // Atualiza ambos os displays com o mesmo número
+                counterElement.textContent = number;
+                badgeElement.textContent = number;
+
+                // Efeito visual sutil e sincronizado
+                [counterElement, badgeElement].forEach(element => {
+                    element.style.transform = 'scale(1.05)';
+                    setTimeout(() => {
+                        element.style.transform = 'scale(1)';
+                    }, 150);
+                });
+            }
 
             function animateValue(start, end, duration) {
                 const range = start - end;
                 const minTimer = 50;
                 const stepCount = duration / minTimer;
-                let currentNumber = start;
                 let currentStep = 0;
 
                 function easeOutQuad(t) {
@@ -1426,31 +1377,21 @@ document.getElementById('leadForm').addEventListener('submit', async function(e)
                 const timer = setInterval(function() {
                     currentStep++;
                     const progress = easeOutQuad(currentStep / stepCount);
-                    currentNumber = Math.round(start - (range * progress));
+                    const currentNumber = Math.round(start - (range * progress));
                     
                     if (currentNumber <= end) {
                         clearInterval(timer);
-                        currentNumber = end;
+                        updateDisplays(end);
+                        return;
                     }
                     
-                    // Atualiza ambos os elementos
-                    counterElement.textContent = currentNumber;
-                    badgeElement.textContent = currentNumber;
-                    
-                    // Efeito visual sutil
-                    counterElement.style.transform = 'scale(1.05)';
-                    badgeElement.style.transform = 'scale(1.05)';
-                    setTimeout(() => {
-                        counterElement.style.transform = 'scale(1)';
-                        badgeElement.style.transform = 'scale(1)';
-                    }, 150);
-                    
+                    updateDisplays(currentNumber);
                 }, minTimer);
             }
 
             function updateCounter() {
                 if (currentValue > targetValue) {
-                    const decrement = Math.floor(Math.random() * 5) + 1;
+                    const decrement = Math.floor(Math.random() * 6) + 1;
                     const nextValue = Math.max(targetValue, currentValue - decrement);
                     
                     animateValue(currentValue, nextValue, 600);
@@ -1462,6 +1403,10 @@ document.getElementById('leadForm').addEventListener('submit', async function(e)
                 }
             }
 
+            // Inicializa os displays com o valor inicial
+            updateDisplays(currentValue);
+            
+            // Inicia o contador após 3 segundos
             setTimeout(updateCounter, 3000);
         });
     </script>

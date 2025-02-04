@@ -250,32 +250,40 @@
 <body class="bg-dark text-white">
     <div class="progress-bar" id="progressBar"></div>
     <main class="min-h-screen bg-gradient-to-b from-darker to-dark">
-        <!-- Hero Section Isolada -->
-        <section id="hero" class="min-h-screen flex items-center justify-center hero-gradient relative pt-20 overflow-hidden">
-            <!-- Glow Effect -->
-            <div class="hero-glow"></div>
-            
-            <!-- Background Image with Overlay -->
+        <!-- Container Principal com Todo Conteúdo -->
+        <div class="relative overflow-hidden">
+            <!-- Background Image com Gradiente -->
             <div class="absolute inset-0 z-0">
                 <img 
-                    src="assets/imagens-para-sessoes/98425-3c7d5ba869272ff90628d41b9b6aab4d.webp" 
+                    src="assets/imagens-para-sessoes/533696_1_17115211336603bd6d11d70.webp"
                     alt="Background" 
-                    class="w-full h-full object-cover object-right opacity-40 scale-110 transform translate-x-80"
+                    class="w-full h-full object-cover opacity-40"
                 />
-                <!-- Gradient Overlay -->
-                <div class="absolute inset-0 bg-gradient-to-r from-darker from-40% via-darker/40 to-transparent"></div>
+                <div class="absolute inset-0 bg-gradient-to-b from-transparent via-darker to-darker"></div>
             </div>
 
-            <!-- Animated Particles -->
-            <div class="absolute inset-0 z-0">
-                <div class="absolute w-32 h-32 bg-gold/20 rounded-full blur-3xl animate-float-slow" style="top: 20%; left: 10%"></div>
-                <div class="absolute w-40 h-40 bg-gold/20 rounded-full blur-3xl animate-float-medium" style="top: 60%; left: 80%"></div>
-                <div class="absolute w-48 h-48 bg-gold/20 rounded-full blur-3xl animate-float-fast" style="top: 40%; left: 50%"></div>
+            <!-- Conteúdo -->
+            <div class="relative z-10">
+                <!-- Hero Section -->
+                <div class="relative min-h-screen">
+                    <!-- Background com Gradiente Suave -->
+                    <div class="absolute inset-0">
+                        <img 
+                            src="assets/imagens-para-sessoes/533696_1_17115211336603bd6d11d70.webp"
+                            alt="Background"
+                            class="w-full h-full object-cover opacity-80"
+                        />
+                        <!-- Gradientes sutis -->
+                        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-darker/50 to-darker"></div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-darker via-transparent to-transparent opacity-40"></div>
             </div>
 
-            <div class="container mx-auto px-6 lg:px-8 max-w-7xl text-center relative z-10">
-                <!-- Social Proof Badges -->
-                <div class="flex flex-wrap justify-center gap-3 mb-8">
+                    <div class="container mx-auto px-6 lg:px-8 max-w-7xl relative z-10 pt-16">
+                        <!-- Grid Container -->
+                        <div class="grid md:grid-cols-2 gap-8 items-center">
+                            <!-- Coluna Esquerda: Conteúdo -->
+                            <div class="flex flex-col items-start text-left space-y-8">
+                                <div class="flex flex-wrap gap-3">
                     <div class="glass-card border border-gold/30 backdrop-blur-sm px-4 py-2 rounded-full flex items-center gap-2 hover:border-gold/50 transition-all">
                         <div class="w-6 h-6 bg-gold/10 rounded-full flex items-center justify-center">
                             <i class="fas fa-users text-gold text-xs"></i>
@@ -289,139 +297,49 @@
                         <span class="text-white text-sm">Método Exclusivo CCB</span>
                     </div>
                 </div>
-
-                <!-- Main Headline -->
-                <div class="text-center mb-12">
-                    <h1 class="text-4xl md:text-6xl font-bold mb-6 leading-tight">
+                                <div class="space-y-6">
+                                    <h1 class="text-4xl md:text-6xl font-bold leading-tight">
                         <span class="bg-gradient-to-r from-gold to-yellow-500 text-transparent bg-clip-text">
                             Eleve Sua Regência
                         </span>
                         <br>
                         <span class="text-3xl md:text-5xl">
-                            Para a Glória de Deuss
+                                            Para a Glória de Deus
                         </span>
                     </h1>
-                    <p class="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed">
+                                    <p class="text-lg md:text-xl text-gray-300 max-w-xl leading-relaxed">
                         Domine a regência dos hinos CCB com um método simples e eficaz, 
                         <span class="text-gold font-semibold">estudando apenas 15 minutos por dia</span>
                     </p>
                 </div>
-
-                <!-- Dores e Desejos em Row -->
-                <div class="max-w-4xl mx-auto mb-12">
-                    <div class="grid md:grid-cols-2 gap-4">
-                        <!-- Coluna da Esquerda - Dores -->
-                        <div class="bg-accent/50 p-6 rounded-2xl border border-red-500/20">
-                            <h3 class="text-xl font-bold mb-6 flex items-center gap-2 text-red-400">
-                                <i class="fas fa-heartbeat text-red-500 animate-pulse"></i>
-                                Você já sentiu esse aperto no peito?
-                            </h3>
-                            <ul class="space-y-4">
-                                <li class="flex items-start gap-3">
-                                    <div class="w-10 h-10 bg-red-500/10 rounded-xl flex items-center justify-center flex-shrink-0">
-                                        <i class="fas fa-exclamation-circle text-red-500"></i>
-                                    </div>
-                                    <div class="text-left">
-                                        <h4 class="text-lg font-semibold">Medo que paralisa</h4>
-                                        <p class="text-sm text-gray-400">Sua mão treme ao reger compassos compostos</p>
-                                    </div>
-                                </li>
-                                <li class="flex items-start gap-3">
-                                    <div class="w-10 h-10 bg-red-500/10 rounded-xl flex items-center justify-center flex-shrink-0">
-                                        <i class="fas fa-users-slash text-red-500"></i>
-                                    </div>
-                                    <div class="text-left">
-                                        <h4 class="text-lg font-semibold">Orquestra Desconectada</h4>
-                                        <p class="text-sm text-gray-400">Músicos perdidos e sem sintonia</p>
-                                    </div>
-                                </li>
-                                <li class="flex items-start gap-3">
-                                    <div class="w-10 h-10 bg-red-500/10 rounded-xl flex items-center justify-center flex-shrink-0">
-                                        <i class="fas fa-moon text-red-500"></i>
-                                    </div>
-                                    <div class="text-left">
-                                        <h4 class="text-lg font-semibold">Noites em Claro</h4>
-                                        <p class="text-sm text-gray-400">Ansiedade antes dos cultos</p>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-
-                        <!-- Coluna da Direita - Transformação -->
-                        <div class="bg-accent/50 p-6 rounded-2xl border border-gold/20">
-                            <h3 class="text-xl font-bold mb-6 flex items-center gap-2 text-gold">
-                                <i class="fas fa-crown text-gold animate-bounce"></i>
-                                Se transforme em...
-                            </h3>
-                            <ul class="space-y-4">
-                                <li class="flex items-start gap-3">
-                                    <div class="w-10 h-10 bg-gold/10 rounded-xl flex items-center justify-center flex-shrink-0">
-                                        <i class="fas fa-medal text-gold"></i>
-                                    </div>
-                                    <div class="text-left">
-                                        <h4 class="text-lg font-semibold">Regente Admirado</h4>
-                                        <p class="text-sm text-gray-400">Dominando cada compasso com confiança</p>
-                                    </div>
-                                </li>
-                                <li class="flex items-start gap-3">
-                                    <div class="w-10 h-10 bg-gold/10 rounded-xl flex items-center justify-center flex-shrink-0">
-                                        <i class="fas fa-hands-helping text-gold"></i>
-                                    </div>
-                                    <div class="text-left">
-                                        <h4 class="text-lg font-semibold">Mentor Inspirador</h4>
-                                        <p class="text-sm text-gray-400">Elevando o nível de cada músico</p>
-                                    </div>
-                                </li>
-                                <li class="flex items-start gap-3">
-                                    <div class="w-10 h-10 bg-gold/10 rounded-xl flex items-center justify-center flex-shrink-0">
-                                        <i class="fas fa-music text-gold"></i>
-                                    </div>
-                                    <div class="text-left">
-                                        <h4 class="text-lg font-semibold">Ministro que Toca</h4>
-                                        <p class="text-sm text-gray-400">Movendo pessoas à adoração</p>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    
-                    <!-- CTA -->
-                    <div class="text-center mt-8">
-                        <a href="https://pay.hotmart.com/W90405096Q?off=s810xbhf&checkoutMode=10" class="w-full max-w-2xl mx-auto inline-block bg-gradient-to-r from-gold to-yellow-500 text-darker font-bold text-xl px-12 py-6 rounded-xl hover:scale-105 transition-all group relative overflow-hidden btn-neon">
+                                <div class="pt-4">
+                                    <a href="https://pay.hotmart.com/W90405096Q?off=s810xbhf&checkoutMode=10" 
+                                       class="inline-block bg-gradient-to-r from-gold to-yellow-500 text-darker font-bold text-xl px-12 py-6 rounded-xl hover:scale-105 transition-all group relative overflow-hidden btn-neon">
                             <span class="relative z-10">QUERO TRANSFORMAR MINHA REGÊNCIA</span>
                             <div class="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity"></div>
                         </a>
                     </div>
                 </div>
-            </div>
-        </section>
 
-        <!-- Container Principal com Todo Conteúdo -->
-        <div class="relative overflow-hidden">
-            <!-- Background Unificado -->
-            <div class="absolute inset-0 z-0">
-                <div class="w-full h-full bg-gradient-to-b from-darker to-dark">
-                    <!-- Efeitos de Luz Dourada -->
-                    <div class="absolute inset-0">
-                        <div class="absolute w-full h-96 bg-gradient-to-b from-gold/10 to-transparent top-0"></div>
-                        <div class="absolute w-full h-96 bg-gradient-to-t from-gold/10 to-transparent bottom-0"></div>
-                        <div class="absolute w-96 h-full bg-gradient-to-r from-gold/10 to-transparent left-0"></div>
-                        <div class="absolute w-96 h-full bg-gradient-to-l from-gold/10 to-transparent right-0"></div>
+                            <!-- Coluna Direita: Imagem -->
+                            <div class="relative min-h-[800px] transform scale-110 pr-16" 
+                                 style="background-image: url('assets/imagens-para-sessoes/WhatsApp Image 2025-01-30 at 00.42.18.webp'); 
+                                        background-size: cover; 
+                                        background-position: left 80% center;">
+                                <!-- Overlay Gradiente Lateral -->
+                                <div class="absolute inset-0 bg-gradient-to-r from-darker/50 via-transparent to-transparent"></div>
+                                
+                                <!-- Gradientes na Base -->
+                                <div class="absolute bottom-0 left-0 right-0 h-[12%] bg-gradient-to-t from-darker via-darker/90 to-transparent"></div>
+                                <div class="absolute bottom-0 left-0 right-0 h-[32%] bg-gradient-to-t from-darker/90 via-darker/50 to-transparent"></div>
                     </div>
-                    <!-- Pontos de Luz -->
-                    <div class="absolute inset-0">
-                        <div class="absolute w-64 h-64 bg-gold/10 rounded-full blur-3xl" style="top: 20%; left: 10%"></div>
-                        <div class="absolute w-64 h-64 bg-gold/10 rounded-full blur-3xl" style="top: 60%; right: 10%"></div>
-                        <div class="absolute w-64 h-64 bg-gold/10 rounded-full blur-3xl" style="top: 40%; left: 50%"></div>
                     </div>
                     </div>
                 </div>
 
-            <!-- Conteúdo -->
-            <div class="relative z-10">
                 <!-- Metodologia DOM -->
-                <section id="metodologia" class="py-20">
-                    <div class="container mx-auto px-6 lg:px-8 max-w-6xl">
+                <section id="metodologia" class="py-20 bg-darker">
+                    <div class="container mx-auto px-6 lg:px-8 max-w-5xl">
                         <!-- Header -->
                         <div class="text-center mb-16">
                             <span class="bg-gold/20 text-gold px-6 py-2 rounded-full text-sm font-bold uppercase tracking-wider">
@@ -582,8 +500,8 @@
                 </section>
 
                 <!-- Depoimentos -->
-                <section id="depoimentos" class="py-20">
-                    <div class="container mx-auto px-6 lg:px-8 max-w-6xl relative z-10">
+                <section id="depoimentos" class="py-20 bg-darker">
+                    <div class="container mx-auto px-6 lg:px-8 max-w-5xl relative z-10">
                         <!-- Header -->
                         <div class="text-center mb-16">
                             <span class="bg-gold/20 text-gold px-6 py-2 rounded-full text-sm font-bold uppercase tracking-wider">
@@ -896,156 +814,382 @@
 
 
                 <!-- Bônus -->
-                <section id="bonus" class="py-20">
+                <section id="bonus" class="py-20 bg-darker">
                     <div class="container mx-auto px-6 lg:px-8 max-w-5xl">
-                        <!-- Header -->
-                        <div class="text-center mb-16">
+                        <!-- Header Principal -->
+                        <div class="text-center max-w-4xl mx-auto mb-20">
+                            <div class="inline-block mb-4">
                                 <span class="bg-gold/20 text-gold px-6 py-2 rounded-full text-sm font-bold uppercase tracking-wider">
-                                    Bônus Exclusivos
+                                    Pacote de Bônus Exclusivos para Você
                                 </span>
-                            <h2 class="text-4xl font-bold mt-6">
+                            </div>
+                            <h2 class="text-4xl md:text-5xl font-bold mb-6">
+                                Transforme-se em um<br>
                                     <span class="bg-gradient-to-r from-gold to-yellow-500 text-transparent bg-clip-text">
-                                    +R$ 3.991
+                                    Maestro Completo
                                     </span>
                                 </h2>
+                            <p class="text-xl text-gray-400">
+                                Receba um pacote exclusivo de bônus avaliado em 
+                                <span class="text-gold font-semibold">mais de R$ 3.900</span> 
+                                para você dominar todas as áreas da regência e se tornar um maestro de excelência
+                            </p>
                             </div>
 
                             <!-- Bônus Grid -->
-                            <div class="grid md:grid-cols-2 gap-8 mb-16">
-                                <!-- Batuta Personalizada -->
-                                <div class="glass-card p-8 rounded-2xl hover:bg-white/5 transition-all group">
-                                    <div class="flex items-start gap-6">
-                                        <div class="w-16 h-16 bg-gold/10 rounded-full flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-all">
-                                        <i class="fas fa-wand-magic-sparkles text-gold text-2xl"></i>
+                        <div class="space-y-8 mb-16">
+                            <!-- Bônus Ultra Exclusivo - Primeira Hora -->
+                            <div class="glass-card p-8 rounded-2xl border-2 border-red-500/30 relative">
+                                <!-- Badge de Urgência Máxima -->
+                                <div class="absolute -top-6 left-1/2 -translate-x-1/2 z-20">
+                                    <div class="bg-gradient-to-r from-red-600 to-red-500 px-6 py-2 rounded-full text-white text-sm font-bold shadow-lg flex items-center gap-2">
+                                        <span class="flex h-2 w-2">
+                                            <span class="animate-ping absolute inline-flex h-2 w-2 rounded-full bg-white opacity-75"></span>
+                                            <span class="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
+                                        </span>
+                                        APENAS NA PRIMEIRA HORA
                                     </div>
-                                    <div>
-                                            <div class="flex items-center gap-3 mb-2">
-                                                <h3 class="text-2xl font-bold">Batuta Personalizada</h3>
-                                                <span class="bg-emerald-500/20 text-emerald-400 text-xs px-3 py-1 rounded-full">GRÁTIS</span>
+                                </div>
+
+                                <!-- Contador Regressivo Melhorado -->
+                                <div class="absolute top-4 right-4">
+                                    <div class="bg-darker backdrop-blur-sm px-4 py-2 rounded-full border border-red-500/30 group relative">
+                                        <div class="flex items-center gap-4">
+                                            <div class="flex items-center gap-2">
+                                                <div class="relative">
+                                                    <div class="w-2 h-2 rounded-full bg-red-500 animate-ping absolute"></div>
+                                                    <div class="w-2 h-2 rounded-full bg-red-500"></div>
+                                                </div>
+                                                <span class="text-red-400 text-xs font-semibold">Oferta expira em:</span>
+                                                <span id="countdown" class="font-mono text-red-400 text-sm tabular-nums">59:59</span>
+                                            </div>
                                         </div>
-                                            <p class="text-gray-400 mb-3">Símbolo premium do seu compromisso com a excelência</p>
-                                            <span class="text-sm text-red-400 line-through">Valor: R$297</span>
+                                        <!-- Borda Pulsante Melhorada -->
+                                        <div class="absolute inset-0 rounded-full border border-red-500/30">
+                                            <div class="absolute inset-0 rounded-full border border-red-500/50 animate-pulse-premium"></div>
                                         </div>
                                     </div>
                                 </div>
 
-                                <!-- Imersão Compasso -->
-                                <div class="glass-card p-8 rounded-2xl hover:bg-white/5 transition-all group">
-                                    <div class="flex items-start gap-6">
+                                <style>
+                                    @keyframes pulse-premium {
+                                        0% { 
+                                            transform: scale(1);
+                                            opacity: 0.5;
+                                        }
+                                        50% { 
+                                            transform: scale(1.05);
+                                            opacity: 0;
+                                        }
+                                        100% { 
+                                            transform: scale(1);
+                                            opacity: 0.5;
+                                        }
+                                    }
+                                    .animate-pulse-premium {
+                                        animation: pulse-premium 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+                                    }
+                                </style>
+
+                                <!-- Script do Contador Melhorado -->
+                                <script>
+                                    document.addEventListener('DOMContentLoaded', function() {
+                                        const countdownElement = document.getElementById('countdown');
+                                        let minutes = 59;
+                                        let seconds = 59;
+
+                                        function updateCountdown() {
+                                            if (minutes === 0 && seconds <= 30) {
+                                                countdownElement.classList.add('text-red-500');
+                                                countdownElement.classList.add('animate-pulse');
+                                            }
+                                            
+                                            countdownElement.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+                                            
+                                            if (seconds > 0) {
+                                                seconds--;
+                                            } else if (minutes > 0) {
+                                                minutes--;
+                                                seconds = 59;
+                                            }
+
+                                            if (minutes === 0 && seconds === 0) {
+                                                clearInterval(countdownInterval);
+                                                return;
+                                            }
+                                        }
+
+                                        const countdownInterval = setInterval(updateCountdown, 1000);
+                                        updateCountdown();
+                                    });
+                                </script>
+
+                                <div class="flex items-start gap-6 mt-4">
+                                    <div class="w-16 h-16 bg-red-500/10 rounded-full flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-all">
+                                        <i class="fas fa-wand-magic-sparkles text-red-500 text-2xl"></i>
+                                    </div>
+                                    <div class="flex-1">
+                                            <div class="flex items-center gap-3 mb-2">
+                                            <h3 class="text-2xl font-bold">Batuta Personalizada Premium</h3>
+                                            <span class="bg-red-500/20 text-red-400 text-xs px-3 py-1 rounded-full animate-pulse whitespace-nowrap">
+                                                RESTAM APENAS 10 VAGAS
+                                            </span>
+                                        </div>
+                                        <p class="text-gray-400 mb-3">
+                                            Receba uma batuta exclusiva feita sob medida para que você 
+                                            <span class="text-red-400 font-semibold">conduza a orquestra com precisão e autoridade</span>, 
+                                            garantindo seu lugar entre os 
+                                            <span class="text-red-400 font-semibold">10 primeiros maestros</span>
+                                        </p>
+                                        <div class="flex items-center gap-4">
+                                            <span class="text-red-500 line-through text-lg">R$ 200</span>
+                                            <span class="text-emerald-400 font-bold text-lg">GRÁTIS</span>
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            <!-- Bônus do Primeiro Dia -->
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <!-- Maestria Internacional - Premium de Largura Total -->
+                                <div class="glass-card p-8 rounded-2xl border-2 border-purple-500/30 relative group md:col-span-2">
+                                    <!-- Badge Primeiro Dia -->
+                                    <div class="absolute -top-3 left-4">
+                                        <div class="bg-gradient-to-r from-purple-600 to-indigo-600 px-4 py-1 rounded-full text-white text-xs font-bold">
+                                            APENAS NO PRIMEIRO DIA
+                                </div>
+                                    </div>
+
+                                    <div class="flex items-start gap-6 mt-4">
+                                        <div class="w-16 h-16 bg-gradient-to-br from-purple-500/20 to-indigo-500/20 rounded-full flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-all">
+                                            <i class="fas fa-earth-europe text-indigo-400 text-2xl"></i>
+                                        </div>
+                                        <div class="flex-1">
+                                        <div class="flex items-center gap-3 mb-2">
+                                                <h3 class="text-2xl font-bold">Maestria Internacional</h3>
+                                    </div>
+                                            <p class="text-gray-400 mb-3">
+                                                Domine técnicas avançadas e segredos de regência das maiores orquestras do mundo, 
+                                                <span class="text-indigo-400 font-semibold">aprendidos nas melhores escolas da Europa</span> 
+                                                e adaptados para os hinos CCB, 
+                                                <span class="text-indigo-400 font-semibold">elevando sua regência a um novo patamar de excelência</span>
+                                            </p>
+                                            <div class="flex items-center gap-4">
+                                                <span class="text-red-500 line-through text-lg">R$ 1.200</span>
+                                                <span class="text-emerald-400 font-bold text-lg">GRÁTIS</span>
+                                            </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                                <!-- 2 Aulas Individuais -->
+                                <div class="glass-card p-8 rounded-2xl border border-gold/30 relative group">
+                                    <!-- Badge Primeiro Dia -->
+                                    <div class="absolute -top-3 left-4">
+                                        <div class="bg-gradient-to-r from-gold to-yellow-500 px-4 py-1 rounded-full text-darker text-xs font-bold">
+                                            APENAS NO PRIMEIRO DIA
+                                        </div>
+                                    </div>
+
+                                    <div class="flex items-start gap-6 mt-4">
                                         <div class="w-16 h-16 bg-gold/10 rounded-full flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-all">
-                                        <i class="fas fa-clock text-gold text-2xl"></i>
+                                            <i class="fas fa-chalkboard-teacher text-gold text-2xl"></i>
                                     </div>
                                     <div>
                                             <div class="flex items-center gap-3 mb-2">
-                                                <h3 class="text-2xl font-bold">Imersão Compasso</h3>
-                                                <span class="bg-emerald-500/20 text-emerald-400 text-xs px-3 py-1 rounded-full">GRÁTIS</span>
+                                                <h3 class="text-2xl font-bold">2 Aulas Individuais</h3>
                                         </div>
-                                            <p class="text-gray-400 mb-3">Domine a técnica de subdivisão com total segurança</p>
-                                            <span class="text-sm text-red-400 line-through">Valor: R$997</span>
+                                            <p class="text-gray-400 mb-3">
+                                                Duas aulas particulares onde eu vou 
+                                                <span class="text-gold font-semibold">te guiar pessoalmente</span>, 
+                                                corrigindo, tirando dúvidas e 
+                                                <span class="text-gold font-semibold">te ajudando a destravar seu potencial como maestro</span>
+                                            </p>
+                                            <div class="flex items-center gap-4">
+                                                <span class="text-red-500 line-through text-lg">R$ 700</span>
+                                                <span class="text-emerald-400 font-bold text-lg">GRÁTIS</span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
 
                                 <!-- Guia de Interpretação -->
-                                <div class="glass-card p-8 rounded-2xl hover:bg-white/5 transition-all group">
-                                    <div class="flex items-start gap-6">
+                                <div class="glass-card p-8 rounded-2xl border border-gold/30 relative group">
+                                    <!-- Badge Primeiro Dia -->
+                                    <div class="absolute -top-3 left-4">
+                                        <div class="bg-gradient-to-r from-gold to-yellow-500 px-4 py-1 rounded-full text-darker text-xs font-bold">
+                                            APENAS NO PRIMEIRO DIA
+                                        </div>
+                                    </div>
+
+                                    <div class="flex items-start gap-6 mt-4">
                                         <div class="w-16 h-16 bg-gold/10 rounded-full flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-all">
                                         <i class="fas fa-book-open text-gold text-2xl"></i>
                                     </div>
                                     <div>
                                             <div class="flex items-center gap-3 mb-2">
                                                 <h3 class="text-2xl font-bold">Guia de Interpretação</h3>
-                                                <span class="bg-emerald-500/20 text-emerald-400 text-xs px-3 py-1 rounded-full">GRÁTIS</span>
                                         </div>
-                                            <p class="text-gray-400 mb-3">Extraia a essência de cada hino com maestria</p>
-                                            <span class="text-sm text-red-400 line-through">Valor: R$497</span>
+                                            <p class="text-gray-400 mb-3">
+                                                Um material exclusivo que explica 
+                                                <span class="text-gold font-semibold">a poesia, a dinâmica e a expressividade</span> 
+                                                de cada hino, para que você possa 
+                                                <span class="text-gold font-semibold">reger com emoção e profundidade</span>
+                                            </p>
+                                            <div class="flex items-center gap-4">
+                                                <span class="text-red-500 line-through text-lg">R$ 200</span>
+                                                <span class="text-emerald-400 font-bold text-lg">GRÁTIS</span>
+                                            </div>
+                                        </div>
                                         </div>
                                     </div>
                                 </div>
 
-                                <!-- Maestria Internacional -->
-                                <div class="glass-card p-8 rounded-2xl hover:bg-white/5 transition-all group">
+                            <!-- Bônus Regulares Grid -->
+                            <div class="grid md:grid-cols-2 gap-6 mt-12">
+                                <!-- Imersão Compasso Composto -->
+                                <div class="glass-card p-8 rounded-2xl border border-gold/30 relative group">
                                     <div class="flex items-start gap-6">
                                         <div class="w-16 h-16 bg-gold/10 rounded-full flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-all">
-                                        <i class="fas fa-earth-europe text-gold text-2xl"></i>
+                                            <i class="fas fa-music text-gold text-2xl"></i>
                                     </div>
                                     <div>
                                             <div class="flex items-center gap-3 mb-2">
-                                                <h3 class="text-2xl font-bold">Maestria Internacional</h3>
-                                                <span class="bg-emerald-500/20 text-emerald-400 text-xs px-3 py-1 rounded-full">GRÁTIS</span>
+                                                <h3 class="text-2xl font-bold">Imersão Compasso Composto</h3>
                                         </div>
-                                            <p class="text-gray-400 mb-3">Técnicas das maiores orquestras do mundo</p>
-                                            <span class="text-sm text-red-400 line-through">Valor: R$1.200</span>
+                                            <p class="text-gray-400 mb-3">
+                                                Domine de vez os compassos compostos e 
+                                                <span class="text-gold font-semibold">pare de travar nos hinos mais desafiadores</span>. 
+                                                Você aprenderá a 
+                                                <span class="text-gold font-semibold">subdividir com segurança e reger com franqueza</span>
+                                            </p>
+                                            <div class="flex items-center gap-4">
+                                                <span class="text-red-500 line-through text-lg">R$ 600</span>
+                                                <span class="text-emerald-400 font-bold text-lg">GRÁTIS</span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
 
-                                <!-- Sessões MAESTRIA EXPRESS - Destaque Especial -->
-                                <div class="md:col-span-2 glass-card p-12 rounded-2xl hover:bg-white/5 transition-all group relative overflow-hidden border border-gold/30">
-                                    <!-- Efeito de Brilho -->
-                                    <div class="absolute inset-0 bg-gradient-to-r from-gold/0 via-gold/5 to-gold/0 transform -skew-x-12 group-hover:translate-x-full transition-transform duration-1000"></div>
-                                    
-                                    <div class="relative z-10">
-                                        <div class="flex items-center gap-8 relative z-10">
-                                            <div class="w-24 h-24 bg-gold/10 rounded-full flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-all">
-                                                <i class="fas fa-bolt text-gold text-4xl"></i>
-                                    </div>
-                                            <div class="flex-1">
-                                                <div class="flex flex-col md:flex-row md:items-center gap-3 mb-4">
-                                                    <h3 class="text-2xl font-bold whitespace-nowrap">Sessões MAESTRIA EXPRESS</h3>
-                                                    <div class="flex items-center gap-2">
-                                                        <span class="bg-emerald-500/20 text-emerald-400 text-xs px-3 py-1 rounded-full font-bold whitespace-nowrap animate-pulse">
-                                                            BÔNUS ESPECIAL
-                                                        </span>
-                                                        <span class="bg-red-500/20 text-red-400 text-xs px-3 py-1 rounded-full whitespace-nowrap">
-                                                            VALOR: R$1.000
-                                                        </span>
+                                <!-- Hinário do Maestro -->
+                                <div class="glass-card p-8 rounded-2xl border border-gold/30 relative group">
+                                    <div class="flex items-start gap-6">
+                                        <div class="w-16 h-16 bg-gold/10 rounded-full flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-all">
+                                            <i class="fas fa-book text-gold text-2xl"></i>
+                                        </div>
+                                        <div>
+                                            <div class="flex items-center gap-3 mb-2">
+                                                <h3 class="text-2xl font-bold">Hinário do Maestro</h3>
+                                            </div>
+                                            <p class="text-gray-400 mb-3">
+                                                Um material exclusivo para você 
+                                                <span class="text-gold font-semibold">entender a estrutura dos hinos</span> 
+                                                e saber exatamente 
+                                                <span class="text-gold font-semibold">conduzi-los com maestria e segurança</span>
+                                            </p>
+                                            <div class="flex items-center gap-4">
+                                                <span class="text-red-500 line-through text-lg">R$ 300</span>
+                                                <span class="text-emerald-400 font-bold text-lg">GRÁTIS</span>
+                                            </div>
                                         </div>
                                     </div>
-                                            <p class="text-xl text-gray-300 mb-4 max-w-3xl">
-                                                Receba feedback personalizado e direcionamento individual para 
-                                                <span class="text-gold font-semibold">acelerar drasticamente seu progresso</span>. 
-                                                Tenha acesso direto ao mentor para tirar suas dúvidas e aperfeiçoar sua técnica.
+                                </div>
+
+                                <!-- Curso Básico de Regência -->
+                                <div class="glass-card p-8 rounded-2xl border border-gold/30 relative group">
+                                    <div class="flex items-start gap-6">
+                                        <div class="w-16 h-16 bg-gold/10 rounded-full flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-all">
+                                            <i class="fas fa-graduation-cap text-gold text-2xl"></i>
+                                    </div>
+                                        <div>
+                                            <div class="flex items-center gap-3 mb-2">
+                                                <h3 class="text-2xl font-bold">Curso Básico de Regência</h3>
+                                        </div>
+                                            <p class="text-gray-400 mb-3">
+                                                Se você está começando, esse curso vai te dar uma 
+                                                <span class="text-gold font-semibold">base sólida</span>, 
+                                                ensinando desde os 
+                                                <span class="text-gold font-semibold">fundamentos até os primeiros passos na regência</span>
                                             </p>
-                                            <div class="flex flex-wrap gap-4">
-                                                <div class="flex items-center gap-2 bg-gold/10 px-4 py-2 rounded-full">
-                                                    <i class="fas fa-check-circle text-gold"></i>
-                                                    <span>Feedback Individual</span>
+                                            <div class="flex items-center gap-4">
+                                                <span class="text-red-500 line-through text-lg">R$ 400</span>
+                                                <span class="text-emerald-400 font-bold text-lg">GRÁTIS</span>
+                                    </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Ensaios na Prática -->
+                                <div class="glass-card p-8 rounded-2xl border border-gold/30 relative group">
+                                    <div class="flex items-start gap-6">
+                                        <div class="w-16 h-16 bg-gold/10 rounded-full flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-all">
+                                            <i class="fas fa-users text-gold text-2xl"></i>
+                                        </div>
+                                        <div>
+                                            <div class="flex items-center gap-3 mb-2">
+                                                <h3 class="text-2xl font-bold">Ensaios na Prática</h3>
+                                            </div>
+                                            <p class="text-gray-400 mb-3">
+                                                Veja na prática como 
+                                                <span class="text-gold font-semibold">conduzir um ensaio eficiente</span>, 
+                                                organizando os músicos, corrigindo erros e 
+                                                <span class="text-gold font-semibold">extraindo o melhor da orquestra</span>
+                                            </p>
+                                            <div class="flex items-center gap-4">
+                                                <span class="text-red-500 line-through text-lg">R$ 200</span>
+                                                <span class="text-emerald-400 font-bold text-lg">GRÁTIS</span>
                                                 </div>
-                                                <div class="flex items-center gap-2 bg-gold/10 px-4 py-2 rounded-full">
-                                                    <i class="fas fa-check-circle text-gold"></i>
-                                                    <span>Progresso Acelerado</span>
                                                 </div>
-                                                <div class="flex items-center gap-2 bg-gold/10 px-4 py-2 rounded-full">
-                                                    <i class="fas fa-check-circle text-gold"></i>
-                                                    <span>Mentoria Personalizada</span>
                                                 </div>
+                                            </div>
+
+                                <!-- Aquecimento para Orquestra -->
+                                <div class="glass-card p-8 rounded-2xl border border-gold/30 relative group md:col-span-2">
+                                    <div class="flex items-start gap-6">
+                                        <div class="w-16 h-16 bg-gold/10 rounded-full flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-all">
+                                            <i class="fas fa-fire text-gold text-2xl"></i>
+                                        </div>
+                                        <div>
+                                            <div class="flex items-center gap-3 mb-2">
+                                                <h3 class="text-2xl font-bold">Aquecimento para Orquestra</h3>
+                                            </div>
+                                            <p class="text-gray-400 mb-3">
+                                                Um guia completo com exercícios de aquecimento para 
+                                                <span class="text-gold font-semibold">preparar os músicos, melhorar a afinação e a sonoridade</span>. 
+                                                Aprimore o 
+                                                <span class="text-gold font-semibold">entrosamento do grupo antes dos ensaios e cultos</span>
+                                            </p>
+                                            <div class="flex items-center gap-4">
+                                                <span class="text-red-500 line-through text-lg">R$ 100</span>
+                                                <span class="text-emerald-400 font-bold text-lg">GRÁTIS</span>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <!-- Valor Total -->
-                            <div class="max-w-3xl mx-auto">
-                                <div class="glass-card p-10 rounded-2xl border border-gold/30 text-center relative overflow-hidden group">
+                            <!-- Valor Total com Nova Copy -->
+                            <div class="glass-card p-10 rounded-2xl border-2 border-gold/30 text-center relative overflow-hidden group mt-16">
                                     <!-- Efeito de Brilho -->
                                     <div class="absolute inset-0 bg-gradient-to-r from-gold/0 via-gold/5 to-gold/0 transform -skew-x-12 group-hover:translate-x-full transition-transform duration-1000"></div>
                                     
                                     <div class="relative z-10">
-                                        <h3 class="text-2xl font-bold mb-6">Valor Total em Bônus</h3>
-                                        <div class="flex items-center justify-center gap-6 mb-6">
-                                            <span class="text-4xl font-black text-red-400 relative">
-                                                R$ 3.991
+                                    <h3 class="text-3xl font-bold mb-8">Valor Total em Bônus</h3>
+                                    <div class="flex items-center justify-center gap-8 mb-6">
+                                        <span class="text-5xl font-black text-red-400 relative">
+                                            R$ 3.900
                                                 <div class="absolute inset-0 flex items-center justify-center">
                                                     <div class="h-0.5 w-full bg-red-500 transform rotate-[-12deg]"></div>
                                     </div>
                                             </span>
-                                            <span class="text-4xl font-black text-emerald-400">GRÁTIS</span>
+                                        <span class="text-5xl font-black text-emerald-400">GRÁTIS</span>
                                 </div>
-                                        <p class="text-gray-400">
-                                            Acesso imediato a todos os bônus ao fazer sua inscrição
+                                    <p class="text-xl text-gray-400 mb-4">
+                                        Você pode continuar tentando sozinho, travando nos hinos compostos, 
+                                        sem saber como corrigir a orquestra e sentindo insegurança na frente dos músicos ou...
                                         </p>
+                                    <p class="text-2xl font-bold text-gold">Agora é com você!</p>
+                                </div>
                             </div>
                         </div>
                     </div>

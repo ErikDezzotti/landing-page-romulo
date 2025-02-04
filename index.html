@@ -346,6 +346,191 @@
         src="https://www.facebook.com/tr?id=696368755825539&ev=PageView&noscript=1"/>
     </noscript>
     <!-- End Meta Pixel Code -->
+
+    <!-- No head, após as meta tags -->
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css" as="style">
+    <link rel="preload" href="https://cdn.tailwindcss.com" as="script">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" as="style">
+
+    <!-- Critical CSS inline -->
+    <style>
+        /* Critical Path CSS */
+        :root {
+            --gold: #FFD700;
+            --darker: #0A0A0A;
+        }
+        
+        body {
+            background: var(--darker);
+            color: #fff;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        body.loaded {
+            opacity: 1;
+        }
+        
+        /* Performance Optimizations */
+        img {
+            content-visibility: auto;
+            contain: layout style paint;
+        }
+        
+        .lazy-section {
+            content-visibility: auto;
+            contain: layout style paint;
+            min-height: 100px;
+        }
+    </style>
+
+    <!-- Otimização de Scripts -->
+    <script type="module">
+        // Performance Utilities
+        const perf = {
+            observers: new Map(),
+            init() {
+                this.setupIntersectionObserver();
+                this.setupLazyLoading();
+                this.optimizeAnimations();
+            },
+            
+            setupIntersectionObserver() {
+                const options = {
+                    root: null,
+                    rootMargin: '50px',
+                    threshold: 0.1
+                };
+                
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const section = entry.target;
+                            section.classList.add('visible');
+                            observer.unobserve(section);
+                            
+                            // Lazy load images in section
+                            section.querySelectorAll('img[data-src]').forEach(img => {
+                                img.src = img.dataset.src;
+                                img.removeAttribute('data-src');
+                            });
+                            
+                            // Initialize components if needed
+                            if (section.dataset.component) {
+                                this.initializeComponent(section);
+                            }
+                        }
+                    });
+                }, options);
+                
+                this.observers.set('sections', observer);
+                
+                document.querySelectorAll('.lazy-section').forEach(section => {
+                    observer.observe(section);
+                });
+            },
+            
+            setupLazyLoading() {
+                if ('loading' in HTMLImageElement.prototype) {
+                    document.querySelectorAll('img[loading="lazy"]').forEach(img => {
+                        if (img.dataset.src) {
+                            img.src = img.dataset.src;
+                        }
+                    });
+                } else {
+                    // Fallback para browsers antigos
+                    const lazyImageObserver = new IntersectionObserver((entries) => {
+                        entries.forEach(entry => {
+                            if (entry.isIntersecting) {
+                                const img = entry.target;
+                                if (img.dataset.src) {
+                                    img.src = img.dataset.src;
+                                    img.removeAttribute('data-src');
+                                }
+                                lazyImageObserver.unobserve(img);
+                            }
+                        });
+                    });
+
+                    document.querySelectorAll('img[loading="lazy"]').forEach(img => {
+                        lazyImageObserver.observe(img);
+                    });
+                }
+            },
+            
+            optimizeAnimations() {
+                // Usar requestAnimationFrame para animações
+                const animatedElements = document.querySelectorAll('.animate-on-scroll');
+                
+                const animate = () => {
+                    animatedElements.forEach(el => {
+                        const rect = el.getBoundingClientRect();
+                        const isVisible = rect.top <= window.innerHeight && rect.bottom >= 0;
+                        
+                        if (isVisible) {
+                            el.classList.add('animated');
+                        }
+                    });
+                    
+                    requestAnimationFrame(animate);
+                };
+                
+                requestAnimationFrame(animate);
+            },
+            
+            initializeComponent(section) {
+                const component = section.dataset.component;
+                
+                switch(component) {
+                    case 'video-testimonials':
+                        this.initVideoTestimonials(section);
+                        break;
+                    // Adicione outros componentes conforme necessário
+                }
+            },
+            
+            initVideoTestimonials(section) {
+                // Lazy initialize Splide only when needed
+                import('https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js').then(module => {
+                    new Splide(section.querySelector('.splide'), {
+                        perPage: 3,
+                        gap: '2rem',
+                        pagination: true,
+                        arrows: true,
+                        breakpoints: {
+                            1024: { perPage: 2 },
+                            640: { perPage: 1 }
+                        }
+                    }).mount();
+                });
+            }
+        };
+
+        // Initialize performance optimizations
+        document.addEventListener('DOMContentLoaded', () => {
+            perf.init();
+            document.body.classList.add('loaded');
+        });
+        
+        // Otimizar carregamento de recursos
+        window.addEventListener('load', () => {
+            // Defer non-critical resources
+            setTimeout(() => {
+                const deferredStyles = document.querySelectorAll('link[data-defer]');
+                deferredStyles.forEach(style => {
+                    style.rel = 'stylesheet';
+                });
+            }, 100);
+        });
+    </script>
+
+    <!-- Adicione data-component aos componentes lazy -->
+    <div class="lazy-section" data-component="video-testimonials">
+        <!-- Seu código do Splide aqui -->
+    </div>
+
+    <!-- Otimize imagens -->
+    <img loading="lazy" data-src="path/to/image.jpg" alt="..." />
 </head>
 <body class="bg-dark text-white overflow-x-hidden">
     <!-- Overlay Global Pulsante -->
@@ -367,7 +552,7 @@
 
             <!-- Conteúdo -->
             <div class="relative z-10">
-        <!-- Hero Section -->
+                <!-- Hero Section -->
                 <div class="relative min-h-screen">
                     <!-- Background com Gradiente Suave -->
                     <div class="absolute inset-0">
@@ -379,7 +564,7 @@
                         <!-- Gradientes sutis -->
                         <div class="absolute inset-0 bg-gradient-to-b from-transparent via-darker/50 to-darker"></div>
                         <div class="absolute inset-0 bg-gradient-to-t from-darker via-transparent to-transparent opacity-40"></div>
-                </div>
+                    </div>
 
                     <!-- Expert Image (Posicionada absolutamente) -->
                     <div class="absolute right-0 top-0 bottom-0 w-1/2 hidden md:block" style="right: 5%;">
@@ -425,18 +610,18 @@
                                 </div>
                                 <div class="space-y-6 max-w-[90%] md:max-w-xl">
                                     <h1 class="text-4xl md:text-6xl font-bold leading-tight">
-                        <span class="bg-gradient-to-r from-gold to-yellow-500 text-transparent bg-clip-text">
-                            Eleve Sua Regência
-                        </span>
-                        <br>
+                                        <span class="bg-gradient-to-r from-gold to-yellow-500 text-transparent bg-clip-text">
+                                            Eleve Sua Regência
+                                        </span>
+                                        <br>
                                         <span class="text-3xl md:text-5xl">
                                             Para a Glória do Reino
-                        </span>
-                    </h1>
+                                        </span>
+                                    </h1>
                                     <p class="text-lg md:text-xl text-gray-300 leading-relaxed max-w-[320px] md:max-w-none mx-auto md:mx-0">
-                        Domine a regência dos hinos CCB com um método simples e eficaz, 
-                        <span class="text-gold font-semibold">estudando apenas 15 minutos por dia</span>
-                    </p>
+                                        Domine a regência dos hinos CCB com um método simples e eficaz, 
+                                        <span class="text-gold font-semibold">estudando apenas 15 minutos por dia</span>
+                                    </p>
                                 </div>
                                 <div class="pt-4 w-full md:w-auto">
                                     <a href="https://pay.hotmart.com/W90405096Q?off=s810xbhf&checkoutMode=10" 
@@ -449,7 +634,7 @@
                         </div>
                     </div>
                 </div>
-                </div>
+            </div>
 
                 <!-- Metodologia DOM -->
                 <section id="metodologia" class="py-20 bg-gradient-to-b from-darker via-dark to-darker relative">
@@ -469,7 +654,7 @@
                             <p class="text-xl text-gray-400 max-w-2xl mx-auto">
                                 Um método revolucionário desenvolvido para que qualquer encarregado possa <span class="text-gold">reger com franqueza, segurança e expressividade</span>, mesmo que nunca tenha estudado música antes.
                             </p>
-                        </div>
+                    </div>
 
                         <!-- Cards D.O.M -->
                     <div class="grid md:grid-cols-3 gap-8">
@@ -479,10 +664,10 @@
                                 <div class="flex items-center gap-4 mb-6">
                                     <div class="w-16 h-16 bg-gold/10 rounded-full flex items-center justify-center group-hover:scale-110 transition-all">
                                         <i class="fas fa-chart-line text-gold text-2xl"></i>
-                    </div>
+                                </div>
                                     <div class="text-6xl font-black text-gold/20 group-hover:text-gold/30 transition-all">D</div>
-                </div>
-
+                                </div>
+                                
                                 <!-- Conteúdo -->
                                 <div class="space-y-4">
                                     <h3 class="text-2xl font-bold">Domínio Técnico</h3>
@@ -490,26 +675,26 @@
                                     
                                     <!-- Lista de Benefícios -->
                                     <ul class="space-y-3 pt-4">
-                                <li class="flex items-start gap-3">
+                                        <li class="flex items-start gap-3">
                                             <div class="w-6 h-6 bg-gold/10 rounded-full flex items-center justify-center flex-shrink-0">
                                                 <i class="fas fa-check text-gold text-xs"></i>
                                             </div>
                                             <span class="text-gray-300">Técnicas claras para reger compassos simples e compostos</span>
-                                </li>
-                                <li class="flex items-start gap-3">
+                                    </li>
+                                        <li class="flex items-start gap-3">
                                             <div class="w-6 h-6 bg-gold/10 rounded-full flex items-center justify-center flex-shrink-0">
                                                 <i class="fas fa-check text-gold text-xs"></i>
                                             </div>
                                             <span class="text-gray-300">Domínio dos diagramas e gestos essenciais</span>
-                                </li>
-                                <li class="flex items-start gap-3">
+                                        </li>
+                                        <li class="flex items-start gap-3">
                                             <div class="w-6 h-6 bg-gold/10 rounded-full flex items-center justify-center flex-shrink-0">
                                                 <i class="fas fa-check text-gold text-xs"></i>
                                             </div>
                                             <span class="text-gray-300">Confiança para reger no púlpito sem medo ou insegurança</span>
-                                </li>
-                            </ul>
-                        </div>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
 
                             <!-- Organização Musical -->
@@ -529,27 +714,27 @@
                                     
                                     <!-- Lista de Benefícios -->
                                     <ul class="space-y-3 pt-4">
-                                <li class="flex items-start gap-3">
+                                        <li class="flex items-start gap-3">
                                             <div class="w-6 h-6 bg-gold/10 rounded-full flex items-center justify-center flex-shrink-0">
                                                 <i class="fas fa-check text-gold text-xs"></i>
                                             </div>
                                             <span class="text-gray-300">Definição do melhor gestual para cada compasso</span>
-                                </li>
-                                <li class="flex items-start gap-3">
+                                    </li>
+                                        <li class="flex items-start gap-3">
                                             <div class="w-6 h-6 bg-gold/10 rounded-full flex items-center justify-center flex-shrink-0">
                                                 <i class="fas fa-check text-gold text-xs"></i>
                                             </div>
                                             <span class="text-gray-300">Transições suaves e claras entre diferentes ritmos</span>
-                                </li>
-                                <li class="flex items-start gap-3">
+                                        </li>
+                                        <li class="flex items-start gap-3">
                                             <div class="w-6 h-6 bg-gold/10 rounded-full flex items-center justify-center flex-shrink-0">
                                                 <i class="fas fa-check text-gold text-xs"></i>
                                             </div>
                                             <span class="text-gray-300">Regência eficiente que facilita a execução da orquestra</span>
-                                </li>
-                            </ul>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
-                    </div>
 
                             <!-- Maestria Espiritual -->
                             <div class="glass-card p-8 rounded-2xl border border-gold/20 hover:border-gold/40 transition-all group">
@@ -557,10 +742,10 @@
                                 <div class="flex items-center gap-4 mb-6">
                                     <div class="w-16 h-16 bg-gold/10 rounded-full flex items-center justify-center group-hover:scale-110 transition-all">
                                         <i class="fas fa-star text-gold text-2xl"></i>
-                    </div>
+                                </div>
                                     <div class="text-6xl font-black text-gold/20 group-hover:text-gold/30 transition-all">M</div>
-                </div>
-
+                                </div>
+                                
                                 <!-- Conteúdo -->
                                 <div class="space-y-4">
                                     <h3 class="text-2xl font-bold">Maestria Musical</h3>
@@ -571,7 +756,7 @@
                                         <li class="flex items-start gap-3">
                                             <div class="w-6 h-6 bg-gold/10 rounded-full flex items-center justify-center flex-shrink-0">
                                                 <i class="fas fa-check text-gold text-xs"></i>
-                                </div>
+                                            </div>
                                             <span class="text-gray-300">Expressividade e franqueza na condução dos hinos</span>
                                     </li>
                                         <li class="flex items-start gap-3">
@@ -579,17 +764,17 @@
                                                 <i class="fas fa-check text-gold text-xs"></i>
                                             </div>
                                             <span class="text-gray-300">Conexão profunda com os músicos para uma regência inspiradora</span>
-                                    </li>
+                                        </li>
                                         <li class="flex items-start gap-3">
                                             <div class="w-6 h-6 bg-gold/10 rounded-full flex items-center justify-center flex-shrink-0">
                                                 <i class="fas fa-check text-gold text-xs"></i>
-                            </div>
+                                            </div>
                                             <span class="text-gray-300">Adoração que toca corações e transmite a verdadeira mensagem do hino</span>
                                     </li>
                                 </ul>
                             </div>
-                            </div>
                         </div>
+                    </div>
 
                         <!-- CTA -->
                     <div class="text-center mt-12">
@@ -597,14 +782,14 @@
                                 <div class="flex items-center gap-3">
                                     <i class="fas fa-music text-3xl text-white animate-pulse"></i>
                                     <i class="fas fa-music text-3xl text-gold animate-pulse"></i>
-                                </div>
+                    </div>
                                 <p class="text-3xl text-white font-black mb-4 tracking-wide bg-gradient-to-r from-gold to-yellow-500 text-transparent bg-clip-text">
                                     Com o Método D.O.M. da Regência
                                 </p>
                                 <p class="text-lg text-gray-300 max-w-xl mb-8">
                                     Você terá um <span class="font-semibold">caminho claro</span> para reger com <span class="font-semibold">maestria</span>, conduzindo a orquestra com <span class="font-semibold">segurança</span> e transmitindo a <span class="font-semibold">verdadeira essência</span> de cada louvor. <span class="text-gold font-semibold">#TudoPeloReino</span>
                                 </p>
-                            </div>
+                </div>
                             <!-- Botão CTA Principal -->
                             <a href="https://pay.hotmart.com/W90405096Q?off=s810xbhf&checkoutMode=10" class="w-full max-w-2xl mx-auto inline-block bg-gradient-to-r from-gold to-yellow-500 text-darker font-bold text-xl px-12 py-6 rounded-xl hover:scale-105 transition-all group relative overflow-hidden btn-neon">
                                 <span class="relative z-10">QUERO TRANSFORMAR MINHA REGÊNCIA</span>
@@ -614,9 +799,9 @@
                     </div>
                     </div>
                 </div>
-        </div>
-    </div>
-        </section>
+                        </div>
+                    </div>
+                </section>
 
                 <!-- Depoimentos -->
                 <section id="depoimentos" class="py-20 bg-gradient-to-b from-darker via-dark to-darker relative">
@@ -720,6 +905,261 @@
 
                         <!-- Galeria de Depoimentos -->
                         <div class="text-center">
+                            <!-- Video Testimonials Grid -->
+                            <div class="splide video-testimonials max-w-7xl mx-auto mb-16">
+                                <div class="splide__track">
+                                    <ul class="splide__list">
+                                        <!-- Video 1 -->
+                                        <li class="splide__slide p-4">
+                                            <div class="glass-card rounded-2xl overflow-hidden relative group border border-gold/20 hover:border-gold/40 transition-all">
+                                                <div class="aspect-[9/16] relative">
+                                                    <div class="absolute inset-0 bg-darker/40 group-hover:bg-darker/20 transition-all duration-300"></div>
+                                                    <div class="video-wrapper" data-video-id="TMNf4pTWyOM">
+                                                        <img 
+                                                            class="w-full h-full object-cover"
+                                                            src="https://i.ytimg.com/vi_webp/TMNf4pTWyOM/maxresdefault.webp"
+                                                            alt="Depoimento em Vídeo"
+                                                        />
+                                                        <button class="play-button absolute inset-0 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                                                            <div class="w-16 h-16 bg-gold/20 rounded-full flex items-center justify-center backdrop-blur-sm border border-gold/30">
+                                                                <i class="fas fa-play text-gold text-xl"></i>
+                                                            </div>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+
+                                        <!-- Video 2 -->
+                                        <li class="splide__slide p-4">
+                                            <div class="glass-card rounded-2xl overflow-hidden relative group border border-gold/20 hover:border-gold/40 transition-all">
+                                                <div class="aspect-[9/16] relative">
+                                                    <div class="absolute inset-0 bg-darker/40 group-hover:bg-darker/20 transition-all duration-300"></div>
+                                                    <div class="video-wrapper" data-video-id="NVhAprqBuDc">
+                                                        <img 
+                                                            class="w-full h-full object-cover"
+                                                            src="https://i.ytimg.com/vi_webp/NVhAprqBuDc/maxresdefault.webp"
+                                                            alt="Depoimento em Vídeo"
+                                                        />
+                                                        <button class="play-button absolute inset-0 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                                                            <div class="w-16 h-16 bg-gold/20 rounded-full flex items-center justify-center backdrop-blur-sm border border-gold/30">
+                                                                <i class="fas fa-play text-gold text-xl"></i>
+                                                            </div>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+
+                                        <!-- Video 3 -->
+                                        <li class="splide__slide p-4">
+                                            <div class="glass-card rounded-2xl overflow-hidden relative group border border-gold/20 hover:border-gold/40 transition-all">
+                                                <div class="aspect-[9/16] relative">
+                                                    <div class="absolute inset-0 bg-darker/40 group-hover:bg-darker/20 transition-all duration-300"></div>
+                                                    <div class="video-wrapper" data-video-id="HIfNwAK6OF4">
+                                                        <img 
+                                                            class="w-full h-full object-cover"
+                                                            src="https://i.ytimg.com/vi_webp/HIfNwAK6OF4/maxresdefault.webp"
+                                                            alt="Depoimento em Vídeo"
+                                                        />
+                                                        <button class="play-button absolute inset-0 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                                                            <div class="w-16 h-16 bg-gold/20 rounded-full flex items-center justify-center backdrop-blur-sm border border-gold/30">
+                                                                <i class="fas fa-play text-gold text-xl"></i>
+                                                            </div>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+
+                                        <!-- Video 4 (Novo) -->
+                                        <li class="splide__slide p-4">
+                                            <div class="glass-card rounded-2xl overflow-hidden relative group border border-gold/20 hover:border-gold/40 transition-all">
+                                                <div class="aspect-[9/16] relative">
+                                                    <div class="absolute inset-0 bg-darker/40 group-hover:bg-darker/20 transition-all duration-300"></div>
+                                                    <div class="video-wrapper" data-video-id="HIfNwAK6OF4">
+                                                        <img 
+                                                            class="w-full h-full object-cover"
+                                                            src="https://i.ytimg.com/vi_webp/HIfNwAK6OF4/maxresdefault.webp"
+                                                            alt="Depoimento em Vídeo"
+                                                        />
+                                                        <button class="play-button absolute inset-0 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                                                            <div class="w-16 h-16 bg-gold/20 rounded-full flex items-center justify-center backdrop-blur-sm border border-gold/30">
+                                                                <i class="fas fa-play text-gold text-xl"></i>
+                                                            </div>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <!-- Splide CSS -->
+                            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css">
+
+                            <!-- Splide Custom Styles -->
+                            <style>
+                                .splide {
+                                    padding: 2rem 0;
+                                }
+
+                                .splide__arrow {
+                                    background: rgba(255, 215, 0, 0.1);
+                                    backdrop-filter: blur(8px);
+                                    border: 1px solid rgba(255, 215, 0, 0.2);
+                                    width: 3rem;
+                                    height: 3rem;
+                                    transition: all 0.3s ease;
+                                }
+
+                                .splide__arrow:hover {
+                                    background: rgba(255, 215, 0, 0.2);
+                                    transform: scale(1.1);
+                                }
+
+                                .splide__arrow svg {
+                                    fill: #FFD700;
+                                }
+
+                                .splide__pagination__page {
+                                    background: rgba(255, 215, 0, 0.2);
+                                    border: 1px solid rgba(255, 215, 0, 0.3);
+                                    transition: all 0.3s ease;
+                                }
+
+                                .splide__pagination__page.is-active {
+                                    background: #FFD700;
+                                    transform: scale(1.4);
+                                }
+
+                                .video-wrapper {
+                                    position: relative;
+                                    width: 100%;
+                                    height: 100%;
+                                }
+
+                                .video-wrapper.playing .play-button {
+                                    display: none;
+                                }
+
+                                .video-wrapper iframe {
+                                    position: absolute;
+                                    top: 0;
+                                    left: 0;
+                                    width: 100%;
+                                    height: 100%;
+                                    border: 0;
+                                }
+                            </style>
+
+                            <!-- Splide and YouTube Player Script -->
+                            <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
+                            <script>
+                                document.addEventListener('DOMContentLoaded', function() {
+                                    // Estado global dos players
+                                    const playerState = {
+                                        currentPlayer: null,
+                                        currentWrapper: null
+                                    };
+
+                                    // Função para limpar player atual
+                                    function cleanupCurrentPlayer() {
+                                        if (playerState.currentPlayer) {
+                                            playerState.currentPlayer.destroy();
+                                            playerState.currentPlayer = null;
+                                        }
+                                        if (playerState.currentWrapper) {
+                                            playerState.currentWrapper.classList.remove('playing');
+                                            const newWrapper = playerState.currentWrapper.cloneNode(true);
+                                            playerState.currentWrapper.parentNode.replaceChild(newWrapper, playerState.currentWrapper);
+                                            playerState.currentWrapper = null;
+                                            
+                                            // Reattach event listener to new button
+                                            const newButton = newWrapper.querySelector('.play-button');
+                                            if (newButton) {
+                                                newButton.addEventListener('click', handlePlayClick);
+                                            }
+                                        }
+                                    }
+
+                                    // Handler para click no botão play
+                                    function handlePlayClick() {
+                                        const wrapper = this.closest('.video-wrapper');
+                                        const videoId = wrapper.dataset.videoId;
+
+                                        // Limpa player anterior
+                                        cleanupCurrentPlayer();
+
+                                        // Configura novo player
+                                        wrapper.classList.add('playing');
+                                        playerState.currentWrapper = wrapper;
+
+                                        playerState.currentPlayer = new YT.Player(wrapper, {
+                                            videoId: videoId,
+                                            width: '100%',
+                                            height: '100%',
+                                            playerVars: {
+                                                autoplay: 1,
+                                                modestbranding: 1,
+                                                controls: 1,
+                                                showinfo: 0,
+                                                rel: 0,
+                                                fs: 1
+                                            },
+                                            events: {
+                                                onStateChange: function(event) {
+                                                    // Se o vídeo terminar, limpa o player
+                                                    if (event.data === YT.PlayerState.ENDED) {
+                                                        cleanupCurrentPlayer();
+                                                    }
+                                                }
+                                            }
+                                        });
+                                    }
+
+                                    // Initialize Splide
+                                    const splide = new Splide('.video-testimonials', {
+                                        perPage: 3,
+                                        gap: '2rem',
+                                        pagination: true,
+                                        arrows: true,
+                                        breakpoints: {
+                                            1024: {
+                                                perPage: 2,
+                                            },
+                                            640: {
+                                                perPage: 1,
+                                            }
+                                        }
+                                    });
+
+                                    // Evento para limpar player quando mudar de slide
+                                    splide.on('move', function() {
+                                        cleanupCurrentPlayer();
+                                    });
+
+                                    splide.mount();
+
+                                    // YouTube API Integration
+                                    window.onYouTubeIframeAPIReady = function() {
+                                        // Attach click handlers
+                                        document.querySelectorAll('.play-button').forEach(button => {
+                                            button.addEventListener('click', handlePlayClick);
+                                        });
+                                    };
+
+                                    // Load YouTube API
+                                    if (!window.YT) {
+                                        const tag = document.createElement('script');
+                                        tag.src = "https://www.youtube.com/iframe_api";
+                                        const firstScriptTag = document.getElementsByTagName('script')[0];
+                                        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+                                    }
+                                });
+                            </script>
+
                             <h3 class="text-2xl font-bold mb-8 flex items-center justify-center gap-3">
                                 <i class="fas fa-comments text-gold"></i>
                                 Mais Histórias de Transformação
@@ -728,35 +1168,35 @@
                                 <div class="glass-card p-4 rounded-xl hover:scale-105 transition-all cursor-pointer group relative">
                                     <div class="absolute inset-0 bg-gradient-to-t from-darker/80 via-transparent to-transparent rounded-xl opacity-0 group-hover:opacity-100 transition-opacity flex items-end justify-center pb-4">
                                         <span class="text-gold">Clique para ampliar</span>
-                                    </div>
+                                </div>
                                     <img 
                                         src="assets/depoimentos/533696_1_17146.png"
                                         alt="Depoimento de aluno"
                                         class="w-full h-auto rounded-lg shadow-lg"
                                     />
-                                </div>
+                                    </div>
                                 <div class="glass-card p-4 rounded-xl hover:scale-105 transition-all cursor-pointer group relative">
                                     <div class="absolute inset-0 bg-gradient-to-t from-darker/80 via-transparent to-transparent rounded-xl opacity-0 group-hover:opacity-100 transition-opacity flex items-end justify-center pb-4">
                                         <span class="text-gold">Clique para ampliar</span>
-                                    </div>
+                                        </div>
                                     <img 
                                         src="assets/depoimentos/533696_1_42333.webp"
                                         alt="Depoimento de aluno"
                                         class="w-full h-auto rounded-lg shadow-lg"
                                     />
-                                </div>
+                                    </div>
                                 <div class="glass-card p-4 rounded-xl hover:scale-105 transition-all cursor-pointer group relative">
                                     <div class="absolute inset-0 bg-gradient-to-t from-darker/80 via-transparent to-transparent rounded-xl opacity-0 group-hover:opacity-100 transition-opacity flex items-end justify-center pb-4">
                                         <span class="text-gold">Clique para ampliar</span>
-                                    </div>
+                                            </div>
                                     <img 
                                         src="assets/depoimentos/533696_1_37275.png"
                                         alt="Depoimento de aluno"
                                         class="w-full h-auto rounded-lg shadow-lg"
                                     />
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
                         <!-- CTA -->
                         <div class="text-center mt-16">
@@ -764,572 +1204,6 @@
                                 <span class="relative z-10">QUERO FAZER PARTE DESSA TRANSFORMAÇÃO</span>
                                 <div class="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity"></div>
                             </a>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Video Testimonials Slider -->
-                <div class="max-w-7xl mx-auto mb-16 relative">
-                    <!-- Slider Container -->
-                    <div class="video-testimonials-slider overflow-hidden relative">
-                        <div class="swiper-wrapper">
-                            <!-- Slide para Vídeo 1 -->
-                            <div class="swiper-slide">
-                                <div class="glass-card rounded-2xl overflow-hidden relative group">
-                                    <div class="aspect-[9/16] relative">
-                                        <div class="absolute inset-0 bg-darker/40 group-hover:bg-darker/20 transition-all duration-300 video-overlay"></div>
-                                        <div class="video-container" data-video-id="TMNf4pTWyOM">
-                                            <div class="video-placeholder absolute inset-0 bg-cover bg-center" style="background-image: url('https://i.ytimg.com/vi/TMNf4pTWyOM/maxresdefault.jpg')"></div>
-                                            <iframe class="absolute inset-0 w-full h-full opacity-0" src="https://www.youtube.com/embed/TMNf4pTWyOM?enablejsapi=1&controls=0&autoplay=0&mute=1&playsinline=1&rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                        </div>
-                                        <button class="play-button absolute inset-0 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                                            <div class="w-16 h-16 bg-gold/20 rounded-full flex items-center justify-center backdrop-blur-sm border border-gold/30">
-                                                <i class="fas fa-play text-gold text-xl"></i>
-                                            </div>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Slide para Vídeo 2 -->
-                            <div class="swiper-slide">
-                                <div class="glass-card rounded-2xl overflow-hidden relative group">
-                                    <div class="aspect-[9/16] relative">
-                                        <div class="absolute inset-0 bg-darker/40 group-hover:bg-darker/20 transition-all duration-300 video-overlay"></div>
-                                        <div class="video-container" data-video-id="NVhAprqBuDc">
-                                            <div class="video-placeholder absolute inset-0 bg-cover bg-center" style="background-image: url('https://i.ytimg.com/vi/NVhAprqBuDc/maxresdefault.jpg')"></div>
-                                            <iframe class="absolute inset-0 w-full h-full opacity-0" src="https://www.youtube.com/embed/NVhAprqBuDc?enablejsapi=1&controls=0&autoplay=0&mute=1&playsinline=1&rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                        </div>
-                                        <button class="play-button absolute inset-0 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                                            <div class="w-16 h-16 bg-gold/20 rounded-full flex items-center justify-center backdrop-blur-sm border border-gold/30">
-                                                <i class="fas fa-play text-gold text-xl"></i>
-                                            </div>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Slide para Vídeo 3 -->
-                            <div class="swiper-slide">
-                                <div class="glass-card rounded-2xl overflow-hidden relative group">
-                                    <div class="aspect-[9/16] relative">
-                                        <div class="absolute inset-0 bg-darker/40 group-hover:bg-darker/20 transition-all duration-300 video-overlay"></div>
-                                        <div class="video-container" data-video-id="HIfNwAK6OF4">
-                                            <div class="video-placeholder absolute inset-0 bg-cover bg-center" style="background-image: url('https://i.ytimg.com/vi/HIfNwAK6OF4/maxresdefault.jpg')"></div>
-                                            <iframe class="absolute inset-0 w-full h-full opacity-0" src="https://www.youtube.com/embed/HIfNwAK6OF4?enablejsapi=1&controls=0&autoplay=0&mute=1&playsinline=1&rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                        </div>
-                                        <button class="play-button absolute inset-0 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                                            <div class="w-16 h-16 bg-gold/20 rounded-full flex items-center justify-center backdrop-blur-sm border border-gold/30">
-                                                <i class="fas fa-play text-gold text-xl"></i>
-                                            </div>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Slide para Vídeo 4 -->
-                            <div class="swiper-slide">
-                                <div class="glass-card rounded-2xl overflow-hidden relative group">
-                                    <div class="aspect-[9/16] relative">
-                                        <div class="absolute inset-0 bg-darker/40 group-hover:bg-darker/20 transition-all duration-300 video-overlay"></div>
-                                        <div class="video-container" data-video-id="PHY_2UwoJyI">
-                                            <div class="video-placeholder absolute inset-0 bg-cover bg-center" style="background-image: url('https://i.ytimg.com/vi/PHY_2UwoJyI/maxresdefault.jpg')"></div>
-                                            <iframe class="absolute inset-0 w-full h-full opacity-0" src="https://www.youtube.com/embed/PHY_2UwoJyI?enablejsapi=1&controls=0&autoplay=0&mute=1&playsinline=1&rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                        </div>
-                                        <button class="play-button absolute inset-0 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                                            <div class="w-16 h-16 bg-gold/20 rounded-full flex items-center justify-center backdrop-blur-sm border border-gold/30">
-                                                <i class="fas fa-play text-gold text-xl"></i>
-                                            </div>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Navigation Buttons -->
-                        <button class="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-gold/10 rounded-full flex items-center justify-center backdrop-blur-sm border border-gold/30 hover:bg-gold/20 transition-all z-10 prev-slide">
-                            <i class="fas fa-chevron-left text-gold"></i>
-                        </button>
-                        <button class="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-gold/10 rounded-full flex items-center justify-center backdrop-blur-sm border border-gold/30 hover:bg-gold/20 transition-all z-10 next-slide">
-                            <i class="fas fa-chevron-right text-gold"></i>
-                        </button>
-                    </div>
-                </div>
-
-                <style>
-                    .video-container {
-                        transition: all 0.3s ease;
-                    }
-                    .video-container iframe {
-                        transition: opacity 0.3s ease;
-                    }
-                    .video-container.playing iframe {
-                        opacity: 1;
-                    }
-                    .video-container.playing + .play-button,
-                    .video-container.playing ~ .video-overlay {
-                        opacity: 0;
-                        pointer-events: none;
-                    }
-                </style>
-
-                <script>
-                    document.addEventListener('DOMContentLoaded', function() {
-                        // Inicializar Swiper com 3 slides visíveis e deslizando 1 por vez
-                        const swiper = new Swiper('.video-testimonials-slider', {
-                            slidesPerView: 3,         // Mostra 3 slides (vídeos) ao mesmo tempo
-                            slidesPerGroup: 1,         // Desliza 1 slide por clique
-                            spaceBetween: 30,
-                            loop: true,
-                            navigation: {
-                                nextEl: '.next-slide',
-                                prevEl: '.prev-slide'
-                            },
-                            // Opcional: se houver necessidade de preencher grupos com slides em branco
-                            loopFillGroupWithBlank: true 
-                        });
-                        
-                        // Lógica de controle dos vídeos (permanece inalterada)
-                        const videoContainers = document.querySelectorAll('.video-container');
-                        let currentPlayingVideo = null;
-
-                        videoContainers.forEach(container => {
-                            const playButton = container.parentElement.querySelector('.play-button');
-                            const iframe = container.querySelector('iframe');
-                            const overlay = container.parentElement.querySelector('.video-overlay');
-
-                            playButton.addEventListener('click', () => {
-                                if (currentPlayingVideo && currentPlayingVideo !== container) {
-                                    const currentIframe = currentPlayingVideo.querySelector('iframe');
-                                    currentIframe.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
-                                    currentPlayingVideo.classList.remove('playing');
-                                }
-                                container.classList.add('playing');
-                                iframe.contentWindow.postMessage('{"event":"command","func":"unMute","args":""}', '*');
-                                iframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
-                                currentPlayingVideo = container;
-                                playButton.style.opacity = '0';
-                                playButton.style.pointerEvents = 'none';
-                                if (overlay) {
-                                    overlay.style.opacity = '0';
-                                    overlay.style.pointerEvents = 'none';
-                                }
-                            });
-                        });
-
-                        swiper.on('slideChange', function () {
-                            if (currentPlayingVideo) {
-                                const iframe = currentPlayingVideo.querySelector('iframe');
-                                iframe.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
-                                currentPlayingVideo.classList.remove('playing');
-                                currentPlayingVideo = null;
-                            }
-                        });
-                    });
-                </script>
-
-                <!-- Link para Swiper JS e CSS -->
-                <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
-                <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-
-
-                <!-- Bônus -->
-                <section id="bonus" class="py-20 bg-gradient-to-b from-darker via-dark to-darker relative">
-                    <div class="absolute inset-0 bg-gradient-to-r from-gold/5 via-transparent to-gold/5 opacity-10"></div>
-                    <div class="container mx-auto px-6 lg:px-8 max-w-5xl">
-                        <!-- Header Principal -->
-                        <div class="text-center max-w-4xl mx-auto mb-20">
-                            <div class="inline-block mb-4">
-                                <span class="bg-gold/20 text-gold px-6 py-2 rounded-full text-sm font-bold uppercase tracking-wider">
-                                    Pacote de Bônus Exclusivos para Você
-                                </span>
-                            </div>
-                            <h2 class="text-4xl md:text-5xl font-bold mb-6">
-                                Transforme-se em um<br>
-                                    <span class="bg-gradient-to-r from-gold to-yellow-500 text-transparent bg-clip-text">
-                                    Maestro Completo
-                                    </span>
-                                </h2>
-                            <p class="text-xl text-gray-400">
-                                Receba um pacote exclusivo de bônus avaliado em 
-                                <span class="text-gold font-semibold">mais de R$ 3.900</span> 
-                                para você dominar todas as áreas da regência e se tornar um maestro de excelência
-                                </p>
-                            </div>
-
-                            <!-- Bônus Grid -->
-                        <div class="space-y-8 mb-16">
-                            <!-- Bônus Ultra Exclusivo - Primeira Hora -->
-                            <div class="glass-card p-8 rounded-2xl border-2 border-red-500/30 relative">
-                                <!-- Badge de Urgência Máxima -->
-                                <div class="absolute -top-6 left-1/2 -translate-x-1/2 z-20 whitespace-nowrap">
-                                    <div class="bg-gradient-to-r from-red-600 to-red-500 px-6 py-2 rounded-full text-white text-sm font-bold shadow-lg flex items-center gap-2">
-                                        <span class="flex h-2 w-2">
-                                            <span class="animate-ping absolute inline-flex h-2 w-2 rounded-full bg-white opacity-75"></span>
-                                            <span class="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
-                                        </span>
-                                        APENAS NA PRIMEIRA HORA
-                                    </div>
-                                        </div>
-
-                                <!-- Contador Regressivo Melhorado -->
-                                <div class="absolute top-4 right-4 md:block hidden">
-                                    <div class="bg-darker backdrop-blur-sm px-4 py-2 rounded-full border border-red-500/30 group relative">
-                                        <div class="flex items-center gap-4">
-                                            <div class="flex items-center gap-2">
-                                                <div class="relative">
-                                                    <div class="w-2 h-2 rounded-full bg-red-500 animate-ping absolute"></div>
-                                                    <div class="w-2 h-2 rounded-full bg-red-500"></div>
-                                                </div>
-                                                <span class="text-red-400 text-xs font-semibold">Oferta expira em:</span>
-                                                <span id="countdown" class="font-mono text-red-400 text-sm tabular-nums">59:59</span>
-                                            </div>
-                                        </div>
-                                        <!-- Borda Pulsante Melhorada -->
-                                        <div class="absolute inset-0 rounded-full border border-red-500/30">
-                                            <div class="absolute inset-0 rounded-full border border-red-500/50 animate-pulse-premium"></div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <style>
-                                    @keyframes pulse-premium {
-                                        0% { 
-                                            transform: scale(1);
-                                            opacity: 0.5;
-                                        }
-                                        50% { 
-                                            transform: scale(1.05);
-                                            opacity: 0;
-                                        }
-                                        100% { 
-                                            transform: scale(1);
-                                            opacity: 0.5;
-                                        }
-                                    }
-                                    .animate-pulse-premium {
-                                        animation: pulse-premium 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-                                    }
-                                </style>
-
-                                <!-- Script do Contador Melhorado -->
-                                <script>
-                                    document.addEventListener('DOMContentLoaded', function() {
-                                        const countdownElement = document.getElementById('countdown');
-                                        let minutes = 59;
-                                        let seconds = 59;
-
-                                        function updateCountdown() {
-                                            if (minutes === 0 && seconds <= 30) {
-                                                countdownElement.classList.add('text-red-500');
-                                                countdownElement.classList.add('animate-pulse');
-                                            }
-                                            
-                                            countdownElement.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
-                                            
-                                            if (seconds > 0) {
-                                                seconds--;
-                                            } else if (minutes > 0) {
-                                                minutes--;
-                                                seconds = 59;
-                                            }
-
-                                            if (minutes === 0 && seconds === 0) {
-                                                clearInterval(countdownInterval);
-                                                return;
-                                            }
-                                        }
-
-                                        const countdownInterval = setInterval(updateCountdown, 1000);
-                                        updateCountdown();
-                                    });
-                                </script>
-
-                                <div class="flex items-start gap-6 mt-4">
-                                    <div class="w-16 h-16 bg-red-500/10 rounded-full flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-all">
-                                        <i class="fas fa-wand-magic-sparkles text-red-500 text-2xl"></i>
-                                    </div>
-                                    <div class="flex-1">
-                                            <div class="flex items-center gap-3 mb-2">
-                                            <h3 class="text-2xl font-bold">Batuta Personalizada Premium</h3>
-                                            <span class="bg-red-500/20 text-red-400 text-xs px-3 py-1 rounded-full animate-pulse whitespace-nowrap hidden md:inline-block">
-                                                RESTAM APENAS 10 VAGAS
-                                            </span>
-                                        </div>
-                                        <p class="text-gray-400 mb-3">
-                                            Receba uma batuta exclusiva feita sob medida para que você 
-                                            <span class="text-red-400 font-semibold">conduza a orquestra com precisão e autoridade</span>, 
-                                            garantindo seu lugar entre os 
-                                            <span class="text-red-400 font-semibold">10 primeiros maestros</span>
-                                        </p>
-                                        <div class="flex items-center gap-4">
-                                            <span class="text-red-500 line-through text-lg">R$ 200</span>
-                                            <span class="text-emerald-400 font-bold text-lg">GRÁTIS</span>
-                                        </div>
-                                        <!-- Mobile Info Row -->
-                                        <div class="md:hidden flex flex-col sm:flex-row items-start sm:items-center gap-4 mt-4">
-                                            <span class="bg-red-500/20 text-red-400 text-xs px-3 py-1 rounded-full animate-pulse whitespace-nowrap">
-                                                RESTAM APENAS 10 VAGAS
-                                            </span>
-                                            <div class="bg-darker backdrop-blur-sm px-4 py-2 rounded-full border border-red-500/30 group relative">
-                                                <div class="flex items-center gap-2">
-                                                    <div class="relative">
-                                                        <div class="w-2 h-2 rounded-full bg-red-500 animate-ping absolute"></div>
-                                                        <div class="w-2 h-2 rounded-full bg-red-500"></div>
-                                                    </div>
-                                                    <span class="text-red-400 text-xs font-semibold">Oferta expira em:</span>
-                                                    <span id="countdown-mobile" class="font-mono text-red-400 text-sm tabular-nums">59:59</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            <!-- Bônus do Primeiro Dia -->
-                            <div class="grid md:grid-cols-2 gap-6">
-                                <!-- Maestria Internacional - Premium de Largura Total -->
-                                <div class="glass-card p-8 rounded-2xl border-2 border-purple-500/30 relative group md:col-span-2">
-                                    <!-- Badge Primeiro Dia -->
-                                    <div class="absolute -top-3 left-4">
-                                        <div class="bg-gradient-to-r from-purple-600 to-indigo-600 px-4 py-1 rounded-full text-white text-xs font-bold">
-                                            APENAS NO PRIMEIRO DIA
-                                </div>
-                                    </div>
-
-                                    <div class="flex items-start gap-6 mt-4">
-                                        <div class="w-16 h-16 bg-gradient-to-br from-purple-500/20 to-indigo-500/20 rounded-full flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-all">
-                                            <i class="fas fa-earth-europe text-indigo-400 text-2xl"></i>
-                                        </div>
-                                        <div class="flex-1">
-                                        <div class="flex items-center gap-3 mb-2">
-                                                <h3 class="text-2xl font-bold">Maestria Internacional</h3>
-                                    </div>
-                                            <p class="text-gray-400 mb-3">
-                                                Domine técnicas avançadas e segredos de regência das maiores orquestras do mundo, 
-                                                <span class="text-indigo-400 font-semibold">aprendidos nas melhores escolas da Europa</span> 
-                                                e adaptados para os hinos CCB, 
-                                                <span class="text-indigo-400 font-semibold">elevando sua regência a um novo patamar de excelência</span>
-                                            </p>
-                                            <div class="flex items-center gap-4">
-                                                <span class="text-red-500 line-through text-lg">R$ 1.200</span>
-                                                <span class="text-emerald-400 font-bold text-lg">GRÁTIS</span>
-                                            </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                                <!-- 2 Aulas Individuais -->
-                                <div class="glass-card p-8 rounded-2xl border border-gold/30 relative group">
-                                    <!-- Badge Primeiro Dia -->
-                                    <div class="absolute -top-3 left-4">
-                                        <div class="bg-gradient-to-r from-gold to-yellow-500 px-4 py-1 rounded-full text-darker text-xs font-bold">
-                                            APENAS NO PRIMEIRO DIA
-                                        </div>
-                                    </div>
-
-                                    <div class="flex items-start gap-6 mt-4">
-                                        <div class="w-16 h-16 bg-gold/10 rounded-full flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-all">
-                                            <i class="fas fa-chalkboard-teacher text-gold text-2xl"></i>
-                                    </div>
-                                    <div>
-                                            <div class="flex items-center gap-3 mb-2">
-                                                <h3 class="text-2xl font-bold">2 Aulas Individuais</h3>
-                                        </div>
-                                            <p class="text-gray-400 mb-3">
-                                                Duas aulas particulares onde eu vou 
-                                                <span class="text-gold font-semibold">te guiar pessoalmente</span>, 
-                                                corrigindo, tirando dúvidas e 
-                                                <span class="text-gold font-semibold">te ajudando a destravar seu potencial como maestro</span>
-                                            </p>
-                                            <div class="flex items-center gap-4">
-                                                <span class="text-red-500 line-through text-lg">R$ 700</span>
-                                                <span class="text-emerald-400 font-bold text-lg">GRÁTIS</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Guia de Interpretação -->
-                                <div class="glass-card p-8 rounded-2xl border border-gold/30 relative group">
-                                    <!-- Badge Primeiro Dia -->
-                                    <div class="absolute -top-3 left-4">
-                                        <div class="bg-gradient-to-r from-gold to-yellow-500 px-4 py-1 rounded-full text-darker text-xs font-bold">
-                                            APENAS NO PRIMEIRO DIA
-                                        </div>
-                                    </div>
-
-                                    <div class="flex items-start gap-6 mt-4">
-                                        <div class="w-16 h-16 bg-gold/10 rounded-full flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-all">
-                                        <i class="fas fa-book-open text-gold text-2xl"></i>
-                                    </div>
-                                    <div>
-                                            <div class="flex items-center gap-3 mb-2">
-                                                <h3 class="text-2xl font-bold">Guia de Interpretação</h3>
-                                        </div>
-                                            <p class="text-gray-400 mb-3">
-                                                Um material exclusivo que explica 
-                                                <span class="text-gold font-semibold">a poesia, a dinâmica e a expressividade</span> 
-                                                de cada hino, para que você possa 
-                                                <span class="text-gold font-semibold">reger com emoção e profundidade</span>
-                                            </p>
-                                            <div class="flex items-center gap-4">
-                                                <span class="text-red-500 line-through text-lg">R$ 200</span>
-                                                <span class="text-emerald-400 font-bold text-lg">GRÁTIS</span>
-                                            </div>
-                                        </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            <!-- Bônus Regulares Grid -->
-                            <div class="grid md:grid-cols-2 gap-6 mt-12">
-                                <!-- Imersão Compasso Composto -->
-                                <div class="glass-card p-8 rounded-2xl border border-gold/30 relative group">
-                                    <div class="flex items-start gap-6">
-                                        <div class="w-16 h-16 bg-gold/10 rounded-full flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-all">
-                                            <i class="fas fa-music text-gold text-2xl"></i>
-                                    </div>
-                                    <div>
-                                            <div class="flex items-center gap-3 mb-2">
-                                                <h3 class="text-2xl font-bold">Imersão Compasso Composto</h3>
-                                        </div>
-                                            <p class="text-gray-400 mb-3">
-                                                Domine de vez os compassos compostos e 
-                                                <span class="text-gold font-semibold">pare de travar nos hinos mais desafiadores</span>. 
-                                                Você aprenderá a 
-                                                <span class="text-gold font-semibold">subdividir com segurança e reger com franqueza</span>
-                                            </p>
-                                            <div class="flex items-center gap-4">
-                                                <span class="text-red-500 line-through text-lg">R$ 600</span>
-                                                <span class="text-emerald-400 font-bold text-lg">GRÁTIS</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Hinário do Maestro -->
-                                <div class="glass-card p-8 rounded-2xl border border-gold/30 relative group">
-                                    <div class="flex items-start gap-6">
-                                        <div class="w-16 h-16 bg-gold/10 rounded-full flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-all">
-                                            <i class="fas fa-book text-gold text-2xl"></i>
-                                    </div>
-                                    <div>
-                                            <div class="flex items-center gap-3 mb-2">
-                                                <h3 class="text-2xl font-bold">Hinário do Maestro</h3>
-                                        </div>
-                                            <p class="text-gray-400 mb-3">
-                                                Um material exclusivo para você 
-                                                <span class="text-gold font-semibold">entender a estrutura dos hinos</span> 
-                                                e saber exatamente 
-                                                <span class="text-gold font-semibold">conduzi-los com maestria e segurança</span>
-                                            </p>
-                                            <div class="flex items-center gap-4">
-                                                <span class="text-red-500 line-through text-lg">R$ 300</span>
-                                                <span class="text-emerald-400 font-bold text-lg">GRÁTIS</span>
-                                            </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                                <!-- Curso Básico de Regência -->
-                                <div class="glass-card p-8 rounded-2xl border border-gold/30 relative group">
-                                    <div class="flex items-start gap-6">
-                                        <div class="w-16 h-16 bg-gold/10 rounded-full flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-all">
-                                            <i class="fas fa-graduation-cap text-gold text-2xl"></i>
-                                    </div>
-                                        <div>
-                                            <div class="flex items-center gap-3 mb-2">
-                                                <h3 class="text-2xl font-bold">Curso Básico de Regência</h3>
-                                </div>
-                                            <p class="text-gray-400 mb-3">
-                                                Se você está começando, esse curso vai te dar uma 
-                                                <span class="text-gold font-semibold">base sólida</span>, 
-                                                ensinando desde os 
-                                                <span class="text-gold font-semibold">fundamentos até os primeiros passos na regência</span>
-                                            </p>
-                                            <div class="flex items-center gap-4">
-                                                <span class="text-red-500 line-through text-lg">R$ 400</span>
-                                                <span class="text-emerald-400 font-bold text-lg">GRÁTIS</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                                <!-- Ensaios na Prática -->
-                                <div class="glass-card p-8 rounded-2xl border border-gold/30 relative group">
-                                    <div class="flex items-start gap-6">
-                                        <div class="w-16 h-16 bg-gold/10 rounded-full flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-all">
-                                            <i class="fas fa-users text-gold text-2xl"></i>
-                                        </div>
-                                        <div>
-                                            <div class="flex items-center gap-3 mb-2">
-                                                <h3 class="text-2xl font-bold">Ensaios na Prática</h3>
-                                            </div>
-                                            <p class="text-gray-400 mb-3">
-                                                Veja na prática como 
-                                                <span class="text-gold font-semibold">conduzir um ensaio eficiente</span>, 
-                                                organizando os músicos, corrigindo erros e 
-                                                <span class="text-gold font-semibold">extraindo o melhor da orquestra</span>
-                                            </p>
-                                            <div class="flex items-center gap-4">
-                                                <span class="text-red-500 line-through text-lg">R$ 200</span>
-                                                <span class="text-emerald-400 font-bold text-lg">GRÁTIS</span>
-                                                </div>
-                                                </div>
-                                                </div>
-                                            </div>
-
-                                <!-- Aquecimento para Orquestra -->
-                                <div class="glass-card p-8 rounded-2xl border border-gold/30 relative group md:col-span-2">
-                                    <div class="flex items-start gap-6">
-                                        <div class="w-16 h-16 bg-gold/10 rounded-full flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-all">
-                                            <i class="fas fa-fire text-gold text-2xl"></i>
-                                        </div>
-                                        <div>
-                                            <div class="flex items-center gap-3 mb-2">
-                                                <h3 class="text-2xl font-bold">Aquecimento para Orquestra</h3>
-                                            </div>
-                                            <p class="text-gray-400 mb-3">
-                                                Um guia completo com exercícios de aquecimento para 
-                                                <span class="text-gold font-semibold">preparar os músicos, melhorar a afinação e a sonoridade</span>. 
-                                                Aprimore o 
-                                                <span class="text-gold font-semibold">entrosamento do grupo antes dos ensaios e cultos</span>
-                                            </p>
-                                            <div class="flex items-center gap-4">
-                                                <span class="text-red-500 line-through text-lg">R$ 100</span>
-                                                <span class="text-emerald-400 font-bold text-lg">GRÁTIS</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Valor Total com Nova Copy -->
-                            <div class="glass-card p-10 rounded-2xl border-2 border-gold/30 text-center relative overflow-hidden group mt-16 shadow-[0_0_15px_rgba(255,215,0,0.2)]">
-                                <!-- Efeito de Brilho -->
-                                <div class="absolute inset-0 bg-gradient-to-r from-gold/0 via-gold/5 to-gold/0 transform -skew-x-12 group-hover:translate-x-full transition-transform duration-1000"></div>
-                                
-                                <div class="relative z-10">
-                                    <h3 class="text-3xl font-bold mb-8">Valor Total em Bônus</h3>
-                                    <div class="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8 mb-6">
-                                        <span class="text-5xl font-black text-red-400 relative">
-                                            R$ 3.900
-                                            <div class="absolute inset-0 flex items-center justify-center">
-                                                <div class="h-0.5 w-full bg-red-500 transform rotate-[-12deg]"></div>
-                                            </div>
-                                        </span>
-                                        <span class="text-5xl font-black text-emerald-400">GRÁTIS</span>
-                                    </div>
-                                    <p class="text-xl text-gray-400 mb-6 max-w-[90%] mx-auto">
-                                        Você pode continuar tentando sozinho, travando nos hinos compostos, 
-                                        sem saber como corrigir a orquestra e sentindo insegurança na frente dos músicos ou...
-                                    </p>
-                                    <p class="text-2xl font-bold text-gold">Agora é com você!</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
                 </div>
                 </section>
@@ -1452,7 +1326,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <!-- DEPOIS -->
                         <div class="glass-card p-8 rounded-2xl relative overflow-hidden group">
                             <!-- Overlay Gradiente -->
@@ -1646,12 +1519,12 @@
                                         <div class="flex items-center gap-3">
                                             <i class="fas fa-users text-gold"></i>
                                             <span class="text-white">Ensaios na Prática</span>
-                                        </div>
-                                        <div class="text-right">
+                                            </div>
+                                            <div class="text-right">
                                             <span class="text-red-500 line-through text-sm">R$ 200</span>
-                                            <span class="text-emerald-400 text-sm ml-2">GRÁTIS</span>
+                                                <span class="text-emerald-400 text-sm ml-2">GRÁTIS</span>
+                                            </div>
                                         </div>
-                                    </div>
 
                                     <!-- Aquecimento para Orquestra -->
                                     <div class="flex items-center justify-between p-3 rounded-xl bg-gradient-to-r from-gold/5 to-transparent border border-gold/30">
@@ -1753,9 +1626,9 @@
                                     <!-- Headline Principal -->
                                     <div class="text-center mb-12 relative">
                                         <div class="inline-block mb-4">
-                                            <span class="bg-gold/20 text-gold px-6 py-2 rounded-full text-sm font-bold uppercase tracking-wider">
-                                                Garantia Incondicional
-                                            </span>
+                                        <span class="bg-gold/20 text-gold px-6 py-2 rounded-full text-sm font-bold uppercase tracking-wider">
+                                            Garantia Incondicional
+                                        </span>
                                         </div>
                                         <h3 class="text-4xl md:text-5xl font-bold mt-6 mb-4 relative">
                                             Invista na Sua
@@ -2114,3 +1987,4 @@ document.getElementById('leadForm').addEventListener('submit', async function(e)
     </script>
 </body>
 </html>
+

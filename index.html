@@ -26,19 +26,13 @@
             --darker: #0A0A0A;
         }
         
-        body {
-            background-color: var(--darker);
-            color: white;
-            overflow-x: hidden;
-        }
-
         /* Estilização da barra de rolagem */
         ::-webkit-scrollbar {
             width: 10px;
         }
 
         ::-webkit-scrollbar-track {
-            background: var(--darker);
+            background: #0A0A0A;
         }
 
         ::-webkit-scrollbar-thumb {
@@ -62,18 +56,15 @@
 
         .hero-gradient {
             background: 
-                radial-gradient(circle at 20% 50%, rgba(255, 215, 0, 0.3) 0%, transparent 70%),
-                radial-gradient(circle at 80% 50%, rgba(255, 215, 0, 0.25) 0%, transparent 70%),
-                linear-gradient(to bottom, rgba(10, 10, 10, 0.95), rgba(10, 10, 10, 0.9));
+                radial-gradient(circle at 20% 50%, rgba(255, 215, 0, 0.15) 0%, transparent 70%),
+                radial-gradient(circle at 80% 50%, rgba(255, 215, 0, 0.1) 0%, transparent 70%),
+                linear-gradient(to bottom, rgba(13, 17, 23, 0.95), rgba(1, 4, 9, 0.9));
         }
 
         .hero-glow {
             position: absolute;
             inset: 0;
-            background: 
-                radial-gradient(circle at 30% 20%, rgba(255, 215, 0, 0.2) 0%, transparent 60%),
-                radial-gradient(circle at 70% 80%, rgba(255, 215, 0, 0.2) 0%, transparent 60%);
-            filter: blur(40px);
+            background: #0A0A0A;
             pointer-events: none;
             animation: pulse 4s ease-in-out infinite;
         }
@@ -84,14 +75,15 @@
         }
 
         .glass-card {
+            position: relative;
+            z-index: 3;
             background: rgba(255, 255, 255, 0.03);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
             transition: all 0.3s ease;
         }
 
         .glass-card:hover {
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(22, 27, 34, 0.98);
             transform: translateY(-5px);
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
         }
@@ -108,46 +100,6 @@
             text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
         }
 
-        .floating {
-            animation: floating 3s ease-in-out infinite;
-        }
-
-        @keyframes floating {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-            100% { transform: translateY(0px); }
-        }
-
-        @keyframes float-slow {
-            0% { transform: translate(0, 0); }
-            50% { transform: translate(20px, 20px); }
-            100% { transform: translate(0, 0); }
-        }
-
-        @keyframes float-medium {
-            0% { transform: translate(0, 0); }
-            50% { transform: translate(-20px, 15px); }
-            100% { transform: translate(0, 0); }
-        }
-
-        @keyframes float-fast {
-            0% { transform: translate(0, 0); }
-            50% { transform: translate(15px, -15px); }
-            100% { transform: translate(0, 0); }
-        }
-
-        .animate-float-slow {
-            animation: float-slow 8s ease-in-out infinite;
-        }
-
-        .animate-float-medium {
-            animation: float-medium 6s ease-in-out infinite;
-        }
-
-        .animate-float-fast {
-            animation: float-fast 4s ease-in-out infinite;
-        }
-
         .scroll-reveal {
             opacity: 0;
             transform: translateY(20px);
@@ -159,35 +111,6 @@
             transform: translateY(0);
         }
 
-        /* Backgrounds por Seção */
-        .metodologia-gradient {
-            background: 
-                radial-gradient(circle at 70% 30%, rgba(255, 215, 0, 0.15) 0%, transparent 50%),
-                radial-gradient(circle at 30% 70%, rgba(255, 215, 0, 0.1) 0%, transparent 50%),
-                linear-gradient(to bottom, rgba(10, 10, 10, 0.98), rgba(10, 10, 10, 0.95));
-        }
-
-        .depoimentos-gradient {
-            background:
-                radial-gradient(ellipse at top, rgba(255, 215, 0, 0.2) 0%, transparent 60%),
-                radial-gradient(ellipse at bottom, rgba(255, 215, 0, 0.1) 0%, transparent 60%),
-                linear-gradient(180deg, var(--darker) 0%, rgba(10, 10, 10, 0.95) 100%);
-        }
-
-        .bonus-gradient {
-            background:
-                radial-gradient(circle at 20% 50%, rgba(255, 215, 0, 0.15) 0%, transparent 40%),
-                radial-gradient(circle at 80% 50%, rgba(255, 215, 0, 0.1) 0%, transparent 40%),
-                linear-gradient(45deg, rgba(10, 10, 10, 0.98), rgba(10, 10, 10, 0.95));
-        }
-
-        .oferta-gradient {
-            background:
-                radial-gradient(circle at 0% 0%, rgba(255, 215, 0, 0.2) 0%, transparent 50%),
-                radial-gradient(circle at 100% 100%, rgba(255, 215, 0, 0.2) 0%, transparent 50%),
-                linear-gradient(to bottom, rgba(10, 10, 10, 0.95), rgba(10, 10, 10, 0.98));
-        }
-
         /* Efeitos de Título */
         .title-glow {
             position: relative;
@@ -197,7 +120,7 @@
             content: '';
             position: absolute;
             inset: -50px;
-            background: radial-gradient(circle at center, rgba(255, 215, 0, 0.15) 0%, transparent 70%);
+            background: #0A0A0A;
             pointer-events: none;
             z-index: 0;
         }
@@ -223,6 +146,120 @@
             transform: translateY(-2px);
             box-shadow: 0 6px 8px rgba(0,0,0,0.15);
         }
+
+        /* Animação do Glow Pulsante */
+        @keyframes pulsating-glow {
+            0% { 
+                opacity: 0.3; 
+                filter: blur(20px);
+                transform: scale(1);
+            }
+            50% { 
+                opacity: 0.5; 
+                filter: blur(30px);
+                transform: scale(1.05);
+            }
+            100% { 
+                opacity: 0.3; 
+                filter: blur(20px);
+                transform: scale(1);
+            }
+        }
+
+        .pulsating-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 5;
+            pointer-events: none;
+            background: 
+                radial-gradient(circle at 30% 20%, rgba(255, 215, 0, 0.15) 0%, transparent 60%),
+                radial-gradient(circle at 70% 60%, rgba(255, 215, 0, 0.15) 0%, transparent 60%),
+                radial-gradient(circle at 50% 50%, rgba(255, 215, 0, 0.12) 0%, transparent 70%),
+                radial-gradient(circle at 80% 20%, rgba(255, 215, 0, 0.12) 0%, transparent 50%);
+            animation: pulsating-glow 8s ease-in-out infinite;
+            mix-blend-mode: screen;
+            opacity: 0.8;
+            transform-origin: center center;
+            will-change: transform, opacity, filter;
+        }
+
+        /* Ajuste para melhor performance e visibilidade */
+        .pulsating-overlay::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: inherit;
+            filter: blur(30px);
+            opacity: 0.8;
+        }
+
+        /* Ajuste dos z-indexes globais */
+        .progress-bar {
+            z-index: 1000;
+        }
+
+        main {
+            position: relative;
+            z-index: 1;
+        }
+
+        .relative {
+            position: relative;
+            z-index: 2;
+        }
+
+        .glass-card {
+            position: relative;
+            z-index: 3;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        /* Removendo backgrounds que possam estar interferindo */
+        body {
+            background: var(--darker);
+        }
+
+        .bg-gradient-to-b {
+            background-image: none;
+        }
+
+        /* Ajuste do efeito de glow nas seções */
+        #oferta, #garantia, #faq {
+            position: relative;
+            overflow: hidden;
+        }
+
+        #oferta::before, #garantia::before, #faq::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: 
+                radial-gradient(circle at 30% 30%, rgba(255, 215, 0, 0.03), transparent 60%),
+                radial-gradient(circle at 70% 70%, rgba(255, 215, 0, 0.03), transparent 60%);
+            opacity: 0.8;
+            mix-blend-mode: soft-light;
+        }
+
+        /* Refinamento das transições entre seções */
+        .section-connector {
+            position: absolute;
+            left: 0;
+            right: 0;
+            height: 100px;
+            background: linear-gradient(to bottom, var(--darker), transparent);
+            pointer-events: none;
+        }
+
+        .section-connector.top {
+            top: 0;
+        }
+
+        .section-connector.bottom {
+            bottom: 0;
+            transform: rotate(180deg);
+        }
     </style>
     <!-- Preload de Recursos Críticos -->
     <link rel="preload" as="font" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/webfonts/fa-brands-400.woff2" crossorigin>
@@ -247,9 +284,12 @@
     </noscript>
     <!-- End Meta Pixel Code -->
 </head>
-<body class="bg-dark text-white">
+<body class="bg-dark text-white overflow-x-hidden">
+    <!-- Overlay Global Pulsante -->
+    <div class="pulsating-overlay"></div>
+    
     <div class="progress-bar" id="progressBar"></div>
-    <main class="min-h-screen bg-gradient-to-b from-darker to-dark">
+    <main class="min-h-screen relative">
         <!-- Container Principal com Todo Conteúdo -->
         <div class="relative overflow-hidden">
             <!-- Background Image com Gradiente -->
@@ -276,69 +316,81 @@
                         <!-- Gradientes sutis -->
                         <div class="absolute inset-0 bg-gradient-to-b from-transparent via-darker/50 to-darker"></div>
                         <div class="absolute inset-0 bg-gradient-to-t from-darker via-transparent to-transparent opacity-40"></div>
+                    </div>
+
+                    <!-- Expert Image (Posicionada absolutamente) -->
+                    <div class="absolute right-0 top-0 bottom-0 w-1/2 hidden md:block" style="right: 5%;">
+                        <div class="relative h-full">
+                            <img
+                                src="assets/imagens-para-sessoes/WhatsApp Image 2025-01-30 at 00.42.18.webp"
+                                alt="Expert"
+                                class="h-full w-full object-cover object-left scale-80 origin-center"
+                            />
+                            <!-- Gradiente para suavizar a parte inferior -->
+                            <div class="absolute inset-x-0 bottom-0 h-1/6 bg-gradient-to-t from-darker via-darker/88 to-transparent"></div>
+                        </div>
+                    </div>
+
+                    <div class="container mx-auto px-6 lg:px-8 max-w-7xl relative z-10 min-h-screen flex items-center">
+                        <!-- Grid Container -->
+                        <div class="flex flex-col md:grid md:grid-cols-2 gap-8 items-center">
+                            <!-- Imagem Expert (Visível apenas no Mobile) -->
+                            <div class="md:hidden relative h-[400px] w-full mb-8">
+                                <img
+                                    src="assets/imagens-para-sessoes/WhatsApp Image 2025-01-30 at 00.42.18.webp"
+                                    alt="Expert"
+                                    class="w-full h-full object-cover rounded-2xl"
+                                />
+                                <div class="absolute inset-0 bg-gradient-to-b from-transparent to-darker/90"></div>
+                            </div>
+
+                            <!-- Coluna Esquerda: Conteúdo -->
+                            <div class="flex flex-col items-center md:items-start text-center md:text-left space-y-8 -mt-12 md:mt-0">
+                                <div class="flex flex-wrap gap-2 md:gap-3 justify-center md:justify-start">
+                                    <div class="glass-card border border-gold/30 backdrop-blur-sm px-3 md:px-4 py-1.5 md:py-2 rounded-full flex items-center gap-2 hover:border-gold/50 transition-all">
+                                        <div class="w-5 md:w-6 h-5 md:h-6 bg-gold/10 rounded-full flex items-center justify-center">
+                                            <i class="fas fa-users text-gold text-xs"></i>
+                                        </div>
+                                        <span class="text-white text-xs md:text-sm">+1000 Encarregados</span>
+                                    </div>
+                                    <div class="glass-card border border-gold/30 backdrop-blur-sm px-3 md:px-4 py-1.5 md:py-2 rounded-full flex items-center gap-2 hover:border-gold/50 transition-all">
+                                        <div class="w-5 md:w-6 h-5 md:h-6 bg-gold/10 rounded-full flex items-center justify-center">
+                                            <i class="fas fa-crown text-gold text-xs"></i>
+                                        </div>
+                                        <span class="text-white text-xs md:text-sm">Método Exclusivo CCB</span>
+                                    </div>
+                                </div>
+                                <div class="space-y-6 max-w-[90%] md:max-w-xl">
+                                    <h1 class="text-4xl md:text-6xl font-bold leading-tight">
+                                        <span class="bg-gradient-to-r from-gold to-yellow-500 text-transparent bg-clip-text">
+                                            Eleve Sua Regência
+                                        </span>
+                                        <br>
+                                        <span class="text-3xl md:text-5xl">
+                                            Para a Glória do Reino
+                                        </span>
+                                    </h1>
+                                    <p class="text-lg md:text-xl text-gray-300 leading-relaxed max-w-[320px] md:max-w-none mx-auto md:mx-0">
+                                        Domine a regência dos hinos CCB com um método simples e eficaz, 
+                                        <span class="text-gold font-semibold">estudando apenas 15 minutos por dia</span>
+                                    </p>
+                                </div>
+                                <div class="pt-4 w-full md:w-auto">
+                                    <a href="https://pay.hotmart.com/W90405096Q?off=s810xbhf&checkoutMode=10" 
+                                       class="block md:inline-block bg-gradient-to-r from-gold to-yellow-500 text-darker font-bold text-lg md:text-xl px-6 md:px-12 py-4 md:py-6 rounded-xl hover:scale-105 transition-all group relative overflow-hidden btn-neon text-center">
+                                        <span class="relative z-10 whitespace-normal md:whitespace-nowrap">QUERO TRANSFORMAR MINHA REGÊNCIA</span>
+                                        <div class="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity"></div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-                    <div class="container mx-auto px-6 lg:px-8 max-w-7xl relative z-10 pt-16">
-                        <!-- Grid Container -->
-                        <div class="grid md:grid-cols-2 gap-8 items-center">
-                            <!-- Coluna Esquerda: Conteúdo -->
-                            <div class="flex flex-col items-start text-left space-y-8">
-                                <div class="flex flex-wrap gap-3">
-                    <div class="glass-card border border-gold/30 backdrop-blur-sm px-4 py-2 rounded-full flex items-center gap-2 hover:border-gold/50 transition-all">
-                        <div class="w-6 h-6 bg-gold/10 rounded-full flex items-center justify-center">
-                            <i class="fas fa-users text-gold text-xs"></i>
-                        </div>
-                        <span class="text-white text-sm">+300 Encarregados Transformados</span>
-                    </div>
-                    <div class="glass-card border border-gold/30 backdrop-blur-sm px-4 py-2 rounded-full flex items-center gap-2 hover:border-gold/50 transition-all">
-                        <div class="w-6 h-6 bg-gold/10 rounded-full flex items-center justify-center">
-                            <i class="fas fa-crown text-gold text-xs"></i>
-                        </div>
-                        <span class="text-white text-sm">Método Exclusivo CCB</span>
-                    </div>
-                </div>
-                                <div class="space-y-6">
-                                    <h1 class="text-4xl md:text-6xl font-bold leading-tight">
-                        <span class="bg-gradient-to-r from-gold to-yellow-500 text-transparent bg-clip-text">
-                            Eleve Sua Regência
-                        </span>
-                        <br>
-                        <span class="text-3xl md:text-5xl">
-                                            Para a Glória de Deus
-                        </span>
-                    </h1>
-                                    <p class="text-lg md:text-xl text-gray-300 max-w-xl leading-relaxed">
-                        Domine a regência dos hinos CCB com um método simples e eficaz, 
-                        <span class="text-gold font-semibold">estudando apenas 15 minutos por dia</span>
-                    </p>
-                </div>
-                                <div class="pt-4">
-                                    <a href="https://pay.hotmart.com/W90405096Q?off=s810xbhf&checkoutMode=10" 
-                                       class="inline-block bg-gradient-to-r from-gold to-yellow-500 text-darker font-bold text-xl px-12 py-6 rounded-xl hover:scale-105 transition-all group relative overflow-hidden btn-neon">
-                            <span class="relative z-10">QUERO TRANSFORMAR MINHA REGÊNCIA</span>
-                            <div class="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity"></div>
-                        </a>
-                    </div>
-                </div>
-
-                            <!-- Coluna Direita: Imagem -->
-                            <div class="relative min-h-[800px] transform scale-110 pr-16" 
-                                 style="background-image: url('assets/imagens-para-sessoes/WhatsApp Image 2025-01-30 at 00.42.18.webp'); 
-                                        background-size: cover; 
-                                        background-position: left 80% center;">
-                                <!-- Overlay Gradiente Lateral -->
-                                <div class="absolute inset-0 bg-gradient-to-r from-darker/50 via-transparent to-transparent"></div>
-                                
-                                <!-- Gradientes na Base -->
-                                <div class="absolute bottom-0 left-0 right-0 h-[12%] bg-gradient-to-t from-darker via-darker/90 to-transparent"></div>
-                                <div class="absolute bottom-0 left-0 right-0 h-[32%] bg-gradient-to-t from-darker/90 via-darker/50 to-transparent"></div>
-                    </div>
-                    </div>
-                    </div>
-                </div>
-
                 <!-- Metodologia DOM -->
-                <section id="metodologia" class="py-20 bg-darker">
+                <section id="metodologia" class="py-20 bg-gradient-to-b from-darker via-dark to-darker relative">
+                    <div class="absolute inset-0 bg-gradient-to-r from-gold/5 via-transparent to-gold/5 opacity-10"></div>
                     <div class="container mx-auto px-6 lg:px-8 max-w-5xl">
                         <!-- Header -->
                         <div class="text-center mb-16">
@@ -497,10 +549,15 @@
                             </a>
                         </div>
                     </div>
-                </section>
+                </div>
+            </div>
+        </div>
+    </div>
+        </section>
 
                 <!-- Depoimentos -->
-                <section id="depoimentos" class="py-20 bg-darker">
+                <section id="depoimentos" class="py-20 bg-gradient-to-b from-darker via-dark to-darker relative">
+                    <div class="absolute inset-0 bg-gradient-to-r from-gold/5 via-transparent to-gold/5 opacity-10"></div>
                     <div class="container mx-auto px-6 lg:px-8 max-w-5xl relative z-10">
                         <!-- Header -->
                         <div class="text-center mb-16">
@@ -814,7 +871,8 @@
 
 
                 <!-- Bônus -->
-                <section id="bonus" class="py-20 bg-darker">
+                <section id="bonus" class="py-20 bg-gradient-to-b from-darker via-dark to-darker relative">
+                    <div class="absolute inset-0 bg-gradient-to-r from-gold/5 via-transparent to-gold/5 opacity-10"></div>
                     <div class="container mx-auto px-6 lg:px-8 max-w-5xl">
                         <!-- Header Principal -->
                         <div class="text-center max-w-4xl mx-auto mb-20">
@@ -841,7 +899,7 @@
                             <!-- Bônus Ultra Exclusivo - Primeira Hora -->
                             <div class="glass-card p-8 rounded-2xl border-2 border-red-500/30 relative">
                                 <!-- Badge de Urgência Máxima -->
-                                <div class="absolute -top-6 left-1/2 -translate-x-1/2 z-20">
+                                <div class="absolute -top-6 left-1/2 -translate-x-1/2 z-20 whitespace-nowrap">
                                     <div class="bg-gradient-to-r from-red-600 to-red-500 px-6 py-2 rounded-full text-white text-sm font-bold shadow-lg flex items-center gap-2">
                                         <span class="flex h-2 w-2">
                                             <span class="animate-ping absolute inline-flex h-2 w-2 rounded-full bg-white opacity-75"></span>
@@ -852,7 +910,7 @@
                                 </div>
 
                                 <!-- Contador Regressivo Melhorado -->
-                                <div class="absolute top-4 right-4">
+                                <div class="absolute top-4 right-4 md:block hidden">
                                     <div class="bg-darker backdrop-blur-sm px-4 py-2 rounded-full border border-red-500/30 group relative">
                                         <div class="flex items-center gap-4">
                                             <div class="flex items-center gap-2">
@@ -931,7 +989,7 @@
                                     <div class="flex-1">
                                             <div class="flex items-center gap-3 mb-2">
                                             <h3 class="text-2xl font-bold">Batuta Personalizada Premium</h3>
-                                            <span class="bg-red-500/20 text-red-400 text-xs px-3 py-1 rounded-full animate-pulse whitespace-nowrap">
+                                            <span class="bg-red-500/20 text-red-400 text-xs px-3 py-1 rounded-full animate-pulse whitespace-nowrap hidden md:inline-block">
                                                 RESTAM APENAS 10 VAGAS
                                             </span>
                                         </div>
@@ -944,6 +1002,22 @@
                                         <div class="flex items-center gap-4">
                                             <span class="text-red-500 line-through text-lg">R$ 200</span>
                                             <span class="text-emerald-400 font-bold text-lg">GRÁTIS</span>
+                                        </div>
+                                        <!-- Mobile Info Row -->
+                                        <div class="md:hidden flex flex-col sm:flex-row items-start sm:items-center gap-4 mt-4">
+                                            <span class="bg-red-500/20 text-red-400 text-xs px-3 py-1 rounded-full animate-pulse whitespace-nowrap">
+                                                RESTAM APENAS 10 VAGAS
+                                            </span>
+                                            <div class="bg-darker backdrop-blur-sm px-4 py-2 rounded-full border border-red-500/30 group relative">
+                                                <div class="flex items-center gap-2">
+                                                    <div class="relative">
+                                                        <div class="w-2 h-2 rounded-full bg-red-500 animate-ping absolute"></div>
+                                                        <div class="w-2 h-2 rounded-full bg-red-500"></div>
+                                                    </div>
+                                                    <span class="text-red-400 text-xs font-semibold">Oferta expira em:</span>
+                                                    <span id="countdown-mobile" class="font-mono text-red-400 text-sm tabular-nums">59:59</span>
+                                                </div>
+                                            </div>
                                         </div>
                                         </div>
                                     </div>
@@ -1169,25 +1243,25 @@
                             </div>
 
                             <!-- Valor Total com Nova Copy -->
-                            <div class="glass-card p-10 rounded-2xl border-2 border-gold/30 text-center relative overflow-hidden group mt-16">
-                                    <!-- Efeito de Brilho -->
-                                    <div class="absolute inset-0 bg-gradient-to-r from-gold/0 via-gold/5 to-gold/0 transform -skew-x-12 group-hover:translate-x-full transition-transform duration-1000"></div>
-                                    
-                                    <div class="relative z-10">
+                            <div class="glass-card p-10 rounded-2xl border-2 border-gold/30 text-center relative overflow-hidden group mt-16 shadow-[0_0_15px_rgba(255,215,0,0.2)]">
+                                <!-- Efeito de Brilho -->
+                                <div class="absolute inset-0 bg-gradient-to-r from-gold/0 via-gold/5 to-gold/0 transform -skew-x-12 group-hover:translate-x-full transition-transform duration-1000"></div>
+                                
+                                <div class="relative z-10">
                                     <h3 class="text-3xl font-bold mb-8">Valor Total em Bônus</h3>
-                                    <div class="flex items-center justify-center gap-8 mb-6">
+                                    <div class="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8 mb-6">
                                         <span class="text-5xl font-black text-red-400 relative">
                                             R$ 3.900
-                                                <div class="absolute inset-0 flex items-center justify-center">
-                                                    <div class="h-0.5 w-full bg-red-500 transform rotate-[-12deg]"></div>
-                                    </div>
-                                            </span>
+                                            <div class="absolute inset-0 flex items-center justify-center">
+                                                <div class="h-0.5 w-full bg-red-500 transform rotate-[-12deg]"></div>
+                                            </div>
+                                        </span>
                                         <span class="text-5xl font-black text-emerald-400">GRÁTIS</span>
-                                </div>
-                                    <p class="text-xl text-gray-400 mb-4">
+                                    </div>
+                                    <p class="text-xl text-gray-400 mb-6 max-w-[90%] mx-auto">
                                         Você pode continuar tentando sozinho, travando nos hinos compostos, 
                                         sem saber como corrigir a orquestra e sentindo insegurança na frente dos músicos ou...
-                                        </p>
+                                    </p>
                                     <p class="text-2xl font-bold text-gold">Agora é com você!</p>
                                 </div>
                             </div>
@@ -1198,7 +1272,18 @@
                 </section>
 
                 <!-- Oferta -->
-                <section id="oferta" class="py-20">
+                <section id="oferta" class="py-20 relative overflow-hidden">
+                    <!-- Background Gradients -->
+                    <div class="absolute inset-0 bg-gradient-to-b from-darker via-dark to-darker"></div>
+                    <div class="absolute inset-0">
+                        <div class="absolute inset-0 bg-gradient-to-r from-gold/2.5 via-transparent to-gold/2.5 opacity-10"></div>
+                        <div class="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(255,215,0,0.04),transparent_70%)]"></div>
+                        <div class="absolute inset-0 bg-[radial-gradient(circle_at_70%_70%,rgba(255,215,0,0.04),transparent_70%)]"></div>
+                    </div>
+                    <!-- Conector Superior -->
+                    <div class="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-darker to-transparent"></div>
+                    <!-- Conector Inferior -->
+                    <div class="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-darker to-transparent"></div>
                     <div class="container mx-auto px-6 lg:px-8 max-w-7xl relative z-10">
     <!-- Oferta Premium -->
                         <div class="max-w-4xl mx-auto">
@@ -1391,12 +1476,6 @@
                                 </div>
                         </div>
 
-                            <!-- Economia Badge -->
-                            <div class="absolute top-4 right-4">
-                                <div class="bg-red-500/20 text-red-500 text-xs px-4 py-1.5 rounded-full animate-pulse">
-                                    ECONOMIZE R$ 3.991
-                                </div>
-                            </div>
                             <!-- Cabeçalho -->
                             <div class="text-center space-y-2 mt-8">
                                 <h4 class="text-3xl sm:text-4xl lg:text-5xl font-black bg-gradient-to-r from-gold to-yellow-500 bg-clip-text text-transparent pb-2">
@@ -1415,42 +1494,22 @@
                                 
                                 <!-- Bônus Items -->
                                 <div class="space-y-3">
-                                    <div class="flex items-center justify-between p-3 rounded-xl bg-gradient-to-r from-gold/5 to-transparent border border-gold/10">
+                                    <!-- Batuta Premium (Vermelho - Primeira Hora) -->
+                                    <div class="flex items-center justify-between p-3 rounded-xl bg-gradient-to-r from-red-500/5 to-transparent border border-red-500/30">
                                         <div class="flex items-center gap-3">
-                                            <i class="fas fa-gift text-gold"></i>
+                                            <i class="fas fa-wand-magic-sparkles text-red-500"></i>
                                             <span class="text-white">Batuta Personalizada Premium</span>
                                         </div>
                                         <div class="text-right">
-                                            <span class="text-red-500 line-through text-sm">R$ 297</span>
-                                            <span class="text-emerald-400 text-sm ml-2">GRÁTIS</span>
-                            </div>
-                        </div>
-
-                                    <div class="flex items-center justify-between p-3 rounded-xl bg-gradient-to-r from-gold/5 to-transparent border border-gold/10">
-                                        <div class="flex items-center gap-3">
-                                            <i class="fas fa-graduation-cap text-gold"></i>
-                                            <span class="text-white">Imersão Compasso</span>
-                                        </div>
-                                        <div class="text-right">
-                                            <span class="text-red-500 line-through text-sm">R$ 997</span>
+                                            <span class="text-red-500 line-through text-sm">R$ 200</span>
                                             <span class="text-emerald-400 text-sm ml-2">GRÁTIS</span>
                                         </div>
                                     </div>
 
-                                    <div class="flex items-center justify-between p-3 rounded-xl bg-gradient-to-r from-gold/5 to-transparent border border-gold/10">
+                                    <!-- Maestria Internacional (Roxo - Primeiro Dia) -->
+                                    <div class="flex items-center justify-between p-3 rounded-xl bg-gradient-to-r from-purple-500/5 to-transparent border border-purple-500/30">
                                         <div class="flex items-center gap-3">
-                                            <i class="fas fa-book text-gold"></i>
-                                            <span class="text-white">Guia de Interpretação</span>
-                                        </div>
-                                        <div class="text-right">
-                                            <span class="text-red-500 line-through text-sm">R$ 497</span>
-                                            <span class="text-emerald-400 text-sm ml-2">GRÁTIS</span>
-                                        </div>
-                                    </div>
-
-                                    <div class="flex items-center justify-between p-3 rounded-xl bg-gradient-to-r from-gold/5 to-transparent border border-gold/10">
-                                        <div class="flex items-center gap-3">
-                                            <i class="fas fa-globe text-gold"></i>
+                                            <i class="fas fa-earth-europe text-indigo-400"></i>
                                             <span class="text-white">Maestria Internacional</span>
                                         </div>
                                         <div class="text-right">
@@ -1459,25 +1518,87 @@
                                         </div>
                                     </div>
 
-                                    <!-- Bônus Especial -->
-                                    <div class="p-4 rounded-xl bg-gradient-to-r from-gold/10 to-transparent border border-gold/20">
-                                        <div class="flex items-center gap-2 mb-2">
-                                            <i class="fas fa-star text-gold"></i>
-                                            <span class="text-gold font-semibold">BÔNUS ESPECIAL</span>
+                                    <!-- 2 Aulas Individuais -->
+                                    <div class="flex items-center justify-between p-3 rounded-xl bg-gradient-to-r from-gold/5 to-transparent border border-gold/30">
+                                        <div class="flex items-center gap-3">
+                                            <i class="fas fa-chalkboard-teacher text-gold"></i>
+                                            <span class="text-white">2 Aulas Individuais</span>
                                         </div>
-                                        <h5 class="text-white font-medium mb-2">Sessões MAESTRIA EXPRESS</h5>
-                                        <p class="text-sm text-gray-400 mb-3">
-                                            Feedback personalizado e direcionamento individual para acelerar seu progresso.
-                                        </p>
-                                        <div class="flex justify-between items-center">
-                                            <div class="flex gap-2">
-                                                <span class="text-xs bg-gold/10 text-gold px-2 py-1 rounded">Feedback Individual</span>
-                                                <span class="text-xs bg-gold/10 text-gold px-2 py-1 rounded">Mentoria Personalizada</span>
-                                            </div>
-                                            <div class="text-right">
-                                                <span class="text-red-500 line-through text-sm">R$ 1.000</span>
-                                                <span class="text-emerald-400 text-sm ml-2">GRÁTIS</span>
-                                            </div>
+                                        <div class="text-right">
+                                            <span class="text-red-500 line-through text-sm">R$ 700</span>
+                                            <span class="text-emerald-400 text-sm ml-2">GRÁTIS</span>
+                                        </div>
+                                    </div>
+
+                                    <!-- Guia de Interpretação -->
+                                    <div class="flex items-center justify-between p-3 rounded-xl bg-gradient-to-r from-gold/5 to-transparent border border-gold/30">
+                                        <div class="flex items-center gap-3">
+                                            <i class="fas fa-book text-gold"></i>
+                                            <span class="text-white">Guia de Interpretação</span>
+                                        </div>
+                                        <div class="text-right">
+                                            <span class="text-red-500 line-through text-sm">R$ 200</span>
+                                            <span class="text-emerald-400 text-sm ml-2">GRÁTIS</span>
+                                        </div>
+                                    </div>
+
+                                    <!-- Imersão Compasso -->
+                                    <div class="flex items-center justify-between p-3 rounded-xl bg-gradient-to-r from-gold/5 to-transparent border border-gold/30">
+                                        <div class="flex items-center gap-3 min-w-0">
+                                            <i class="fas fa-graduation-cap text-gold flex-shrink-0"></i>
+                                            <span class="text-white truncate">Imersão Compasso Composto</span>
+                                        </div>
+                                        <div class="text-right flex-shrink-0">
+                                            <span class="text-red-500 line-through text-sm">R$ 600</span>
+                                            <span class="text-emerald-400 text-sm ml-2">GRÁTIS</span>
+                                        </div>
+                                    </div>
+
+                                    <!-- Hinário do Maestro -->
+                                    <div class="flex items-center justify-between p-3 rounded-xl bg-gradient-to-r from-gold/5 to-transparent border border-gold/30">
+                                        <div class="flex items-center gap-3">
+                                            <i class="fas fa-book text-gold"></i>
+                                            <span class="text-white">Hinário do Maestro</span>
+                                        </div>
+                                        <div class="text-right">
+                                            <span class="text-red-500 line-through text-sm">R$ 300</span>
+                                            <span class="text-emerald-400 text-sm ml-2">GRÁTIS</span>
+                                        </div>
+                                    </div>
+
+                                    <!-- Curso Básico -->
+                                    <div class="flex items-center justify-between p-3 rounded-xl bg-gradient-to-r from-gold/5 to-transparent border border-gold/30">
+                                        <div class="flex items-center gap-3">
+                                            <i class="fas fa-graduation-cap text-gold"></i>
+                                            <span class="text-white">Curso Básico de Regência</span>
+                                        </div>
+                                        <div class="text-right">
+                                            <span class="text-red-500 line-through text-sm">R$ 400</span>
+                                            <span class="text-emerald-400 text-sm ml-2">GRÁTIS</span>
+                                        </div>
+                                    </div>
+
+                                    <!-- Ensaios na Prática -->
+                                    <div class="flex items-center justify-between p-3 rounded-xl bg-gradient-to-r from-gold/5 to-transparent border border-gold/30">
+                                        <div class="flex items-center gap-3">
+                                            <i class="fas fa-users text-gold"></i>
+                                            <span class="text-white">Ensaios na Prática</span>
+                                        </div>
+                                        <div class="text-right">
+                                            <span class="text-red-500 line-through text-sm">R$ 200</span>
+                                            <span class="text-emerald-400 text-sm ml-2">GRÁTIS</span>
+                                        </div>
+                                    </div>
+
+                                    <!-- Aquecimento para Orquestra -->
+                                    <div class="flex items-center justify-between p-3 rounded-xl bg-gradient-to-r from-gold/5 to-transparent border border-gold/30">
+                                        <div class="flex items-center gap-3">
+                                            <i class="fas fa-fire text-gold"></i>
+                                            <span class="text-white">Aquecimento para Orquestra</span>
+                                        </div>
+                                        <div class="text-right">
+                                            <span class="text-red-500 line-through text-sm">R$ 100</span>
+                                            <span class="text-emerald-400 text-sm ml-2">GRÁTIS</span>
                                         </div>
                                     </div>
                                 </div>
@@ -1488,7 +1609,7 @@
                                 <div class="flex justify-between items-center p-4 rounded-xl bg-gradient-to-r from-gold/5 to-transparent">
                                     <span class="text-white font-medium">Valor Total em Bônus</span>
                                     <div class="text-right">
-                                        <span class="text-red-500 line-through">R$ 3.991</span>
+                                        <span class="text-red-500 line-through">R$ 3.900</span>
                                         <span class="text-emerald-400 font-bold ml-2">GRÁTIS</span>
                                     </div>
                                 </div>
@@ -1508,7 +1629,7 @@
                             <!-- CTA -->
                             <div class="mt-8 space-y-4">
                                 <a href="https://pay.hotmart.com/W90405096Q?off=s810xbhf&checkoutMode=10" 
-                                   class="block w-full bg-gradient-to-r from-gold to-yellow-500 text-darker font-bold text-xl px-8 py-4 rounded-xl hover:scale-105 transition-all group relative overflow-hidden">
+                                   class="block w-full bg-gradient-to-r from-gold to-yellow-500 text-darker font-bold text-xl px-8 py-4 rounded-xl hover:scale-105 transition-all group relative overflow-hidden btn-neon shadow-[0_0_12px_rgba(255,215,0,0.3)]">
                                     <span class="relative z-10 flex items-center justify-center gap-2">
                                         QUERO TRANSFORMAR MINHA REGÊNCIA
                                     </span>
@@ -1548,19 +1669,32 @@
         </section>
 
                 <!-- Garantia -->
-                <section id="garantia" class="py-20" style="background: linear-gradient(to right, #ffcc00, #ff9900); box-shadow: 0 0 20px rgba(255, 204, 0, 0.5);">
+                <section id="garantia" class="py-20 relative overflow-hidden">
+                    <!-- Background Gradients -->
+                    <div class="absolute inset-0 bg-gradient-to-b from-darker via-dark to-darker"></div>
+                    <div class="absolute inset-0">
+                        <div class="absolute inset-0 bg-gradient-to-r from-gold/2.5 via-transparent to-gold/2.5 opacity-10"></div>
+                        <div class="absolute inset-0 bg-[radial-gradient(circle_at_40%_40%,rgba(255,215,0,0.04),transparent_70%)]"></div>
+                        <div class="absolute inset-0 bg-[radial-gradient(circle_at_60%_60%,rgba(255,215,0,0.04),transparent_70%)]"></div>
+                    </div>
+                    <!-- Conector Superior -->
+                    <div class="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-darker to-transparent"></div>
+                    <!-- Conector Inferior -->
+                    <div class="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-darker to-transparent"></div>
                     <div class="container mx-auto px-6 lg:px-8 max-w-6xl">
                         <!-- Garantia e Segurança -->
-                        <div class="max-w-6xl mx-auto px-4 mb-20 pt-16">
-                            <div class="relative overflow-hidden">
+                        <div class="max-w-6xl mx-auto px-4 mb-20 pt-24 md:pt-16">
+                            <div class="relative overflow-visible">
                                 <!-- Conteúdo -->
                                 <div class="relative z-10">
                                     <!-- Headline Principal -->
-                                    <div class="text-center mb-12">
-                                        <span class="bg-gold/20 text-gold px-6 py-2 rounded-full text-sm font-bold uppercase tracking-wider">
-                                            Garantia Incondicional
-                                        </span>
-                                        <h3 class="text-4xl md:text-5xl font-bold mt-6 mb-4">
+                                    <div class="text-center mb-12 relative">
+                                        <div class="inline-block mb-4">
+                                            <span class="bg-gold/20 text-gold px-6 py-2 rounded-full text-sm font-bold uppercase tracking-wider">
+                                                Garantia Incondicional
+                                            </span>
+                                        </div>
+                                        <h3 class="text-4xl md:text-5xl font-bold mt-6 mb-4 relative">
                                             Invista na Sua
                                             <span class="bg-gradient-to-r from-gold to-yellow-500 text-transparent bg-clip-text">
                                                 Maestria com Total Segurança
@@ -1630,7 +1764,7 @@
                                             </div>
 
                                             <div class="flex flex-col items-center gap-4">
-                                                <a href="https://pay.hotmart.com/W90405096Q?off=s810xbhf&checkoutMode=10" class="w-full max-w-2xl mx-auto inline-block bg-gradient-to-r from-gold to-yellow-500 text-darker font-bold text-xl px-12 py-6 rounded-xl hover:scale-105 transition-all group relative overflow-hidden btn-neon">
+                                                <a href="https://pay.hotmart.com/W90405096Q?off=s810xbhf&checkoutMode=10" class="w-full max-w-2xl mx-auto inline-block bg-gradient-to-r from-gold to-yellow-500 text-darker font-bold text-xl px-12 py-6 rounded-xl hover:scale-105 transition-all group relative overflow-hidden btn-neon shadow-[0_0_12px_rgba(255,215,0,0.3)]">
                                                     <span class="relative z-10">QUERO TRANSFORMAR MINHA REGÊNCIA</span>
                                                     <div class="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity"></div>
                                                 </a>
@@ -1648,18 +1782,30 @@
                 </section>
 
                 <!-- FAQ Section -->
-                <section id="faq" class="py-20" style="background: linear-gradient(to right, #ffcc00, #ff9900); box-shadow: 0 0 20px rgba(255, 204, 0, 0.5);">
-                    <div class="container mx-auto px-6 lg:px-8 max-w-5xl">
-                        <div class="text-center mb-16">
-                            <span class="bg-gold/20 text-gold px-6 py-2 rounded-full text-sm font-bold uppercase tracking-wider">
+                <section id="faq" class="py-20 relative overflow-hidden -mt-20">
+                    <!-- Background Gradients -->
+                    <div class="absolute inset-0 bg-gradient-to-b from-darker via-dark to-darker"></div>
+                    <div class="absolute inset-0">
+                        <div class="absolute inset-0 bg-gradient-to-r from-gold/2.5 via-transparent to-gold/2.5 opacity-10"></div>
+                        <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,215,0,0.04),transparent_70%)]"></div>
+                        <div class="absolute inset-0 bg-[radial-gradient(circle_at_20%_80%,rgba(255,215,0,0.04),transparent_70%)]"></div>
+                    </div>
+                    <!-- Conector Superior -->
+                    <div class="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-darker to-transparent"></div>
+                    <div class="container mx-auto px-6 lg:px-8 max-w-5xl relative z-10">
+                        <div class="text-center mb-16 relative z-20">
+                            <span class="bg-gold/20 text-gold px-6 py-2 rounded-full text-sm font-bold uppercase tracking-wider inline-block">
                                 Últimas Dúvidas?
                             </span>
-                            <h2 class="text-4xl font-bold mt-6 mb-4">
+                            <h2 class="text-4xl md:text-5xl font-bold mt-6 mb-4 relative">
                                 Perguntas
-                                <span class="bg-gradient-to-r from-gold to-yellow-500 text-transparent bg-clip-text">
+                                <span class="bg-gradient-to-r from-gold to-yellow-500 text-transparent bg-clip-text inline-block">
                                     Frequentes
                                 </span>
                             </h2>
+                            <p class="text-xl text-gray-400 max-w-2xl mx-auto relative">
+                                Tire suas últimas dúvidas sobre a <span class="text-gold">Academia de Regência CCB</span> e comece sua transformação hoje mesmo
+                            </p>
                         </div>
 
                         <!-- FAQ Cards -->
@@ -1723,7 +1869,7 @@
                         </div>
 
                         <!-- Final CTA -->
-                        <div class="mt-20 text-center">
+                        <div class="mt-12 text-center">
                             <h3 class="text-3xl font-bold mb-8">
                                 Não deixe para depois o que pode
                                 <span class="bg-gradient-to-r from-gold to-yellow-500 text-transparent bg-clip-text">
@@ -1732,7 +1878,8 @@
                             </h3>
 
                             <div class="flex flex-col items-center gap-6">
-                                <a href="https://pay.hotmart.com/W90405096Q?off=s810xbhf&checkoutMode=10" class="w-full max-w-2xl mx-auto inline-block bg-gradient-to-r from-gold to-yellow-500 text-darker font-bold text-2xl px-12 py-6 rounded-xl hover:scale-105 transition-all group relative overflow-hidden btn-neon">
+                                <a href="https://pay.hotmart.com/W90405096Q?off=s810xbhf&checkoutMode=10" 
+                                   class="w-full max-w-2xl mx-auto inline-block bg-gradient-to-r from-gold to-yellow-500 text-darker font-bold text-2xl px-12 py-6 rounded-xl hover:scale-105 transition-all group relative overflow-hidden btn-neon shadow-[0_0_12px_rgba(255,215,0,0.3)]">
                                     <span class="relative z-10">SIM, EU QUERO ME INSCREVER AGORA!</span>
                                     <div class="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity"></div>
                                 </a>

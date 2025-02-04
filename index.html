@@ -537,99 +537,176 @@
     <div class="pulsating-overlay"></div>
     
     <div class="progress-bar" id="progressBar"></div>
+
+    <!-- Remover elementos soltos -->
+    <style>
+        /* Esconder elementos vazados de forma absoluta */
+        body > img,
+        body > div.lazy-section:not(.video-testimonials) {
+            display: none !important;
+            visibility: hidden !important;
+            opacity: 0 !important;
+            position: absolute !important;
+            pointer-events: none !important;
+            z-index: -9999 !important;
+            height: 0 !important;
+            width: 0 !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            overflow: hidden !important;
+            clip: rect(0, 0, 0, 0) !important;
+            white-space: nowrap !important;
+            border: 0 !important;
+        }
+
+        /* Garantir posicionamento correto do main */
+        main.min-h-screen {
+            position: relative;
+            z-index: 1;
+            margin-top: 0 !important;
+            padding-top: 0 !important;
+        }
+
+        /* Ajuste do container principal */
+        .main-container {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            margin-top: 0 !important;
+            padding-top: 0 !important;
+        }
+
+        /* Garantir que a hero section fique no topo */
+        .hero-section {
+            margin-top: 0 !important;
+            padding-top: 0 !important;
+        }
+    </style>
+
+    <!-- Script de Limpeza Aprimorado -->
+    <script>
+        // Executar imediatamente para evitar FOUC (Flash of Unstyled Content)
+        (function() {
+            const elementsToRemove = [
+                'body > img',
+                'body > div.lazy-section:not(.video-testimonials)',
+                'body > .lazy-section[data-component]:not(.splide)'
+            ];
+            
+            elementsToRemove.forEach(selector => {
+                const elements = document.querySelectorAll(selector);
+                elements.forEach(el => {
+                    if (el.parentNode) {
+                        el.parentNode.removeChild(el);
+                    }
+                });
+            });
+        })();
+
+        // Garantir limpeza após carregamento do DOM
+        document.addEventListener('DOMContentLoaded', function() {
+            const observer = new MutationObserver(function(mutations) {
+                mutations.forEach(function(mutation) {
+                    if (mutation.addedNodes.length) {
+                        mutation.addedNodes.forEach(function(node) {
+                            if (node.matches && (
+                                node.matches('body > img') || 
+                                node.matches('body > div.lazy-section:not(.video-testimonials)')
+                            )) {
+                                node.parentNode.removeChild(node);
+                            }
+                        });
+                    }
+                });
+            });
+
+            observer.observe(document.body, {
+                childList: true,
+                subtree: false
+            });
+        });
+    </script>
+
     <main class="min-h-screen relative">
         <!-- Container Principal com Todo Conteúdo -->
-        <div class="relative overflow-hidden">
-            <!-- Background Image com Gradiente -->
-            <div class="absolute inset-0 z-0">
-                <img 
-                    src="assets/imagens-para-sessoes/533696_1_17115211336603bd6d11d70.webp"
-                    alt="Background" 
-                    class="w-full h-full object-cover opacity-40"
-                />
-                <div class="absolute inset-0 bg-gradient-to-b from-transparent via-darker to-darker"></div>
-            </div>
+        <div class="main-container relative overflow-hidden">
+            <!-- Hero Section com classe específica -->
+            <div class="hero-section relative min-h-screen">
+                <!-- Background com Gradiente Suave -->
+                <div class="absolute inset-0">
+                    <img 
+                        src="assets/imagens-para-sessoes/533696_1_17115211336603bd6d11d70.webp"
+                        alt="Background"
+                        class="w-full h-full object-cover opacity-80"
+                    />
+                    <!-- Gradientes sutis -->
+                    <div class="absolute inset-0 bg-gradient-to-b from-transparent via-darker/50 to-darker"></div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-darker via-transparent to-transparent opacity-40"></div>
+                </div>
 
-            <!-- Conteúdo -->
-            <div class="relative z-10">
-                <!-- Hero Section -->
-                <div class="relative min-h-screen">
-                    <!-- Background com Gradiente Suave -->
-                    <div class="absolute inset-0">
-                        <img 
-                            src="assets/imagens-para-sessoes/533696_1_17115211336603bd6d11d70.webp"
-                            alt="Background"
-                            class="w-full h-full object-cover opacity-80"
+                <!-- Expert Image (Posicionada absolutamente) -->
+                <div class="absolute right-0 top-0 bottom-0 w-1/2 hidden md:block" style="right: 5%;">
+                    <div class="relative h-full">
+                        <img
+                            src="assets/imagens-para-sessoes/WhatsApp Image 2025-01-30 at 00.42.18.webp"
+                            alt="Expert"
+                            class="h-full w-full object-cover object-left scale-80 origin-center"
                         />
-                        <!-- Gradientes sutis -->
-                        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-darker/50 to-darker"></div>
-                        <div class="absolute inset-0 bg-gradient-to-t from-darker via-transparent to-transparent opacity-40"></div>
+                        <!-- Gradiente para suavizar a parte inferior -->
+                        <div class="absolute inset-x-0 bottom-0 h-1/6 bg-gradient-to-t from-darker via-darker/88 to-transparent"></div>
                     </div>
+                </div>
 
-                    <!-- Expert Image (Posicionada absolutamente) -->
-                    <div class="absolute right-0 top-0 bottom-0 w-1/2 hidden md:block" style="right: 5%;">
-                        <div class="relative h-full">
+                <div class="container mx-auto px-6 lg:px-8 max-w-7xl relative z-10 min-h-screen flex items-center">
+                    <!-- Grid Container -->
+                    <div class="flex flex-col md:grid md:grid-cols-2 gap-8 items-center">
+                        <!-- Imagem Expert (Visível apenas no Mobile) -->
+                        <div class="md:hidden relative h-[400px] w-full mb-8">
                             <img
                                 src="assets/imagens-para-sessoes/WhatsApp Image 2025-01-30 at 00.42.18.webp"
                                 alt="Expert"
-                                class="h-full w-full object-cover object-left scale-80 origin-center"
+                                class="w-full h-full object-cover rounded-2xl"
                             />
-                            <!-- Gradiente para suavizar a parte inferior -->
-                            <div class="absolute inset-x-0 bottom-0 h-1/6 bg-gradient-to-t from-darker via-darker/88 to-transparent"></div>
+                            <div class="absolute inset-0 bg-gradient-to-b from-transparent to-darker/90"></div>
                         </div>
-                    </div>
 
-                    <div class="container mx-auto px-6 lg:px-8 max-w-7xl relative z-10 min-h-screen flex items-center">
-                        <!-- Grid Container -->
-                        <div class="flex flex-col md:grid md:grid-cols-2 gap-8 items-center">
-                            <!-- Imagem Expert (Visível apenas no Mobile) -->
-                            <div class="md:hidden relative h-[400px] w-full mb-8">
-                                <img
-                                    src="assets/imagens-para-sessoes/WhatsApp Image 2025-01-30 at 00.42.18.webp"
-                                    alt="Expert"
-                                    class="w-full h-full object-cover rounded-2xl"
-                                />
-                                <div class="absolute inset-0 bg-gradient-to-b from-transparent to-darker/90"></div>
+                        <!-- Coluna Esquerda: Conteúdo -->
+                        <div class="flex flex-col items-center md:items-start text-center md:text-left space-y-8 -mt-12 md:mt-0">
+                            <div class="flex flex-wrap gap-2 md:gap-3 justify-center md:justify-start">
+                                <div class="glass-card border border-gold/30 backdrop-blur-sm px-3 md:px-4 py-1.5 md:py-2 rounded-full flex items-center gap-2 hover:border-gold/50 transition-all">
+                                    <div class="w-5 md:w-6 h-5 md:h-6 bg-gold/10 rounded-full flex items-center justify-center">
+                                        <i class="fas fa-users text-gold text-xs"></i>
+                                    </div>
+                                    <span class="text-white text-xs md:text-sm">+1000 Encarregados</span>
+                                </div>
+                                <div class="glass-card border border-gold/30 backdrop-blur-sm px-3 md:px-4 py-1.5 md:py-2 rounded-full flex items-center gap-2 hover:border-gold/50 transition-all">
+                                    <div class="w-5 md:w-6 h-5 md:h-6 bg-gold/10 rounded-full flex items-center justify-center">
+                                        <i class="fas fa-crown text-gold text-xs"></i>
+                                    </div>
+                                    <span class="text-white text-xs md:text-sm">Método Exclusivo CCB</span>
+                                </div>
                             </div>
-
-                            <!-- Coluna Esquerda: Conteúdo -->
-                            <div class="flex flex-col items-center md:items-start text-center md:text-left space-y-8 -mt-12 md:mt-0">
-                                <div class="flex flex-wrap gap-2 md:gap-3 justify-center md:justify-start">
-                                    <div class="glass-card border border-gold/30 backdrop-blur-sm px-3 md:px-4 py-1.5 md:py-2 rounded-full flex items-center gap-2 hover:border-gold/50 transition-all">
-                                        <div class="w-5 md:w-6 h-5 md:h-6 bg-gold/10 rounded-full flex items-center justify-center">
-                                            <i class="fas fa-users text-gold text-xs"></i>
-                                        </div>
-                                        <span class="text-white text-xs md:text-sm">+1000 Encarregados</span>
-                                    </div>
-                                    <div class="glass-card border border-gold/30 backdrop-blur-sm px-3 md:px-4 py-1.5 md:py-2 rounded-full flex items-center gap-2 hover:border-gold/50 transition-all">
-                                        <div class="w-5 md:w-6 h-5 md:h-6 bg-gold/10 rounded-full flex items-center justify-center">
-                                            <i class="fas fa-crown text-gold text-xs"></i>
-                                        </div>
-                                        <span class="text-white text-xs md:text-sm">Método Exclusivo CCB</span>
-                                    </div>
-                                </div>
-                                <div class="space-y-6 max-w-[90%] md:max-w-xl">
-                                    <h1 class="text-4xl md:text-6xl font-bold leading-tight">
-                                        <span class="bg-gradient-to-r from-gold to-yellow-500 text-transparent bg-clip-text">
-                                            Eleve Sua Regência
-                                        </span>
-                                        <br>
-                                        <span class="text-3xl md:text-5xl">
-                                            Para a Glória do Reino
-                                        </span>
-                                    </h1>
-                                    <p class="text-lg md:text-xl text-gray-300 leading-relaxed max-w-[320px] md:max-w-none mx-auto md:mx-0">
-                                        Domine a regência dos hinos CCB com um método simples e eficaz, 
-                                        <span class="text-gold font-semibold">estudando apenas 15 minutos por dia</span>
-                                    </p>
-                                </div>
-                                <div class="pt-4 w-full md:w-auto">
-                                    <a href="https://pay.hotmart.com/W90405096Q?off=s810xbhf&checkoutMode=10" 
-                                       class="block md:inline-block bg-gradient-to-r from-gold to-yellow-500 text-darker font-bold text-lg md:text-xl px-6 md:px-12 py-4 md:py-6 rounded-xl hover:scale-105 transition-all group relative overflow-hidden btn-neon text-center">
-                                        <span class="relative z-10 whitespace-normal md:whitespace-nowrap">QUERO TRANSFORMAR MINHA REGÊNCIA</span>
-                                        <div class="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity"></div>
-                                    </a>
-                                </div>
+                            <div class="space-y-6 max-w-[90%] md:max-w-xl">
+                                <h1 class="text-4xl md:text-6xl font-bold leading-tight">
+                                    <span class="bg-gradient-to-r from-gold to-yellow-500 text-transparent bg-clip-text">
+                                        Eleve Sua Regência
+                                    </span>
+                                    <br>
+                                    <span class="text-3xl md:text-5xl">
+                                        Para a Glória do Reino
+                                    </span>
+                                </h1>
+                                <p class="text-lg md:text-xl text-gray-300 leading-relaxed max-w-[320px] md:max-w-none mx-auto md:mx-0">
+                                    Domine a regência dos hinos CCB com um método simples e eficaz, 
+                                    <span class="text-gold font-semibold">estudando apenas 15 minutos por dia</span>
+                                </p>
+                            </div>
+                            <div class="pt-4 w-full md:w-auto">
+                                <a href="https://pay.hotmart.com/W90405096Q?off=s810xbhf&checkoutMode=10" 
+                                   class="block md:inline-block bg-gradient-to-r from-gold to-yellow-500 text-darker font-bold text-lg md:text-xl px-6 md:px-12 py-4 md:py-6 rounded-xl hover:scale-105 transition-all group relative overflow-hidden btn-neon text-center">
+                                    <span class="relative z-10 whitespace-normal md:whitespace-nowrap">QUERO TRANSFORMAR MINHA REGÊNCIA</span>
+                                    <div class="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity"></div>
+                                </a>
                             </div>
                         </div>
                     </div>

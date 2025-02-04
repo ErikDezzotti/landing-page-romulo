@@ -1,9 +1,72 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Academia de Regência CCB - Transforme sua Regência</title>
+    <title>Domine a Regência | Método D.O.M.</title>
+    
+    <!-- Preload de recursos críticos -->
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" as="style">
+    <link rel="preload" href="https://cdn.tailwindcss.com" as="script">
+    
+    <!-- Preconnect para domínios externos -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://cdn.tailwindcss.com">
+    
+    <!-- Font Display Swap -->
+    <style>
+        @font-face {
+            font-family: system-ui;
+            font-display: swap;
+        }
+    </style>
+    
+    <!-- Lazy Loading de Imagens -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var lazyImages = [].slice.call(document.querySelectorAll("img.lazy"));
+            
+            if ("IntersectionObserver" in window) {
+                let lazyImageObserver = new IntersectionObserver(function(entries, observer) {
+                    entries.forEach(function(entry) {
+                        if (entry.isIntersecting) {
+                            let lazyImage = entry.target;
+                            lazyImage.src = lazyImage.dataset.src;
+                            lazyImage.classList.remove("lazy");
+                            lazyImageObserver.unobserve(lazyImage);
+                        }
+                    });
+                });
+                
+                lazyImages.forEach(function(lazyImage) {
+                    lazyImageObserver.observe(lazyImage);
+                });
+            }
+        });
+    </script>
+    
+    <!-- Otimização de Performance -->
+    <script>
+        // Defer de scripts não críticos
+        function loadDeferredStyles() {
+            var addStylesNode = document.getElementById("deferred-styles");
+            var replacement = document.createElement("div");
+            replacement.innerHTML = addStylesNode.textContent;
+            document.body.appendChild(replacement);
+            addStylesNode.parentElement.removeChild(addStylesNode);
+        }
+        var raf = window.requestAnimationFrame || window.mozRequestAnimationFrame ||
+            window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
+        if (raf) raf(function() { window.setTimeout(loadDeferredStyles, 0); });
+        else window.addEventListener('load', loadDeferredStyles);
+    </script>
+    
+    <!-- Cache Control -->
+    <meta http-equiv="Cache-Control" content="max-age=31536000, immutable">
+    
+    <!-- Compression -->
+    <script type="module" src="script.js"></script>
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script>
@@ -304,7 +367,7 @@
 
             <!-- Conteúdo -->
             <div class="relative z-10">
-                <!-- Hero Section -->
+        <!-- Hero Section -->
                 <div class="relative min-h-screen">
                     <!-- Background com Gradiente Suave -->
                     <div class="absolute inset-0">
@@ -316,7 +379,7 @@
                         <!-- Gradientes sutis -->
                         <div class="absolute inset-0 bg-gradient-to-b from-transparent via-darker/50 to-darker"></div>
                         <div class="absolute inset-0 bg-gradient-to-t from-darker via-transparent to-transparent opacity-40"></div>
-                    </div>
+                </div>
 
                     <!-- Expert Image (Posicionada absolutamente) -->
                     <div class="absolute right-0 top-0 bottom-0 w-1/2 hidden md:block" style="right: 5%;">
@@ -362,18 +425,18 @@
                                 </div>
                                 <div class="space-y-6 max-w-[90%] md:max-w-xl">
                                     <h1 class="text-4xl md:text-6xl font-bold leading-tight">
-                                        <span class="bg-gradient-to-r from-gold to-yellow-500 text-transparent bg-clip-text">
-                                            Eleve Sua Regência
-                                        </span>
-                                        <br>
+                        <span class="bg-gradient-to-r from-gold to-yellow-500 text-transparent bg-clip-text">
+                            Eleve Sua Regência
+                        </span>
+                        <br>
                                         <span class="text-3xl md:text-5xl">
                                             Para a Glória do Reino
-                                        </span>
-                                    </h1>
+                        </span>
+                    </h1>
                                     <p class="text-lg md:text-xl text-gray-300 leading-relaxed max-w-[320px] md:max-w-none mx-auto md:mx-0">
-                                        Domine a regência dos hinos CCB com um método simples e eficaz, 
-                                        <span class="text-gold font-semibold">estudando apenas 15 minutos por dia</span>
-                                    </p>
+                        Domine a regência dos hinos CCB com um método simples e eficaz, 
+                        <span class="text-gold font-semibold">estudando apenas 15 minutos por dia</span>
+                    </p>
                                 </div>
                                 <div class="pt-4 w-full md:w-auto">
                                     <a href="https://pay.hotmart.com/W90405096Q?off=s810xbhf&checkoutMode=10" 
@@ -386,7 +449,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+                </div>
 
                 <!-- Metodologia DOM -->
                 <section id="metodologia" class="py-20 bg-gradient-to-b from-darker via-dark to-darker relative">
@@ -406,7 +469,7 @@
                             <p class="text-xl text-gray-400 max-w-2xl mx-auto">
                                 Um método revolucionário desenvolvido para que qualquer encarregado possa <span class="text-gold">reger com franqueza, segurança e expressividade</span>, mesmo que nunca tenha estudado música antes.
                             </p>
-                    </div>
+                        </div>
 
                         <!-- Cards D.O.M -->
                     <div class="grid md:grid-cols-3 gap-8">
@@ -416,10 +479,10 @@
                                 <div class="flex items-center gap-4 mb-6">
                                     <div class="w-16 h-16 bg-gold/10 rounded-full flex items-center justify-center group-hover:scale-110 transition-all">
                                         <i class="fas fa-chart-line text-gold text-2xl"></i>
-                                </div>
+                    </div>
                                     <div class="text-6xl font-black text-gold/20 group-hover:text-gold/30 transition-all">D</div>
-                                </div>
-                                
+                </div>
+
                                 <!-- Conteúdo -->
                                 <div class="space-y-4">
                                     <h3 class="text-2xl font-bold">Domínio Técnico</h3>
@@ -427,26 +490,26 @@
                                     
                                     <!-- Lista de Benefícios -->
                                     <ul class="space-y-3 pt-4">
-                                        <li class="flex items-start gap-3">
+                                <li class="flex items-start gap-3">
                                             <div class="w-6 h-6 bg-gold/10 rounded-full flex items-center justify-center flex-shrink-0">
                                                 <i class="fas fa-check text-gold text-xs"></i>
                                             </div>
                                             <span class="text-gray-300">Técnicas claras para reger compassos simples e compostos</span>
-                                    </li>
-                                        <li class="flex items-start gap-3">
+                                </li>
+                                <li class="flex items-start gap-3">
                                             <div class="w-6 h-6 bg-gold/10 rounded-full flex items-center justify-center flex-shrink-0">
                                                 <i class="fas fa-check text-gold text-xs"></i>
                                             </div>
                                             <span class="text-gray-300">Domínio dos diagramas e gestos essenciais</span>
-                                        </li>
-                                        <li class="flex items-start gap-3">
+                                </li>
+                                <li class="flex items-start gap-3">
                                             <div class="w-6 h-6 bg-gold/10 rounded-full flex items-center justify-center flex-shrink-0">
                                                 <i class="fas fa-check text-gold text-xs"></i>
                                             </div>
                                             <span class="text-gray-300">Confiança para reger no púlpito sem medo ou insegurança</span>
-                                    </li>
-                                </ul>
-                            </div>
+                                </li>
+                            </ul>
+                        </div>
                         </div>
 
                             <!-- Organização Musical -->
@@ -466,27 +529,27 @@
                                     
                                     <!-- Lista de Benefícios -->
                                     <ul class="space-y-3 pt-4">
-                                        <li class="flex items-start gap-3">
+                                <li class="flex items-start gap-3">
                                             <div class="w-6 h-6 bg-gold/10 rounded-full flex items-center justify-center flex-shrink-0">
                                                 <i class="fas fa-check text-gold text-xs"></i>
                                             </div>
                                             <span class="text-gray-300">Definição do melhor gestual para cada compasso</span>
-                                    </li>
-                                        <li class="flex items-start gap-3">
+                                </li>
+                                <li class="flex items-start gap-3">
                                             <div class="w-6 h-6 bg-gold/10 rounded-full flex items-center justify-center flex-shrink-0">
                                                 <i class="fas fa-check text-gold text-xs"></i>
                                             </div>
                                             <span class="text-gray-300">Transições suaves e claras entre diferentes ritmos</span>
-                                        </li>
-                                        <li class="flex items-start gap-3">
+                                </li>
+                                <li class="flex items-start gap-3">
                                             <div class="w-6 h-6 bg-gold/10 rounded-full flex items-center justify-center flex-shrink-0">
                                                 <i class="fas fa-check text-gold text-xs"></i>
                                             </div>
                                             <span class="text-gray-300">Regência eficiente que facilita a execução da orquestra</span>
-                                    </li>
-                                </ul>
-                            </div>
+                                </li>
+                            </ul>
                         </div>
+                    </div>
 
                             <!-- Maestria Espiritual -->
                             <div class="glass-card p-8 rounded-2xl border border-gold/20 hover:border-gold/40 transition-all group">
@@ -494,10 +557,10 @@
                                 <div class="flex items-center gap-4 mb-6">
                                     <div class="w-16 h-16 bg-gold/10 rounded-full flex items-center justify-center group-hover:scale-110 transition-all">
                                         <i class="fas fa-star text-gold text-2xl"></i>
-                                </div>
+                    </div>
                                     <div class="text-6xl font-black text-gold/20 group-hover:text-gold/30 transition-all">M</div>
-                                </div>
-                                
+                </div>
+
                                 <!-- Conteúdo -->
                                 <div class="space-y-4">
                                     <h3 class="text-2xl font-bold">Maestria Musical</h3>
@@ -508,7 +571,7 @@
                                         <li class="flex items-start gap-3">
                                             <div class="w-6 h-6 bg-gold/10 rounded-full flex items-center justify-center flex-shrink-0">
                                                 <i class="fas fa-check text-gold text-xs"></i>
-                                            </div>
+                                </div>
                                             <span class="text-gray-300">Expressividade e franqueza na condução dos hinos</span>
                                     </li>
                                         <li class="flex items-start gap-3">
@@ -516,17 +579,17 @@
                                                 <i class="fas fa-check text-gold text-xs"></i>
                                             </div>
                                             <span class="text-gray-300">Conexão profunda com os músicos para uma regência inspiradora</span>
-                                        </li>
+                                    </li>
                                         <li class="flex items-start gap-3">
                                             <div class="w-6 h-6 bg-gold/10 rounded-full flex items-center justify-center flex-shrink-0">
                                                 <i class="fas fa-check text-gold text-xs"></i>
-                                            </div>
+                            </div>
                                             <span class="text-gray-300">Adoração que toca corações e transmite a verdadeira mensagem do hino</span>
                                     </li>
                                 </ul>
                             </div>
+                            </div>
                         </div>
-                    </div>
 
                         <!-- CTA -->
                     <div class="text-center mt-12">
@@ -534,14 +597,14 @@
                                 <div class="flex items-center gap-3">
                                     <i class="fas fa-music text-3xl text-white animate-pulse"></i>
                                     <i class="fas fa-music text-3xl text-gold animate-pulse"></i>
-                    </div>
+                                </div>
                                 <p class="text-3xl text-white font-black mb-4 tracking-wide bg-gradient-to-r from-gold to-yellow-500 text-transparent bg-clip-text">
                                     Com o Método D.O.M. da Regência
                                 </p>
                                 <p class="text-lg text-gray-300 max-w-xl mb-8">
                                     Você terá um <span class="font-semibold">caminho claro</span> para reger com <span class="font-semibold">maestria</span>, conduzindo a orquestra com <span class="font-semibold">segurança</span> e transmitindo a <span class="font-semibold">verdadeira essência</span> de cada louvor. <span class="text-gold font-semibold">#TudoPeloReino</span>
                                 </p>
-                </div>
+                            </div>
                             <!-- Botão CTA Principal -->
                             <a href="https://pay.hotmart.com/W90405096Q?off=s810xbhf&checkoutMode=10" class="w-full max-w-2xl mx-auto inline-block bg-gradient-to-r from-gold to-yellow-500 text-darker font-bold text-xl px-12 py-6 rounded-xl hover:scale-105 transition-all group relative overflow-hidden btn-neon">
                                 <span class="relative z-10">QUERO TRANSFORMAR MINHA REGÊNCIA</span>
@@ -549,8 +612,8 @@
                             </a>
                         </div>
                     </div>
+                    </div>
                 </div>
-            </div>
         </div>
     </div>
         </section>
@@ -572,14 +635,14 @@
                             </h2>
                             <p class="text-xl text-gray-400 max-w-2xl mx-auto">
                                 Veja como o método D.O.M. está 
-                                <span class="text-gold">transformando a vida de centenas de encarregados</span>
+                                <span class="text-gold">transformando a vida de mais de mil encarregados</span>
                             </p>
                     </div>
 
                         <!-- Social Proof Numbers -->
                         <div class="flex flex-wrap justify-center gap-8 mb-16">
                             <div class="glass-card p-6 rounded-2xl text-center">
-                                <div class="text-4xl font-bold text-gold mb-2">+300</div>
+                                <div class="text-4xl font-bold text-gold mb-2">+1000</div>
                                 <div class="text-gray-400">Encarregados Formados</div>
                                     </div>
                             <div class="glass-card p-6 rounded-2xl text-center">
@@ -891,7 +954,7 @@
                                 Receba um pacote exclusivo de bônus avaliado em 
                                 <span class="text-gold font-semibold">mais de R$ 3.900</span> 
                                 para você dominar todas as áreas da regência e se tornar um maestro de excelência
-                            </p>
+                                </p>
                             </div>
 
                             <!-- Bônus Grid -->
@@ -907,7 +970,7 @@
                                         </span>
                                         APENAS NA PRIMEIRA HORA
                                     </div>
-                                </div>
+                                        </div>
 
                                 <!-- Contador Regressivo Melhorado -->
                                 <div class="absolute top-4 right-4 md:block hidden">
@@ -1150,11 +1213,11 @@
                                     <div class="flex items-start gap-6">
                                         <div class="w-16 h-16 bg-gold/10 rounded-full flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-all">
                                             <i class="fas fa-book text-gold text-2xl"></i>
-                                        </div>
-                                        <div>
+                                    </div>
+                                    <div>
                                             <div class="flex items-center gap-3 mb-2">
                                                 <h3 class="text-2xl font-bold">Hinário do Maestro</h3>
-                                            </div>
+                                        </div>
                                             <p class="text-gray-400 mb-3">
                                                 Um material exclusivo para você 
                                                 <span class="text-gold font-semibold">entender a estrutura dos hinos</span> 
@@ -1165,9 +1228,9 @@
                                                 <span class="text-red-500 line-through text-lg">R$ 300</span>
                                                 <span class="text-emerald-400 font-bold text-lg">GRÁTIS</span>
                                             </div>
-                                        </div>
                                     </div>
                                 </div>
+                            </div>
 
                                 <!-- Curso Básico de Regência -->
                                 <div class="glass-card p-8 rounded-2xl border border-gold/30 relative group">
@@ -1178,7 +1241,7 @@
                                         <div>
                                             <div class="flex items-center gap-3 mb-2">
                                                 <h3 class="text-2xl font-bold">Curso Básico de Regência</h3>
-                                        </div>
+                                </div>
                                             <p class="text-gray-400 mb-3">
                                                 Se você está começando, esse curso vai te dar uma 
                                                 <span class="text-gold font-semibold">base sólida</span>, 
@@ -1188,10 +1251,10 @@
                                             <div class="flex items-center gap-4">
                                                 <span class="text-red-500 line-through text-lg">R$ 400</span>
                                                 <span class="text-emerald-400 font-bold text-lg">GRÁTIS</span>
-                                    </div>
-                                        </div>
-                                    </div>
-                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
                                 <!-- Ensaios na Prática -->
                                 <div class="glass-card p-8 rounded-2xl border border-gold/30 relative group">
@@ -1456,7 +1519,7 @@
                         </div>
                                             <div class="flex items-center gap-2 bg-accent/80 px-4 py-2 rounded-full text-center">
                             <i class="fas fa-users text-gold"></i>
-                            <span>+300 encarregados formados</span>
+                            <span>+1000encarregados formados</span>
                         </div>
                                             <div class="flex items-center gap-2 bg-accent/80 px-4 py-2 rounded-full text-center">
                             <i class="fas fa-star text-gold"></i>
@@ -1503,8 +1566,8 @@
                                         <div class="text-right">
                                             <span class="text-red-500 line-through text-sm">R$ 200</span>
                                             <span class="text-emerald-400 text-sm ml-2">GRÁTIS</span>
-                                        </div>
-                                    </div>
+                            </div>
+                        </div>
 
                                     <!-- Maestria Internacional (Roxo - Primeiro Dia) -->
                                     <div class="flex items-center justify-between p-3 rounded-xl bg-gradient-to-r from-purple-500/5 to-transparent border border-purple-500/30">
@@ -1842,7 +1905,7 @@
                                         <p class="text-xl text-gray-300">
                                             A Academia atende tanto iniciantes quanto encarregados experientes. 
                                             <span class="text-gold font-semibold">Você aprenderá do básico à maestria</span>, 
-                                            com um método testado e aprovado por +300 encarregados.
+                                            com um método testado e aprovado por +1000 encarregados.
                                         </p>
                                     </div>
                                 </div>

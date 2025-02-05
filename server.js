@@ -57,6 +57,11 @@ app.get("/lp-vd", (req, res) => {
   res.sendFile(path.join(__dirname, "index.html"));
 });
 
+// Nova rota para Academia de Regência
+app.get("/academiaderegencia", (req, res) => {
+  res.sendFile(path.join(__dirname, "index.html"));
+});
+
 // Rota para a página de captura
 app.get("/lp-cp", (req, res) => {
   res.sendFile(path.join(__dirname, "captura.html"));

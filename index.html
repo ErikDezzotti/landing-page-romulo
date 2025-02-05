@@ -323,6 +323,115 @@
             bottom: 0;
             transform: rotate(180deg);
         }
+
+        /* Animações dos Botões */
+        .btn-neon {
+            animation: pulse-scale 2s infinite, neon-glow 3s infinite;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+            will-change: transform, box-shadow;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @keyframes pulse-scale {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+            }
+            50% {
+                transform: scale(1.02);
+                box-shadow: 0 0 25px rgba(255, 215, 0, 0.5);
+            }
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+            }
+        }
+
+        @keyframes neon-glow {
+            0%, 100% {
+                box-shadow: 0 0 15px rgba(255, 215, 0, 0.3),
+                           0 0 30px rgba(255, 215, 0, 0.2),
+                           0 0 45px rgba(255, 215, 0, 0.1);
+            }
+            50% {
+                box-shadow: 0 0 20px rgba(255, 215, 0, 0.4),
+                           0 0 40px rgba(255, 215, 0, 0.3),
+                           0 0 60px rgba(255, 215, 0, 0.2);
+            }
+        }
+
+        .btn-neon:hover {
+            animation-play-state: paused;
+            transform: 
+                perspective(1000px) 
+                scale(1.05) 
+                translateY(-5px) 
+                rotateX(5deg);
+        }
+
+        .btn-neon::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            background: linear-gradient(
+                45deg, 
+                rgba(255, 215, 0, 0.5), 
+                rgba(255, 165, 0, 0.5)
+            );
+            border-radius: inherit;
+            opacity: 0;
+            transition: all 0.4s ease;
+            z-index: -1;
+            filter: blur(10px);
+        }
+
+        .btn-neon:hover::before {
+            opacity: 1;
+            transform: scale(1.1);
+        }
+
+        /* Efeito de partículas brilhantes */
+        @keyframes sparkle {
+            0%, 100% { opacity: 0; transform: scale(0); }
+            50% { opacity: 1; transform: scale(1); }
+        }
+
+        .btn-neon .sparkle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background-color: rgba(255, 215, 0, 0.8);
+            animation: sparkle 1.5s infinite;
+        }
+
+        .btn-neon .sparkle:nth-child(1) { top: 20%; left: 20%; animation-delay: 0s; }
+        .btn-neon .sparkle:nth-child(2) { top: 60%; left: 80%; animation-delay: 0.2s; }
+        .btn-neon .sparkle:nth-child(3) { top: 40%; left: 40%; animation-delay: 0.4s; }
+        .btn-neon .sparkle:nth-child(4) { top: 80%; left: 60%; animation-delay: 0.6s; }
+
+        .btn-neon::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 215, 0, 0.2),
+                transparent
+            );
+            transition: 0.5s;
+        }
+
+        .btn-neon:hover::after {
+            left: 100%;
+        }
     </style>
     <!-- Preload de Recursos Críticos -->
     <link rel="preload" as="font" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/webfonts/fa-brands-400.woff2" crossorigin>
@@ -346,6 +455,341 @@
         src="https://www.facebook.com/tr?id=696368755825539&ev=PageView&noscript=1"/>
     </noscript>
     <!-- End Meta Pixel Code -->
+
+    <!-- Novas regras de media queries para responsividade em telas menores -->
+    <style>
+      /* Media queries para dispositivos móveis com larguras até 414px (ex.: 360x780, 370x822, 379x820, 412x915, 390x844, 393x852) */
+      @media (max-width: 414px) {
+        /* Ajusta os contêineres para evitar overflow lateral */
+        .container {
+          padding-left: 1rem !important;
+          padding-right: 1rem !important;
+          max-width: 100% !important;
+        }
+        
+        /* Reduz espaçamentos em main para telas pequenas */
+        main {
+          padding: 0.5rem 0;
+        }
+        
+        /* Ajustes de tamanhos de fontes para cabeçalhos e parágrafos */
+        h1.text-4xl {
+          font-size: 2rem; /* Reduzido para telas menores */
+        }
+        h1.text-3xl {
+          font-size: 1.75rem;
+        }
+        h2.text-4xl, h2.text-5xl {
+          font-size: 1.8rem;
+        }
+        h3.text-2xl {
+          font-size: 1.4rem;
+        }
+        p.text-lg, p.text-xl {
+          font-size: 0.9rem;
+        }
+        
+        /* Garantir que as imagens não extrapolem a tela */
+        img {
+          max-width: 100%;
+          height: auto;
+        }
+        
+        /* Ajuste dos grids: força exibição em 1 coluna para evitar quebra de layout */
+        .grid {
+          grid-gap: 1rem;
+        }
+        /* Override das classes para colunas definidas em md e lg */
+        .md\:grid-cols-2 {
+          grid-template-columns: 1fr !important;
+        }
+        .lg\:grid-cols-4 {
+          grid-template-columns: 1fr !important;
+        }
+        
+        /* Reduz o padding de botões e cards para melhor ajuste */
+        .btn-neon, .glass-card {
+          padding: 0.75rem !important;
+        }
+
+        /* Ajustes para elementos com posicionamento absoluto para evitar overflow */
+        .absolute {
+          /* Se necessário, limitar a posição para não extrapolar a viewport */
+          left: 0;
+          right: 0;
+        }
+        
+        /* Ajusta a exibição dos textos dos contadores, se precisarem se ajustar */
+        #vagasCounter, #vagasBadge {
+          font-size: 1.5rem;
+        }
+      }
+    </style>
+
+    <!-- Adicione este novo bloco de estilos após os estilos existentes -->
+    <style>
+      @media (max-width: 414px) {
+        /* Ajuste do espaçamento entre seções */
+        section {
+          padding-top: 40px !important;
+          padding-bottom: 40px !important;
+        }
+        
+        /* Correção das badges */
+        .bg-gradient-to-r.from-red-600.to-red-500.px-6.py-2,
+        .bg-gradient-to-r.from-gold.to-yellow-500.px-4.py-1 {
+          white-space: normal !important;
+          text-align: center !important;
+          width: calc(100% - 2rem) !important;
+          max-width: 300px !important;
+          margin: 0 auto !important;
+        }
+
+        /* Ajustes da seção de oferta */
+        .glass-card {
+          margin-left: 0.5rem !important;
+          margin-right: 0.5rem !important;
+        }
+
+        /* Ajuste dos itens da oferta */
+        .flex.items-center.justify-between {
+          flex-wrap: wrap !important;
+          gap: 0.5rem !important;
+        }
+
+        .flex.items-center.justify-between > div {
+          width: 100% !important;
+        }
+
+        /* Ajuste do texto e preço */
+        .text-right {
+          text-align: left !important;
+          margin-top: 0.25rem !important;
+        }
+
+        /* Melhorar legibilidade dos preços */
+        .text-red-500.line-through,
+        .text-emerald-400 {
+          display: inline-block !important;
+          margin-right: 0.5rem !important;
+        }
+
+        /* Ajuste dos botões e CTAs */
+        .btn-neon {
+          width: 100% !important;
+          text-align: center !important;
+          padding: 1rem !important;
+        }
+
+        /* Refinamento dos espaços internos */
+        .space-y-4 {
+          margin-top: 1rem !important;
+          margin-bottom: 1rem !important;
+        }
+
+        /* Ajuste das badges */
+        .absolute.-top-6.left-1\/2.-translate-x-1\/2,
+        .absolute.-top-3.left-4 {
+          width: auto !important;
+          min-width: 200px !important;
+          transform: translateX(-50%) !important;
+          left: 50% !important;
+        }
+
+        /* Correção do container da oferta */
+        .container.mx-auto.px-6.lg\:px-8.max-w-5xl {
+          padding-left: 1rem !important;
+          padding-right: 1rem !important;
+          overflow: hidden !important;
+        }
+
+        /* Ajuste dos cards de benefícios */
+        .glass-card.p-8.rounded-2xl {
+          padding: 1rem !important;
+        }
+
+        /* Melhor organização dos preços */
+        .flex.items-center.gap-4 {
+          flex-wrap: wrap !important;
+          gap: 0.5rem !important;
+          justify-content: flex-start !important;
+        }
+
+        /* Ajuste do título da metodologia */
+        .text-3xl.sm\:text-4xl.lg\:text-5xl {
+          font-size: 1.75rem !important;
+          line-height: 1.2 !important;
+          margin-bottom: 0.5rem !important;
+        }
+
+        /* Espaçamento entre elementos da lista */
+        .space-y-3 > div {
+          margin-bottom: 0.75rem !important;
+        }
+
+        /* Ajuste das badges de destaque */
+        .bg-gradient-to-r.from-gold.to-yellow-500.text-darker.text-sm {
+          padding: 0.5rem 1rem !important;
+          width: auto !important;
+          white-space: nowrap !important;
+        }
+      }
+    </style>
+
+    <style>
+      @media (max-width: 414px) {
+        /* Ajuste específico para as badges vermelhas "APENAS NA PRIMEIRA HORA" */
+        .bg-gradient-to-r.from-red-600.to-red-500.px-6.py-2 {
+          width: auto !important;
+          min-width: 280px !important;
+          white-space: nowrap !important;
+          display: inline-flex !important;
+          justify-content: center !important;
+          align-items: center !important;
+          transform: translateX(-50%) !important;
+          left: 50% !important;
+          position: absolute !important;
+        }
+
+        /* Ajuste específico para as badges douradas "APENAS NO PRIMEIRO DIA" */
+        .bg-gradient-to-r.from-gold.to-yellow-500.px-4.py-1,
+        .bg-gradient-to-r.from-purple-600.to-indigo-600.px-4.py-1 {
+          width: auto !important;
+          min-width: 220px !important;
+          white-space: nowrap !important;
+          display: inline-flex !important;
+          justify-content: center !important;
+          align-items: center !important;
+          font-size: 0.75rem !important;
+        }
+      }
+    </style>
+
+    <style>
+      @media (max-width: 414px) {
+        /* Ajuste específico para a badge "PACOTE DE BÔNUS EXCLUSIVOS PARA VOCÊ" */
+        .bg-gold\/20.text-gold.px-6.py-2.rounded-full.text-sm.font-bold.uppercase.tracking-wider {
+          width: auto !important;
+          min-width: 300px !important;
+          white-space: nowrap !important;
+          display: inline-flex !important;
+          justify-content: center !important;
+          align-items: center !important;
+          padding-left: 1.5rem !important;
+          padding-right: 1.5rem !important;
+          font-size: 0.7rem !important;
+          line-height: 1 !important;
+        }
+      }
+    </style>
+
+    <style>
+      @media (max-width: 414px) {
+        /* Ajuste específico para os cards de Dominando o Hinário e Mentorias */
+        .glass-card .flex.items-start.gap-6 {
+          flex-direction: column !important;
+          align-items: center !important;
+          text-align: center !important;
+          gap: 1.5rem !important;
+        }
+
+        /* Ajuste do ícone */
+        .glass-card .w-16.h-16 {
+          margin-bottom: 0.5rem !important;
+        }
+
+        /* Ajuste do conteúdo */
+        .glass-card .flex.items-start.gap-6 > div {
+          width: 100% !important;
+        }
+
+        /* Ajuste da lista de benefícios */
+        .glass-card ul.space-y-3 {
+          margin-top: 1rem !important;
+          width: 100% !important;
+        }
+
+        /* Ajuste dos itens da lista */
+        .glass-card ul.space-y-3 li {
+          display: flex !important;
+          align-items: center !important;
+          gap: 0.75rem !important;
+          justify-content: center !important;
+          text-align: left !important;
+        }
+
+        /* Ajuste do ícone dentro dos itens da lista */
+        .glass-card ul.space-y-3 li i {
+          flex-shrink: 0 !important;
+        }
+
+        /* Ajuste do texto dentro dos itens da lista */
+        .glass-card ul.space-y-3 li span {
+          flex: 1 !important;
+        }
+
+        /* Ajuste do título */
+        .glass-card h3.text-2xl {
+          margin-bottom: 0.5rem !important;
+          font-size: 1.5rem !important;
+        }
+
+        /* Ajuste do espaçamento entre os cards */
+        .glass-card + .glass-card {
+          margin-top: 1.5rem !important;
+        }
+      }
+    </style>
+
+    <style>
+      @media (max-width: 414px) {
+        /* Ajustes específicos para os cards da seção de bônus */
+        #bonus .glass-card {
+          text-align: center !important;
+        }
+
+        /* Ajuste do container flex dos preços */
+        #bonus .flex.items-center.justify-between {
+          flex-direction: column !important;
+          align-items: center !important;
+          gap: 0.75rem !important;
+        }
+
+        /* Centraliza o texto e preços */
+        #bonus .text-right {
+          text-align: center !important;
+          width: 100% !important;
+        }
+
+        /* Ajuste dos preços */
+        #bonus .text-red-500.line-through,
+        #bonus .text-emerald-400 {
+          display: inline-block !important;
+          margin: 0 0.25rem !important;
+        }
+
+        /* Ajuste do ícone e título */
+        #bonus .flex.items-start.gap-6 {
+          flex-direction: column !important;
+          align-items: center !important;
+          text-align: center !important;
+        }
+
+        /* Ajuste do conteúdo do card */
+        #bonus .flex.items-start.gap-6 > div {
+          width: 100% !important;
+          display: flex !important;
+          flex-direction: column !important;
+          align-items: center !important;
+        }
+
+        /* Ajuste do texto dentro dos cards */
+        #bonus .text-gray-400 {
+          text-align: center !important;
+          margin-bottom: 1rem !important;
+        }
+        }
+    </style>
 </head>
 <body class="bg-dark text-white overflow-x-hidden">
     <!-- Overlay Global Pulsante -->
@@ -440,9 +884,12 @@
                                 </div>
                                 <div class="pt-4 w-full md:w-auto">
                                     <a href="https://pay.hotmart.com/W90405096Q?off=s810xbhf&checkoutMode=10" 
-                                       class="block md:inline-block bg-gradient-to-r from-gold to-yellow-500 text-darker font-bold text-lg md:text-xl px-6 md:px-12 py-4 md:py-6 rounded-xl hover:scale-105 transition-all group relative overflow-hidden btn-neon text-center">
+                                       class="block md:inline-block bg-gradient-to-r from-gold to-yellow-500 text-darker font-bold text-lg md:text-xl px-6 md:px-12 py-4 md:py-6 rounded-xl btn-neon text-center">
                                         <span class="relative z-10 whitespace-normal md:whitespace-nowrap">QUERO TRANSFORMAR MINHA REGÊNCIA</span>
-                                        <div class="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity"></div>
+                                        <div class="sparkle"></div>
+                                        <div class="sparkle"></div>
+                                        <div class="sparkle"></div>
+                                        <div class="sparkle"></div>
                                     </a>
                                 </div>
                             </div>
@@ -579,11 +1026,11 @@
                                                 <i class="fas fa-check text-gold text-xs"></i>
                                             </div>
                                             <span class="text-gray-300">Conexão profunda com os músicos para uma regência inspiradora</span>
-                                    </li>
+                                        </li>
                                         <li class="flex items-start gap-3">
                                             <div class="w-6 h-6 bg-gold/10 rounded-full flex items-center justify-center flex-shrink-0">
                                                 <i class="fas fa-check text-gold text-xs"></i>
-                            </div>
+                                            </div>
                                             <span class="text-gray-300">Adoração que toca corações e transmite a verdadeira mensagem do hino</span>
                                     </li>
                                 </ul>
@@ -591,32 +1038,107 @@
                             </div>
                         </div>
 
+                               <!-- Academia de Regência - Seção Premium -->
+                                </div>
+                    <!-- Conteúdo Principal -->
+                    <div class="container mx-auto px-6 lg:px-8 relative z-10">
+                        <!-- Cabeçalho Premium -->
+                        <div class="text-center mb-16">
+                            <div class="inline-block mt-16">
+                                <span class="bg-gold/20 text-gold px-6 py-2 rounded-full text-sm font-bold uppercase tracking-wider">
+                                    Método Exclusivo CCB
+                                </span>
+                            </div>
+                            <h2 class="text-5xl md:text-6xl font-black mt-6 mb-4 bg-gradient-to-r from-gold to-yellow-500 text-transparent bg-clip-text">
+                                Academia de Regência
+                            </h2>
+                            <p class="text-xl text-gray-400 max-w-3xl mx-auto">
+                                Descubra os 4 pilares que vão <span class="text-gold font-semibold">destravar</span> sua regência e te dar 
+                                <span class="text-gold font-semibold">franqueza</span> na frente da orquestra.
+                            </p>
+                        </div>
+
+                        <!-- Grid de Recursos Premium -->
+                        <div class="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+                            <!-- Dominando o Hinário -->
+                            <div class="glass-card p-8 rounded-2xl hover:bg-white/5 transition-all group">
+                                <div class="flex items-start gap-6">
+                                    <div class="w-16 h-16 bg-gold/10 rounded-full flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-all">
+                                        <i class="fas fa-book-open text-gold text-2xl"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="text-2xl font-bold mb-4">Dominando o Hinário</h3>
+                                        <ul class="space-y-3 text-gray-400">
+                                    <li class="flex items-center gap-3">
+                                                <i class="fas fa-play-circle text-gold text-sm"></i>
+                                                <span>Videoaulas diretas e objetivas (máx. 10 min) para você aprender cada hino da ccb na prática</span>
+                                    </li>
+                                    <li class="flex items-center gap-3">
+                                                <i class="fas fa-search text-gold text-sm"></i>
+                                                <span>Análise detalhada para reger com confiança</span>
+                                            </li>
+                                            <li class="flex items-center gap-3">
+                                                <i class="fas fa-check-circle text-gold text-sm"></i>
+                                                <span>Metodologia D.O.M aplicada!</span>
+                                    </li>
+                                </ul>
+                                    </div>
+                            </div>
+                        </div>
+
+                            <!-- Mentorias em Grupo -->
+                            <div class="glass-card p-8 rounded-2xl hover:bg-white/5 transition-all group">
+                                <div class="flex items-start gap-6">
+                                    <div class="w-16 h-16 bg-gold/10 rounded-full flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-all">
+                                        <i class="fas fa-users text-gold text-2xl"></i>
+                                </div>
+                                    <div>
+                                        <h3 class="text-2xl font-bold mb-4">Mentorias em Grupo</h3>
+                                        <ul class="space-y-3 text-gray-400">
+                                    <li class="flex items-center gap-3">
+                                                <i class="fas fa-video text-gold text-sm"></i>
+                                                <span>Encontros ao vivo para tirar suas dúvidas diretamente comigo</span>
+                                    </li>
+                                    <li class="flex items-center gap-3">
+                                                <i class="fas fa-lightbulb text-gold text-sm"></i>
+                                                <span>Respostas claras e diretas para os desafios da regência</span>
+                                            </li>
+                                            <li class="flex items-center gap-3">
+                                                <i class="fas fa-comments text-gold text-sm"></i>
+                                                <span>Compartilhamento de experiências e soluções reais</span>
+                                    </li>
+                                </ul>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+
                         <!-- CTA -->
                     <div class="text-center mt-12">
                             <div class="flex flex-col items-center justify-center gap-4">
                                 <div class="flex items-center gap-3">
                                     <i class="fas fa-music text-3xl text-white animate-pulse"></i>
                                     <i class="fas fa-music text-3xl text-gold animate-pulse"></i>
-                                </div>
+                    </div>
                                 <p class="text-3xl text-white font-black mb-4 tracking-wide bg-gradient-to-r from-gold to-yellow-500 text-transparent bg-clip-text">
                                     Com o Método D.O.M. da Regência
                                 </p>
                                 <p class="text-lg text-gray-300 max-w-xl mb-8">
                                     Você terá um <span class="font-semibold">caminho claro</span> para reger com <span class="font-semibold">maestria</span>, conduzindo a orquestra com <span class="font-semibold">segurança</span> e transmitindo a <span class="font-semibold">verdadeira essência</span> de cada louvor. <span class="text-gold font-semibold">#TudoPeloReino</span>
                                 </p>
-                            </div>
+                </div>
                             <!-- Botão CTA Principal -->
-                            <a href="https://pay.hotmart.com/W90405096Q?off=s810xbhf&checkoutMode=10" class="w-full max-w-2xl mx-auto inline-block bg-gradient-to-r from-gold to-yellow-500 text-darker font-bold text-xl px-12 py-6 rounded-xl hover:scale-105 transition-all group relative overflow-hidden btn-neon">
+                            <a href="https://pay.hotmart.com/W90405096Q?off=s810xbhf&checkoutMode=10" class="w-full max-w-2xl mx-auto inline-block bg-gradient-to-r from-gold to-yellow-500 text-darker font-bold text-xl px-12 py-6 rounded-xl btn-neon">
                                 <span class="relative z-10">QUERO TRANSFORMAR MINHA REGÊNCIA</span>
-                                <div class="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity"></div>
+                                <div class="sparkle"></div>
+                                <div class="sparkle"></div>
+                                <div class="sparkle"></div>
+                                <div class="sparkle"></div>
                             </a>
                         </div>
                     </div>
-                    </div>
                 </div>
-                        </div>
-                    </div>
-                </section>
+              
 
                 <!-- Depoimentos -->
                 <section id="depoimentos" class="py-20 bg-gradient-to-b from-darker via-dark to-darker relative">
@@ -710,11 +1232,11 @@
                                     <p class="text-gray-300 text-lg leading-relaxed pl-8">
                                         O método D.O.M. revolucionou minha forma de reger. Agora tenho confiança total nos compassos compostos e minha orquestra está mais unida que nunca!
                                     </p>
-                    </div>
+                                </div>
                                 <div class="mt-6 flex items-center gap-4">
                                     <div class="h-px flex-1 bg-gold/20"></div>
                                     <span class="text-gold/60 text-sm">Aluno Certificado</span>
-                </div>
+                                </div>
                     </div>
                 </div>
 
@@ -722,13 +1244,76 @@
                         <div class="text-center">
                             <!-- Video Testimonials Grid -->
                             <div class="max-w-7xl mx-auto mb-16">
-                                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                                     <!-- Video 1 -->
                                     <div class="video-container-wrapper">
                                         <div class="glass-card rounded-2xl overflow-hidden relative group border border-gold/20 hover:border-gold/40 transition-all">
                                     <div class="aspect-[9/16] relative">
                                                 <div class="absolute inset-0 bg-darker/40 group-hover:bg-darker/20 transition-all duration-300"></div>
-                                        <div class="video-container" data-video-id="TMNf4pTWyOM">
+                                        <div class="video-container" data-video-id="4KnJAlyZpMg">
+                                                    <img 
+                                                        class="video-thumbnail w-full h-full object-cover lazy"
+                                                        data-src="https://i.ytimg.com/vi_webp/4KnJAlyZpMg/maxresdefault.webp"
+                                                        alt="Depoimento em Vídeo"
+                                                    />
+                                        <button class="play-button absolute inset-0 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                                            <div class="w-16 h-16 bg-gold/20 rounded-full flex items-center justify-center backdrop-blur-sm border border-gold/30">
+                                                <i class="fas fa-play text-gold text-xl"></i>
+                                            </div>
+                                        </button>
+                                                </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                                    <!-- Video 2 -->
+                                    <div class="video-container-wrapper">
+                                        <div class="glass-card rounded-2xl overflow-hidden relative group border border-gold/20 hover:border-gold/40 transition-all">
+                                    <div class="aspect-[9/16] relative">
+                                                <div class="absolute inset-0 bg-darker/40 group-hover:bg-darker/20 transition-all duration-300"></div>
+                                        <div class="video-container" data-video-id="3FR8XtXT9fY">
+                                                    <img 
+                                                        class="video-thumbnail w-full h-full object-cover lazy"
+                                                        data-src="https://i.ytimg.com/vi_webp/3FR8XtXT9fY/maxresdefault.webp"
+                                                        alt="Depoimento em Vídeo"
+                                                    />
+                                        <button class="play-button absolute inset-0 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                                            <div class="w-16 h-16 bg-gold/20 rounded-full flex items-center justify-center backdrop-blur-sm border border-gold/30">
+                                                <i class="fas fa-play text-gold text-xl"></i>
+                                            </div>
+                                        </button>
+                                                </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                                    <!-- Video 3 -->
+                                    <div class="video-container-wrapper">
+                                        <div class="glass-card rounded-2xl overflow-hidden relative group border border-gold/20 hover:border-gold/40 transition-all">
+                                    <div class="aspect-[9/16] relative">
+                                                <div class="absolute inset-0 bg-darker/40 group-hover:bg-darker/20 transition-all duration-300"></div>
+                                        <div class="video-container" data-video-id="P-DjU7yAkc0">
+                                                    <img 
+                                                        class="video-thumbnail w-full h-full object-cover lazy"
+                                                        data-src="https://i.ytimg.com/vi_webp/P-DjU7yAkc0/maxresdefault.webp"
+                                                        alt="Depoimento em Vídeo"
+                                                    />
+                                        <button class="play-button absolute inset-0 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                                            <div class="w-16 h-16 bg-gold/20 rounded-full flex items-center justify-center backdrop-blur-sm border border-gold/30">
+                                                <i class="fas fa-play text-gold text-xl"></i>
+                                            </div>
+                                        </button>
+                                                </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                                    <!-- Video 4 -->
+                                    <div class="video-container-wrapper">
+                                        <div class="glass-card rounded-2xl overflow-hidden relative group border border-gold/20 hover:border-gold/40 transition-all">
+                                    <div class="aspect-[9/16] relative">
+                                                <div class="absolute inset-0 bg-darker/40 group-hover:bg-darker/20 transition-all duration-300"></div>
+                                                <div class="video-container" data-video-id="TMNf4pTWyOM">
                                                     <img 
                                                         class="video-thumbnail w-full h-full object-cover lazy"
                                                         data-src="https://i.ytimg.com/vi_webp/TMNf4pTWyOM/maxresdefault.webp"
@@ -737,55 +1322,13 @@
                                         <button class="play-button absolute inset-0 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                                             <div class="w-16 h-16 bg-gold/20 rounded-full flex items-center justify-center backdrop-blur-sm border border-gold/30">
                                                 <i class="fas fa-play text-gold text-xl"></i>
-                                    </div>
+                                            </div>
                                         </button>
-                                        </div>
-                                    </div>
                                     </div>
                                 </div>
-
-                                    <!-- Video 2 -->
-                                    <div class="video-container-wrapper">
-                                        <div class="glass-card rounded-2xl overflow-hidden relative group border border-gold/20 hover:border-gold/40 transition-all">
-                                    <div class="aspect-[9/16] relative">
-                                                <div class="absolute inset-0 bg-darker/40 group-hover:bg-darker/20 transition-all duration-300"></div>
-                                        <div class="video-container" data-video-id="NVhAprqBuDc">
-                                                    <img 
-                                                        class="video-thumbnail w-full h-full object-cover lazy"
-                                                        data-src="https://i.ytimg.com/vi_webp/NVhAprqBuDc/maxresdefault.webp"
-                                                        alt="Depoimento em Vídeo"
-                                                    />
-                                        <button class="play-button absolute inset-0 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                                            <div class="w-16 h-16 bg-gold/20 rounded-full flex items-center justify-center backdrop-blur-sm border border-gold/30">
-                                                <i class="fas fa-play text-gold text-xl"></i>
-                                    </div>
-                                        </button>
-                                        </div>
-                                    </div>
-                                    </div>
-                                </div>
-
-                                    <!-- Video 3 -->
-                                    <div class="video-container-wrapper">
-                                        <div class="glass-card rounded-2xl overflow-hidden relative group border border-gold/20 hover:border-gold/40 transition-all">
-                                    <div class="aspect-[9/16] relative">
-                                                <div class="absolute inset-0 bg-darker/40 group-hover:bg-darker/20 transition-all duration-300"></div>
-                                        <div class="video-container" data-video-id="HIfNwAK6OF4">
-                                                    <img 
-                                                        class="video-thumbnail w-full h-full object-cover lazy"
-                                                        data-src="https://i.ytimg.com/vi_webp/HIfNwAK6OF4/maxresdefault.webp"
-                                                        alt="Depoimento em Vídeo"
-                                                    />
-                                        <button class="play-button absolute inset-0 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                                            <div class="w-16 h-16 bg-gold/20 rounded-full flex items-center justify-center backdrop-blur-sm border border-gold/30">
-                                                <i class="fas fa-play text-gold text-xl"></i>
-                                    </div>
-                                        </button>
-                                        </div>
-                                    </div>
-                                </div>
-                                    </div>
-                                        </div>
+                            </div>
+                    </div>
+                </div>
 
                                 <!-- Estilos do Player -->
                 <style>
@@ -817,6 +1360,7 @@
                 <script>
                     document.addEventListener('DOMContentLoaded', function() {
                                         let currentPlayer = null;
+                                        let players = {};
 
                                         // Carrega a API do YouTube
                                         function loadYouTubeAPI() {
@@ -835,16 +1379,24 @@
                                                     const container = this.closest('.video-container');
                                                     const videoId = container.dataset.videoId;
 
-                                                    // Para o player atual se existir
-                                                    if (currentPlayer) {
-                                                        currentPlayer.destroy();
-                                                    }
+                                                    // Para todos os players ativos
+                                                    Object.values(players).forEach(player => {
+                                                        if (player && typeof player.destroy === 'function') {
+                                                            player.destroy();
+                                                        }
+                                                    });
+                                                    players = {};
 
-                                                    // Remove a thumbnail e o botão de play
+                                                    // Remove a classe playing de todos os containers
+                                                    document.querySelectorAll('.video-container').forEach(cont => {
+                                                        cont.classList.remove('playing');
+                                                    });
+
+                                                    // Adiciona a classe playing ao container atual
                                 container.classList.add('playing');
 
                                                     // Cria o novo player
-                                                    currentPlayer = new YT.Player(container, {
+                                                    players[videoId] = new YT.Player(container, {
                                                         videoId: videoId,
                                                         width: '100%',
                                                         height: '100%',
@@ -859,6 +1411,11 @@
                                                         events: {
                                                             onReady: function(event) {
                                                                 event.target.playVideo();
+                                                            },
+                                                            onStateChange: function(event) {
+                                                                if (event.data === YT.PlayerState.ENDED) {
+                                                                    container.classList.remove('playing');
+                                                                }
                                                             }
                                 }
                             });
@@ -878,13 +1435,13 @@
                                                     img.src = img.dataset.src;
                                                     img.classList.remove('lazy');
                                                     observer.unobserve(img);
-                            }
-                        });
-                    });
+                                                }
+                                            });
+                                        });
 
                                         lazyImages.forEach(img => imageObserver.observe(img));
-                                    });
-                                </script>
+                    });
+                </script>
                                 </div>
 
                             <h3 class="text-2xl font-bold mb-8 flex items-center justify-center gap-3">
@@ -927,16 +1484,19 @@
 
                         <!-- CTA -->
                         <div class="text-center mt-16">
-                            <a href="https://pay.hotmart.com/W90405096Q?off=s810xbhf&checkoutMode=10" class="w-full max-w-2xl mx-auto inline-block bg-gradient-to-r from-gold to-yellow-500 text-darker font-bold text-xl px-12 py-6 rounded-xl hover:scale-105 transition-all group relative overflow-hidden btn-neon">
+                            <a href="https://pay.hotmart.com/W90405096Q?off=s810xbhf&checkoutMode=10" class="w-full max-w-2xl mx-auto inline-block bg-gradient-to-r from-gold to-yellow-500 text-darker font-bold text-xl px-12 py-6 rounded-xl btn-neon">
                                 <span class="relative z-10">QUERO FAZER PARTE DESSA TRANSFORMAÇÃO</span>
-                                <div class="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity"></div>
+                                <div class="sparkle"></div>
+                                <div class="sparkle"></div>
+                                <div class="sparkle"></div>
+                                <div class="sparkle"></div>
                             </a>
                         </div>
                     </div>
                 </section>
 
-                 <!-- Bônus -->
-                 <section id="bonus" class="py-20 bg-gradient-to-b from-darker via-dark to-darker relative">
+                <!-- Bônus -->
+                <section id="bonus" class="py-20 bg-gradient-to-b from-darker via-dark to-darker relative">
                     <div class="absolute inset-0 bg-gradient-to-r from-gold/5 via-transparent to-gold/5 opacity-10"></div>
                     <div class="container mx-auto px-6 lg:px-8 max-w-5xl">
                         <!-- Header Principal -->
@@ -1054,9 +1614,6 @@
                                     <div class="flex-1">
                                             <div class="flex items-center gap-3 mb-2">
                                             <h3 class="text-2xl font-bold">Batuta Personalizada Premium</h3>
-                                            <span class="bg-red-500/20 text-red-400 text-xs px-3 py-1 rounded-full animate-pulse whitespace-nowrap hidden md:inline-block">
-                                                RESTAM APENAS 10 VAGAS
-                                            </span>
                                         </div>
                                         <p class="text-gray-400 mb-3">
                                             Receba uma batuta exclusiva feita sob medida para que você 
@@ -1309,24 +1866,24 @@
 
                             <!-- Valor Total com Nova Copy -->
                             <div class="glass-card p-10 rounded-2xl border-2 border-gold/30 text-center relative overflow-hidden group mt-16 shadow-[0_0_15px_rgba(255,215,0,0.2)]">
-                                <!-- Efeito de Brilho -->
-                                <div class="absolute inset-0 bg-gradient-to-r from-gold/0 via-gold/5 to-gold/0 transform -skew-x-12 group-hover:translate-x-full transition-transform duration-1000"></div>
-                                
-                                <div class="relative z-10">
+                                    <!-- Efeito de Brilho -->
+                                    <div class="absolute inset-0 bg-gradient-to-r from-gold/0 via-gold/5 to-gold/0 transform -skew-x-12 group-hover:translate-x-full transition-transform duration-1000"></div>
+                                    
+                                    <div class="relative z-10">
                                     <h3 class="text-3xl font-bold mb-8">Valor Total em Bônus</h3>
                                     <div class="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8 mb-6">
                                         <span class="text-5xl font-black text-red-400 relative">
                                             R$ 3.900
-                                            <div class="absolute inset-0 flex items-center justify-center">
-                                                <div class="h-0.5 w-full bg-red-500 transform rotate-[-12deg]"></div>
-                                            </div>
-                                        </span>
-                                        <span class="text-5xl font-black text-emerald-400">GRÁTIS</span>
+                                                <div class="absolute inset-0 flex items-center justify-center">
+                                                    <div class="h-0.5 w-full bg-red-500 transform rotate-[-12deg]"></div>
                                     </div>
+                                            </span>
+                                        <span class="text-5xl font-black text-emerald-400">GRÁTIS</span>
+                                </div>
                                     <p class="text-xl text-gray-400 mb-6 max-w-[90%] mx-auto">
                                         Você pode continuar tentando sozinho, travando nos hinos compostos, 
-                                        sem saber como corrigir a orquestra e sentindo insegurança na frente dos músicos ou...
-                                    </p>
+                                        sem saber como corrigir a orquestra e sentindo insegurança na frente dos músicos... Ou garantir sua vaga e transformar a regência.
+                                        </p>
                                     <p class="text-2xl font-bold text-gold">Agora é com você!</p>
                                 </div>
                             </div>
@@ -1531,9 +2088,9 @@
                 </div>
 
                 <!-- Opções de Preço -->
-                                    <div class="grid md:grid-cols-1 gap-8 max-w-2xl mx-auto pt-8">
+                                    <div class="grid md:grid-cols-1 gap-8 max-w-5xl mx-auto pt-8">
                     <!-- Plano à Vista -->
-                        <div class="glass-card p-8 sm:p-10 rounded-2xl border border-gold/30 relative overflow-visible group hover:border-gold/50 transition-all mt-6">
+                        <div class="glass-card p-8 sm:p-10 rounded-2xl border border-gold/30 relative overflow-visible group hover:border-gold/50 transition-all mt-6 max-w-5xl mx-auto">
                             <!-- Badge de Melhor Escolha -->
                             <div class="absolute -top-5 left-1/2 -translate-x-1/2 z-20">
                                 <div class="bg-gradient-to-r from-gold to-yellow-500 text-darker text-sm font-bold px-6 py-2 rounded-full shadow-lg whitespace-nowrap">
@@ -1552,24 +2109,118 @@
                         </div>
 
                             <!-- Lista de Bônus -->
-                            <div class="mt-8 space-y-4">
+                            <div class="mt-8 space-y-4 max-w-5xl mx-auto">
                                 <div class="text-center">
                                     <span class="text-sm text-gold/80 font-medium uppercase tracking-wider">Você Receberá</span>
                                 </div>
                                 
+                                <!-- Academia de Regência -->
+                                <div class="space-y-6 mb-8">
+                                    <!-- Título da Academia -->
+                                    <div class="flex items-center justify-center p-4 rounded-xl bg-gradient-to-r from-gold/10 to-transparent border border-gold/40">
+                                        <div class="flex items-center gap-3">
+                                            <i class="fas fa-graduation-cap text-gold text-xl"></i>
+                                            <span class="text-white text-lg font-bold">Academia de Regência Completa</span>
+                            </div>
+                        </div>
+
+                                    <!-- Pilares da Academia -->
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                        <!-- Domínio Técnico -->
+                                        <div class="glass-card p-6 rounded-xl bg-gradient-to-r from-gold/5 to-transparent border border-gold/20 hover:border-gold/40 transition-all group">
+                                            <div class="flex items-start gap-4">
+                                                <div class="w-12 h-12 bg-gold/10 rounded-full flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-all">
+                                                    <i class="fas fa-chart-line text-gold text-xl"></i>
+                                                </div>
+                                                <div class="text-left">
+                                                    <h4 class="text-lg font-bold mb-2 text-white">Domínio Técnico</h4>
+                                                    <p class="text-gray-400 text-sm leading-relaxed">
+                                                        Domine os fundamentos essenciais da regência com técnicas profissionais adaptadas para a CCB.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Organização do Gestual -->
+                                        <div class="glass-card p-6 rounded-xl bg-gradient-to-r from-gold/5 to-transparent border border-gold/20 hover:border-gold/40 transition-all group">
+                                            <div class="flex items-start gap-4">
+                                                <div class="w-12 h-12 bg-gold/10 rounded-full flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-all">
+                                                    <i class="fas fa-hand text-gold text-xl"></i>
+                                                </div>
+                                                <div class="text-left">
+                                                    <h4 class="text-lg font-bold mb-2 text-white">Organização do Gestual</h4>
+                                                    <p class="text-gray-400 text-sm leading-relaxed">
+                                                        Desenvolva gestos claros e precisos para conduzir a orquestra com confiança e maestria.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Maestria Musical -->
+                                        <div class="glass-card p-6 rounded-xl bg-gradient-to-r from-gold/5 to-transparent border border-gold/20 hover:border-gold/40 transition-all group">
+                                            <div class="flex items-start gap-4">
+                                                <div class="w-12 h-12 bg-gold/10 rounded-full flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-all">
+                                                    <i class="fas fa-star text-gold text-xl"></i>
+                                                </div>
+                                                <div class="text-left">
+                                                    <h4 class="text-lg font-bold mb-2 text-white">Maestria Musical</h4>
+                                                    <p class="text-gray-400 text-sm leading-relaxed">
+                                                        Eleve sua interpretação musical e inspire sua orquestra a alcançar novos patamares.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Dominando o Hinário -->
+                                        <div class="glass-card p-6 rounded-xl bg-gradient-to-r from-gold/5 to-transparent border border-gold/20 hover:border-gold/40 transition-all group">
+                                            <div class="flex items-start gap-4">
+                                                <div class="w-12 h-12 bg-gold/10 rounded-full flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-all">
+                                                    <i class="fas fa-book-open text-gold text-xl"></i>
+                                                </div>
+                                                <div class="text-left">
+                                                    <h4 class="text-lg font-bold mb-2 text-white">Dominando o Hinário</h4>
+                                                    <p class="text-gray-400 text-sm leading-relaxed">
+                                                        Aprenda a reger cada hino com análises detalhadas e videoaulas práticas de até 10 minutos.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Mentorias em Grupo -->
+                                        <div class="glass-card p-6 rounded-xl bg-gradient-to-r from-gold/5 to-transparent border border-gold/20 hover:border-gold/40 transition-all group col-span-full">
+                                            <div class="flex items-start gap-4">
+                                                <div class="w-12 h-12 bg-gold/10 rounded-full flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-all">
+                                                    <i class="fas fa-users text-gold text-xl"></i>
+                                                </div>
+                                                <div class="text-left">
+                                                    <h4 class="text-lg font-bold mb-2 text-white">Mentorias em Grupo</h4>
+                                                    <p class="text-gray-400 text-sm leading-relaxed">
+                                                        Participe de sessões exclusivas de mentoria para aprimorar sua técnica e tirar todas as suas dúvidas.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Separador -->
+                                <div class="text-center my-8">
+                                    <span class="text-sm text-gold/80 font-medium uppercase tracking-wider">E Todos Esses Bônus</span>
+                        </div>
+
                                 <!-- Bônus Items -->
-                                <div class="space-y-3">
+                                <div class="space-y-3 max-w-5xl mx-auto">
                                     <!-- Batuta Premium (Vermelho - Primeira Hora) -->
                                     <div class="flex items-center justify-between p-3 rounded-xl bg-gradient-to-r from-red-500/5 to-transparent border border-red-500/30">
-                                        <div class="flex items-center gap-3">
+                                        <div class="flex items-center gap-3 text-left">
                                             <i class="fas fa-wand-magic-sparkles text-red-500"></i>
                                             <span class="text-white">Batuta Personalizada Premium</span>
                                         </div>
-                                        <div class="text-right">
+                                        <div class="text-right flex-shrink-0">
                                             <span class="text-red-500 line-through text-sm">R$ 200</span>
                                             <span class="text-emerald-400 text-sm ml-2">GRÁTIS</span>
-                            </div>
-                        </div>
+                                        </div>
+                                    </div>
 
                                     <!-- Maestria Internacional (Roxo - Primeiro Dia) -->
                                     <div class="flex items-center justify-between p-3 rounded-xl bg-gradient-to-r from-purple-500/5 to-transparent border border-purple-500/30">
@@ -1694,11 +2345,14 @@
                             <!-- CTA -->
                             <div class="mt-8 space-y-4">
                                 <a href="https://pay.hotmart.com/W90405096Q?off=s810xbhf&checkoutMode=10" 
-                                   class="block w-full bg-gradient-to-r from-gold to-yellow-500 text-darker font-bold text-xl px-8 py-4 rounded-xl hover:scale-105 transition-all group relative overflow-hidden btn-neon shadow-[0_0_12px_rgba(255,215,0,0.3)]">
+                                   class="block w-full bg-gradient-to-r from-gold to-yellow-500 text-darker font-bold text-xl px-8 py-4 rounded-xl btn-neon shadow-[0_0_12px_rgba(255,215,0,0.3)]">
                                     <span class="relative z-10 flex items-center justify-center gap-2">
                                         QUERO TRANSFORMAR MINHA REGÊNCIA
                                     </span>
-                                    <div class="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity"></div>
+                                    <div class="sparkle"></div>
+                                    <div class="sparkle"></div>
+                                    <div class="sparkle"></div>
+                                    <div class="sparkle"></div>
                                 </a>
 
                                 <div class="text-center space-y-2">
@@ -1719,7 +2373,7 @@
                 <!-- Última Chamada -->
                 <div class="mt-12 text-center">
                     <p class="text-gray-400 mb-4">
-                        Não deixe a insegurança impedir você de glorificar a Deus com excelência.
+                        Não deixe a insegurança impedir você de glorificar o Mestre com Maestria, ou o Reino.
                         <span class="text-gold">Sua transformação começa hoje.</span>
                     </p>
                     <div class="flex items-center justify-center gap-2 text-sm">
@@ -1829,7 +2483,7 @@
                                             </div>
 
                                             <div class="flex flex-col items-center gap-4">
-                                                <a href="https://pay.hotmart.com/W90405096Q?off=s810xbhf&checkoutMode=10" class="w-full max-w-2xl mx-auto inline-block bg-gradient-to-r from-gold to-yellow-500 text-darker font-bold text-xl px-12 py-6 rounded-xl hover:scale-105 transition-all group relative overflow-hidden btn-neon shadow-[0_0_12px_rgba(255,215,0,0.3)]">
+                                                <a href="https://pay.hotmart.com/W90405096Q?off=s810xbhf&checkoutMode=10" class="w-full max-w-2xl mx-auto inline-block bg-gradient-to-r from-gold to-yellow-500 text-darker font-bold text-xl px-12 py-6 rounded-xl btn-neon shadow-[0_0_12px_rgba(255,215,0,0.3)]">
                                                     <span class="relative z-10">QUERO TRANSFORMAR MINHA REGÊNCIA</span>
                                                     <div class="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity"></div>
                                                 </a>
@@ -1869,7 +2523,7 @@
                                 </span>
                             </h2>
                             <p class="text-xl text-gray-400 max-w-2xl mx-auto relative">
-                                Tire suas últimas dúvidas sobre a <span class="text-gold">Academia de Regência CCB</span> e comece sua transformação hoje mesmo
+                                Tire suas últimas dúvidas sobre a <span class="text-gold">Academia de Regência para Encarregados</span> e comece sua transformação hoje mesmo
                             </p>
                         </div>
 
@@ -1903,7 +2557,7 @@
                                         </div>
                                     </div>
                                     <div>
-                                        <h3 class="text-2xl font-bold mb-4 text-white">E se eu não souber nada de música?</h3>
+                                        <h3 class="text-2xl font-bold mb-4 text-white">E se eu não souber nada de regência?</h3>
                                         <p class="text-xl text-gray-300">
                                             A Academia atende tanto iniciantes quanto encarregados experientes. 
                                             <span class="text-gold font-semibold">Você aprenderá do básico à maestria</span>, 
@@ -1944,7 +2598,7 @@
 
                             <div class="flex flex-col items-center gap-6">
                                 <a href="https://pay.hotmart.com/W90405096Q?off=s810xbhf&checkoutMode=10" 
-                                   class="w-full max-w-2xl mx-auto inline-block bg-gradient-to-r from-gold to-yellow-500 text-darker font-bold text-2xl px-12 py-6 rounded-xl hover:scale-105 transition-all group relative overflow-hidden btn-neon shadow-[0_0_12px_rgba(255,215,0,0.3)]">
+                                   class="w-full max-w-2xl mx-auto inline-block bg-gradient-to-r from-gold to-yellow-500 text-darker font-bold text-2xl px-12 py-6 rounded-xl btn-neon shadow-[0_0_12px_rgba(255,215,0,0.3)]">
                                     <span class="relative z-10">SIM, EU QUERO ME INSCREVER AGORA!</span>
                                     <div class="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity"></div>
                                 </a>

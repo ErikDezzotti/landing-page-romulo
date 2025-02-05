@@ -6,20 +6,49 @@
     <title>Domine a Regência | Método D.O.M.</title>
     
     <!-- Preload de recursos críticos -->
+    <link rel="preload" href="assets/imagens-para-sessoes/533696_1_17115211336603bd6d11d70.webp" as="image" type="image/webp">
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" as="style">
     <link rel="preload" href="https://cdn.tailwindcss.com" as="script">
     
     <!-- Preconnect para domínios externos -->
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-    <link rel="preconnect" href="https://cdn.tailwindcss.com">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin>
     
-    <!-- Font Display Swap -->
-    <style>
-        @font-face {
-            font-family: system-ui;
-            font-display: swap;
+    <!-- Otimização de imagens com srcset -->
+    <script>
+        // Função para carregar imagens de forma otimizada
+        function loadOptimizedImages() {
+            const images = document.querySelectorAll('img[data-src]');
+            const imageOptions = {
+                root: null,
+                rootMargin: '50px',
+                threshold: 0.1
+            };
+
+            const imageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        img.src = img.dataset.src;
+                        if (img.dataset.srcset) {
+                            img.srcset = img.dataset.srcset;
+                        }
+                        img.classList.remove('lazy');
+                        observer.unobserve(img);
+                    }
+                });
+            }, imageOptions);
+
+            images.forEach(img => imageObserver.observe(img));
         }
-    </style>
+
+        // Carregar imagens quando o DOM estiver pronto
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', loadOptimizedImages);
+        } else {
+            loadOptimizedImages();
+        }
+    </script>
     
     <!-- Lazy Loading de Imagens -->
     <script>
@@ -47,25 +76,52 @@
     
     <!-- Otimização de Performance -->
     <script>
-        // Defer de scripts não críticos
-        function loadDeferredStyles() {
-            var addStylesNode = document.getElementById("deferred-styles");
-            var replacement = document.createElement("div");
-            replacement.innerHTML = addStylesNode.textContent;
-            document.body.appendChild(replacement);
-            addStylesNode.parentElement.removeChild(addStylesNode);
+        // Defer de scripts não críticos com priorização
+        const deferredScripts = [
+            { src: 'script.js', priority: 'high' },
+            { src: 'https://connect.facebook.net/en_US/fbevents.js', priority: 'low' }
+        ];
+
+        function loadDeferredScripts() {
+            deferredScripts.sort((a, b) => a.priority === 'high' ? -1 : 1)
+                .forEach(script => {
+                    const scriptEl = document.createElement('script');
+                    scriptEl.src = script.src;
+                    scriptEl.async = true;
+                    document.body.appendChild(scriptEl);
+                });
         }
-        var raf = window.requestAnimationFrame || window.mozRequestAnimationFrame ||
-            window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
-        if (raf) raf(function() { window.setTimeout(loadDeferredStyles, 0); });
-        else window.addEventListener('load', loadDeferredStyles);
+
+        // Otimização de performance com requestIdleCallback
+        if ('requestIdleCallback' in window) {
+            requestIdleCallback(() => {
+                loadDeferredScripts();
+            }, { timeout: 2000 });
+        } else {
+            setTimeout(loadDeferredScripts, 100);
+        }
+
+        // Otimização de renderização
+        document.addEventListener('DOMContentLoaded', () => {
+            requestAnimationFrame(() => {
+                const elements = document.querySelectorAll('.scroll-reveal');
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('visible');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.1 });
+
+                elements.forEach(el => observer.observe(el));
+            });
+        });
     </script>
-    
-    <!-- Cache Control -->
-    <meta http-equiv="Cache-Control" content="max-age=31536000, immutable">
-    
-    <!-- Compression -->
-    <script type="module" src="script.js"></script>
+
+    <!-- Cache e Compressão -->
+    <link rel="dns-prefetch" href="https://connect.facebook.net">
+    <meta http-equiv="Cache-Control" content="public, max-age=31536000, immutable">
     
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -802,9 +858,19 @@
             <!-- Background Image com Gradiente -->
             <div class="absolute inset-0 z-0">
                 <img 
-                    src="assets/imagens-para-sessoes/533696_1_17115211336603bd6d11d70.webp"
+                    src="assets/imagens-para-sessoes/533696_1_17115211336603bd6d11d70.webp" 
                     alt="Background" 
-                    class="w-full h-full object-cover opacity-40"
+                    class="w-full h-full object-cover opacity-80"
+                    srcset="
+                        assets/imagens-para-sessoes/533696_1_17115211336603bd6d11d70-mobile.webp 480w,
+                        assets/imagens-para-sessoes/533696_1_17115211336603bd6d11d70-tablet.webp 768w,
+                        assets/imagens-para-sessoes/533696_1_17115211336603bd6d11d70.webp 1920w
+                    "
+                    sizes="100vw"
+                    fetchpriority="high"
+                    loading="eager"
+                    decoding="async"
+                    style="content-visibility: auto;"
                 />
                 <div class="absolute inset-0 bg-gradient-to-b from-transparent via-darker to-darker"></div>
             </div>
@@ -2507,7 +2573,7 @@
                                             <div class="mb-8">
                                                 <span class="text-gray-400 line-through text-xl">R$ 1.297</span>
                                                 <div class="text-4xl font-bold mt-2">
-                                                    12x de <span class="text-gold">R$ 59,58</span>
+                                                    12x de <span class="text-gold">R$ 49,00</span>
                                                     <span class="text-xl text-gray-400">ou R$ 597 à vista</span>
                                                 </div>
                                             </div>

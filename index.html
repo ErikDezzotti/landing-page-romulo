@@ -520,6 +520,89 @@
         .btn-neon:hover::after {
             left: 100%;
         }
+
+        /* Novo estilo do botão verde com animação de neon */
+        .btn-neon {
+          background: linear-gradient(90deg, #25D366, #34eb98) !important;
+          color: white !important;
+          border: none !important;
+          position: relative !important;
+          overflow: hidden !important;
+          transition: all 0.3s ease !important;
+          box-shadow: 0 0 15px rgba(37, 211, 102, 0.3) !important;
+        }
+
+        /* Efeito de onda neon dentro do botão */
+        .btn-neon::before {
+          content: '' !important;
+          position: absolute !important;
+          top: -50% !important;
+          left: -50% !important;
+          width: 200% !important;
+          height: 200% !important;
+          background: radial-gradient(
+            circle,
+            rgba(255, 255, 255, 0.2) 0%,
+            rgba(37, 211, 102, 0.1) 30%,
+            transparent 70%
+          ) !important;
+          animation: neonWave 3s linear infinite !important;
+          opacity: 0.7 !important;
+        }
+
+        /* Mantendo o efeito de pulsar existente e adicionando brilho */
+        .btn-neon:hover {
+          transform: scale(1.05) !important;
+          box-shadow: 0 0 25px rgba(37, 211, 102, 0.5) !important;
+          background: linear-gradient(90deg, #34eb98, #25D366) !important;
+        }
+
+        /* Animação da onda de neon */
+        @keyframes neonWave {
+          0% {
+            transform: rotate(0deg) !important;
+          }
+          100% {
+            transform: rotate(360deg) !important;
+          }
+        }
+
+        /* Efeito de brilho adicional */
+        .btn-neon::after {
+          content: '' !important;
+          position: absolute !important;
+          top: 0 !important;
+          left: -100% !important;
+          width: 100% !important;
+          height: 100% !important;
+          background: linear-gradient(
+            90deg,
+            transparent,
+            rgba(255, 255, 255, 0.2),
+            transparent
+          ) !important;
+          animation: neonShine 3s infinite !important;
+        }
+
+        @keyframes neonShine {
+          0% {
+            left: -100% !important;
+          }
+          50% {
+            left: 100% !important;
+          }
+          100% {
+            left: 100% !important;
+          }
+        }
+
+        /* Reforço do texto */
+        .btn-neon span {
+          position: relative !important;
+          z-index: 1 !important;
+          font-weight: bold !important;
+          text-shadow: 0 0 10px rgba(255, 255, 255, 0.3) !important;
+        }
     </style>
     <!-- Preload de Recursos Críticos -->
     <link rel="preload" as="font" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/webfonts/fa-brands-400.woff2" crossorigin>
@@ -1201,7 +1284,7 @@
                                         <span class="leading-relaxed">Compartilhamento de <span class="text-gold font-semibold">experiências transformadoras</span></span>
                                     </li>
                                 </ul>
-                            </div>
+                        </div>
 
                             <!-- Método Regência na Prática -->
                             <div class="glass-card p-8 rounded-2xl backdrop-blur-md bg-white/5 border border-gold/20 hover:border-gold/40 hover:bg-white/10 transition-all group flex flex-col items-center transform hover:scale-105 hover:shadow-2xl hover:shadow-gold/20">
@@ -2463,7 +2546,7 @@
                                     <span class="text-red-500 line-through text-lg">De R$ 1.297</span>
                                     <div class="text-4xl font-black">
                                         <span class="bg-gradient-to-r from-gold to-yellow-500 bg-clip-text text-transparent">
-                                            12x de R$ 49,00 apenas
+                                            12x de R$ 59,60 apenas
                                         </span>
                                     </div>
                                     <p class="text-white text-lg">ou R$ 597 à vista</p>
@@ -2605,7 +2688,7 @@
                                             <div class="mb-8">
                                                 <span class="text-gray-400 line-through text-xl">R$ 1.297</span>
                                                 <div class="text-4xl font-bold mt-2">
-                                                    12x de <span class="text-gold">R$ 49,00</span>
+                                                    12x de <span class="text-gold">R$ 56,90</span>
                                                     <span class="text-xl text-gray-400">ou R$ 597 à vista</span>
                                                 </div>
                                             </div>

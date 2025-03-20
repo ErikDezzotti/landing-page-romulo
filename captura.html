@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Domine a Regência | Método D.O.M.</title>
+    <title>Masterclass para Encarregados e Instrutores | Método D.O.M.</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -38,6 +38,64 @@
             font-family: system-ui, -apple-system, sans-serif;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Ajuste da imagem para diferentes tamanhos de tela */
+        @media (min-width: 1920px) {
+            .maestro-image-desktop {
+                translate: -25% -5% !important;
+                scale: 95% !important;
+                height: 80% !important;
+            }
+        }
+
+        @media (max-width: 1600px) {
+            .maestro-image-desktop {
+                translate: -22% -5% !important;
+                scale: 90% !important;
+                height: 75% !important;
+            }
+        }
+
+        @media (max-width: 1440px) {
+            .maestro-image-desktop {
+                translate: -18% -5% !important;
+                scale: 85% !important;
+                height: 72% !important;
+            }
+        }
+
+        @media (max-width: 1366px) {
+            .maestro-image-desktop {
+                translate: -15% -5% !important;
+                scale: 82% !important;
+                height: 70% !important;
+            }
+        }
+
+        @media (max-width: 1280px) {
+            .maestro-image-desktop {
+                translate: -12% -5% !important;
+                scale: 80% !important;
+                height: 68% !important;
+            }
+            
+            .form-container {
+                max-width: 520px !important;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .maestro-image-desktop {
+                display: none !important;
+            }
+        }
+
+        /* Ajustes específicos para o formulário em telas menores */
+        @media (max-width: 1366px) {
+            .form-container {
+                padding: 1.5rem !important;
+            }
         }
 
         /* Otimizações Mobile */
@@ -157,13 +215,13 @@
             }
 
             .form-section {
-                margin-top: 55vh;
+                margin-top: 41vh;
             }
         }
 
         @media (max-width: 820px) {
             .form-section {
-                margin-top: 50vh;
+                margin-top: 38vh;
             }
         }
 
@@ -178,7 +236,7 @@
             }
 
             .form-section {
-                margin-top: 45vh;
+                margin-top: 34vh;
             }
         }
     </style>
@@ -230,31 +288,31 @@
         </div>
 
         <!-- Expert em Primeiro Plano -->
-        <div class="absolute inset-0 flex items-center justify-end z-20 pointer-events-none" style="transform: translateY(-5%);">
+        <div class="absolute inset-0 flex items-center justify-end z-20 pointer-events-none">
             <!-- Desktop Version (apenas para telas grandes) -->
             <img 
-                src="./assets/imagens-para-sessoes/romulocursofoto-pg-cp.webp" 
+                src="./assets/imagens-para-sessoes/imagemdefundo-pagina-captura.webp" 
                 alt="Maestro Expert" 
-                class="hidden lg:block h-[110%] w-auto object-contain object-right transform translate-x-[5%] lg:translate-x-[8%] xl:translate-x-[15%] 2xl:translate-x-[5%] scale-105 transition-transform duration-300"
+                class="hidden lg:block h-[80%] w-auto object-contain object-right transform translate-y-[-5%] translate-x-[-25%] scale-95 transition-transform duration-300 maestro-image-desktop"
                 style="filter: drop-shadow(0 0 30px rgba(255, 215, 0, 0.2));"
             >
         </div>
 
         <!-- Mobile e Tablet Expert Image -->
-        <div class="lg:hidden absolute inset-0 flex items-start justify-center z-20 pointer-events-none pt-4">
+        <div class="lg:hidden absolute inset-0 flex items-start justify-center z-20 pointer-events-none" style="padding-top: 3vh;">
             <img 
-                src="./assets/imagens-para-sessoes/romulocursofoto-pg-cp.webp" 
+                src="./assets/imagens-para-sessoes/imagemdefundo-pagina-captura.webp" 
                 alt="Maestro Expert" 
-                class="h-[45vh] sm:h-[50vh] md:h-[55vh] w-auto object-contain object-top transform scale-110 transition-transform duration-300"
+                class="h-[40vh] xs:h-[43vh] sm:h-[46vh] md:h-[50vh] w-auto object-contain object-top transform scale-100 transition-transform duration-300"
                 style="filter: drop-shadow(0 0 30px rgba(255, 215, 0, 0.2));"
             >
         </div>
 
         <!-- Hero Content -->
         <div class="container max-w-6xl mx-auto relative z-40">
-            <div class="grid lg:grid-cols-2 gap-6 lg:gap-12 items-start lg:items-center">
+            <div class="grid lg:grid-cols-2 gap-6 lg:gap-8 xl:gap-12 items-start lg:items-center">
                 <!-- Form Section -->
-                <div class="p-3 xs:p-4 sm:p-6 md:p-8 rounded-lg xs:rounded-xl sm:rounded-2xl relative z-50 mt-[45vh] sm:mt-[50vh] md:mt-[55vh] lg:mt-0 w-full max-w-[95vw] xs:max-w-[90vw] sm:max-w-[85vw] md:max-w-[600px] mx-auto backdrop-blur-md"
+                <div class="form-container p-3 xs:p-4 sm:p-6 md:p-8 rounded-lg xs:rounded-xl sm:rounded-2xl relative z-50 mt-[41vh] sm:mt-[46vh] md:mt-[48vh] lg:mt-0 w-full max-w-[95vw] xs:max-w-[90vw] sm:max-w-[85vw] md:max-w-[600px] lg:max-w-[520px] xl:max-w-[600px] mx-auto backdrop-blur-md"
                     style="background: linear-gradient(145deg, rgba(255, 255, 255, 0.85), rgba(255, 252, 245, 0.88));">
                     <!-- Social Proof Compacto -->
                     <div class="flex items-center justify-center gap-2 xs:gap-3 mb-4 xs:mb-6">
@@ -273,15 +331,15 @@
                         <h1 class="text-lg xs:text-xl sm:text-2xl lg:text-3xl font-bold mb-1.5 xs:mb-2 sm:mb-3 px-1 xs:px-2">
                             <div class="flex flex-col gap-0.5 xs:gap-1">
                                 <span class="relative text-darker font-black tracking-wide text-base xs:text-lg sm:text-xl lg:text-2xl" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.15);">
-                                    MASTERCLASS DE REGÊNCIA
+                                    MASTERCLASS
                                 </span>
                                 <span class="text-darker font-extrabold text-sm xs:text-base sm:text-lg lg:text-xl" style="text-shadow: 1px 1px 2px rgba(0,0,0,0.1);">
-                                    PARA ENCARREGADOS DA CCB
+                                    PARA ENCARREGADOS E INSTRUTORES DA CCB
                                 </span>
                             </div>
                         </h1>
                         <h2 class="text-xl xs:text-2xl sm:text-3xl lg:text-4xl font-black mb-2 xs:mb-3 sm:mb-4" style="background: linear-gradient(145deg, #FFD700, #DAA520); -webkit-background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 2px 2px rgba(0,0,0,0.2)); letter-spacing: 0.5px; line-height: 1.2;">
-                            "O DESTRAVAR DO DOM"
+                            DOMINE A REGÊNCIA
                         </h2>
                         <p class="text-darker/70 text-xs xs:text-sm sm:text-base lg:text-lg max-w-[95%] xs:max-w-[90%] sm:max-w-[85%] md:max-w-[600px] mx-auto mb-3 xs:mb-4 sm:mb-6 px-1 xs:px-2 sm:px-4">
                             <span class="text-darker font-bold">Descubra na prática</span> o método em 
@@ -338,7 +396,7 @@
                             <div class="flex items-center gap-2">
                                 <i class="far fa-calendar-alt text-black text-sm opacity-90"></i>
                                 <div class="flex flex-col">
-                                    <span class="text-[12px] md:text-[15px] font-semibold text-darker tracking-wide">5 DE FEVEREIRO</span>
+                                    <span class="text-[12px] md:text-[15px] font-semibold text-darker tracking-wide">8 DE ABRIL</span>
                                     <span class="text-[9px] md:text-[12px] text-darker/70">Às 21:45</span>
                                 </div>
                             </div>

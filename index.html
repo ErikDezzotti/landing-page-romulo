@@ -2128,7 +2128,7 @@
                                                     </span>
                 </div>
                                                 <p class="text-white/90 text-sm font-medium">
-                                                    ATENÇÃO: Apenas <span id="vagasBadge" class="font-bold text-white">392</span> vagas restantes nesta turma
+                                                    ATENÇÃO: Apenas <span id="vagasBadge" class="font-bold text-white">383</span> vagas restantes nesta turma
                                                 </p>
                                             </div>
                                         </div>
@@ -2553,7 +2553,7 @@
                                     <span class="text-red-500 line-through text-lg">De R$ 1.297</span>
                                     <div class="text-4xl font-black">
                                         <span class="bg-gradient-to-r from-gold to-yellow-500 bg-clip-text text-transparent">
-                                            12x de R$ 59,60 apenas
+                                            12x de R$ 61,74 apenas
                                         </span>
                                     </div>
                                     <p class="text-white text-lg">ou R$ 597 à vista</p>
@@ -2695,7 +2695,7 @@
                                             <div class="mb-8">
                                                 <span class="text-gray-400 line-through text-xl">R$ 1.297</span>
                                                 <div class="text-4xl font-bold mt-2">
-                                                    12x de <span class="text-gold">R$ 59,60</span>
+                                                    12x de <span class="text-gold">R$ 61,74</span>
                                                     <span class="text-xl text-gray-400">ou R$ 597 à vista</span>
                                                 </div>
                                             </div>
@@ -2888,41 +2888,66 @@ document.getElementById('leadForm').addEventListener('submit', async function(e)
     <!-- Contador de Vagas Premium -->
     <div class="fixed bottom-6 right-6 z-50">
         <div class="relative group">
-            <!-- Efeito Glass Fosco Premium com Borda Refinada -->
-            <div class="absolute inset-0 rounded-2xl bg-gradient-to-r from-gold/5 to-gold/10 backdrop-blur-[8px] border border-[#FFD700]/20 shadow-lg"
+            <!-- Efeito Glass Fosco Premium com Borda Refinada e Animação Dourada -->
+            <div class="absolute inset-0 rounded-2xl bg-gradient-to-r from-gold/5 to-gold/10 backdrop-blur-[8px] border border-[#FFD700]/20 shadow-lg golden-pulse-bg"
                  style="background: linear-gradient(145deg, rgba(255, 215, 0, 0.05), rgba(255, 215, 0, 0.02));">
             </div>
             
             <!-- Conteúdo do Contador -->
-            <div class="relative px-6 py-4 flex items-center gap-4">
-                <!-- Ícone Pulsante -->
-                <div class="relative">
-                    <span class="flex h-2.5 w-2.5">
-                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-500 opacity-60"></span>
-                        <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-red-600"></span>
-                    </span>
+            <div class="relative px-4 py-3 flex items-center gap-3 w-[280px]">
+                <!-- Layout reorganizado -->
+                <div class="flex items-center flex-shrink-0">
+                    <!-- Ícone Vermelho -->
+                    <div class="relative mr-2">
+                        <span class="flex h-3 w-3">
+                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-500 opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-3 w-3 bg-red-600"></span>
+                        </span>
+                    </div>
+                    
+                    <!-- Número do Contador -->
+                    <div class="w-[60px] text-center">
+                        <span id="vagasCounter" class="text-2xl font-black bg-gradient-to-r from-gold to-yellow-500 bg-clip-text text-transparent inline-block">383</span>
+                    </div>
                 </div>
                 
-                <!-- Texto do Contador -->
-                <div class="flex flex-col">
-                    <div class="flex items-baseline gap-2">
-                        <div class="relative overflow-hidden h-8">
-                            <span id="vagasCounter" class="text-2xl font-black bg-gradient-to-r from-gold to-yellow-500 bg-clip-text text-transparent inline-block">392</span>
-                        </div>
-                        <span class="text-white/80 text-sm font-medium tracking-wide">vagas restantes</span>
-                    </div>
-                    <p class="text-[10px] text-white/60 font-medium tracking-wide">Turma com vagas limitadas</p>
+                <!-- Textos em Coluna com Prevenção de Quebra -->
+                <div class="flex flex-col min-w-0">
+                    <span class="text-white/80 text-sm font-medium tracking-wide whitespace-nowrap">vagas restantes</span>
+                    <p class="text-[10px] text-white/60 font-medium tracking-wide whitespace-nowrap overflow-hidden text-ellipsis">Turma com vagas limitadas</p>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- Estilo para Animação Dourada do Contador -->
+    <style>
+        @keyframes golden-pulse {
+            0% {
+                box-shadow: 0 0 5px rgba(255, 215, 0, 0.1), inset 0 0 5px rgba(255, 215, 0, 0.1);
+                background: linear-gradient(145deg, rgba(255, 215, 0, 0.05), rgba(255, 215, 0, 0.02));
+            }
+            50% {
+                box-shadow: 0 0 15px rgba(255, 215, 0, 0.3), inset 0 0 10px rgba(255, 215, 0, 0.2);
+                background: linear-gradient(145deg, rgba(255, 215, 0, 0.1), rgba(255, 215, 0, 0.05));
+            }
+            100% {
+                box-shadow: 0 0 5px rgba(255, 215, 0, 0.1), inset 0 0 5px rgba(255, 215, 0, 0.1);
+                background: linear-gradient(145deg, rgba(255, 215, 0, 0.05), rgba(255, 215, 0, 0.02));
+            }
+        }
+        
+        .golden-pulse-bg {
+            animation: golden-pulse 3s infinite ease-in-out;
+        }
+    </style>
 
     <!-- Script do Contador Unificado -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const counterElement = document.getElementById('vagasCounter');
             const badgeElement = document.getElementById('vagasBadge');
-            let currentValue = 392; // Valor inicial fixo
+            let currentValue = 383; // Valor inicial fixo
             const targetValue = 41;
             const interval = 4000; // 7 segundos
 

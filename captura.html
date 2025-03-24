@@ -3,6 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <!-- Meta tags para prevenir cache -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
     <title>Masterclass para Encarregados e Instrutores | Método D.O.M.</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
@@ -403,7 +407,7 @@
         <div class="absolute inset-0 z-0">
             <!-- Camada 1: Imagem da Orquestra -->
             <img 
-                src="./assets/imagens-para-sessoes/533696_1_17115211336603bd6d11d70.webp" 
+                src="./assets/imagens-para-sessoes/533696_1_17115211336603bd6d11d70.webp?v=1.1" 
                 alt="Background" 
                 class="absolute inset-0 w-full h-full object-cover opacity-80"
             >
@@ -425,7 +429,7 @@
         <div class="absolute inset-0 flex items-end justify-end z-20 pointer-events-none">
             <!-- Desktop Version (apenas para telas grandes) -->
             <img 
-                src="./assets/imagens-para-sessoes/imagemdefundo-pagina-captura.webp" 
+                src="./assets/imagens-para-sessoes/imagemdefundo-pagina-captura.webp?v=1.1" 
                 alt="Maestro Expert" 
                 class="hidden lg:block h-[95%] w-auto object-contain object-bottom transform translate-y-[0%] translate-x-[-15%] scale-110 transition-transform duration-300 maestro-image-desktop"
                 style="filter: drop-shadow(0 0 30px rgba(255, 215, 0, 0.2));"
@@ -435,7 +439,7 @@
         <!-- Mobile e Tablet Expert Image -->
         <div class="lg:hidden absolute inset-0 flex items-start justify-center z-20 pointer-events-none" style="padding-top: -10vh;">
             <img 
-                src="./assets/imagens-para-sessoes/imagemdefundo-pagina-captura.webp" 
+                src="./assets/imagens-para-sessoes/imagemdefundo-pagina-captura.webp?v=1.1" 
                 alt="Maestro Expert" 
                 class="h-[40vh] xs:h-[43vh] sm:h-[46vh] md:h-[50vh] w-auto object-contain object-top transform translate-y-[-18%] scale-110 transition-transform duration-300"
                 style="filter: drop-shadow(0 0 30px rgba(255, 215, 0, 0.2));"
@@ -753,7 +757,7 @@
                                 
                                 <!-- Imagem -->
                                 <img 
-                                    src="./assets/imagens-para-sessoes/WhatsApp Image 2025-01-19 at 14.24.41.jpeg"
+                                    src="./assets/imagens-para-sessoes/WhatsApp Image 2025-01-19 at 14.24.41.jpeg?v=1.1"
                                     alt="Maestro Rômulo Moreira"
                                     class="w-full aspect-[4/5] object-cover object-center transform scale-105 transition-transform duration-700 group-hover:scale-110"
                                 >
@@ -957,6 +961,34 @@
             if (href.endsWith('.html')) {
                 link.setAttribute('href', href.replace('.html', ''));
             }
+        });
+    </script>
+    <!-- Script para forçar recarregamento de imagens -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Função para forçar o recarregamento de imagens
+            function reloadImages() {
+                const images = document.querySelectorAll('img');
+                images.forEach(img => {
+                    const src = img.src;
+                    if (src.includes('assets/imagens-para-sessoes')) {
+                        // Adiciona ou atualiza parâmetro de timestamp para evitar cache
+                        const timestamp = new Date().getTime();
+                        img.src = src.split('?')[0] + '?t=' + timestamp;
+                    }
+                });
+            }
+            
+            // Recarrega imagens quando a página carrega
+            reloadImages();
+            
+            // Também recarrega quando o usuário volta para a página
+            window.addEventListener('pageshow', function(event) {
+                // Verifica se a página foi carregada do cache
+                if (event.persisted) {
+                    reloadImages();
+                }
+            });
         });
     </script>
 </body>

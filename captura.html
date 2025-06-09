@@ -148,18 +148,18 @@
         /* Ajuste específico para iPad Air */
         @media (width: 820px) and (height: 1180px) {
             .form-container {
-                margin-top: 18vh !important;
+                margin-top: calc(18vh + 40px) !important;
                 padding: 1.5rem !important;
             }
             
             .lg:hidden.absolute.inset-0.flex.items-start.justify-center {
-                padding-top: -36vh !important;
+                padding-top: 20px !important;
             }
             
             .lg:hidden.absolute.inset-0.flex.items-start.justify-center img {
                 height: 42vh !important;
                 object-position: top -10px center !important;
-                transform: translate-y(-10%) scale(115%) !important;
+                transform: translate-y(-10%) scale(16%) !important;
             }
             
             .space-y-3 {
@@ -180,6 +180,13 @@
             .lg:hidden.absolute.inset-0.flex.items-start.justify-center img {
                 height: 38vh !important;
                 transform: translate-y(-15%) scale(95%) !important;
+            }
+        }
+
+        /* Ajuste geral para dispositivos móveis - 20px de padding-top */
+        @media (max-width: 1024px) {
+            .lg:hidden.absolute.inset-0.flex.items-start.justify-center {
+                padding-top: 20px !important;
             }
         }
 
@@ -436,7 +443,7 @@
         </div>
 
         <!-- Mobile e Tablet Expert Image -->
-        <div class="lg:hidden absolute inset-0 flex items-start justify-center z-20 pointer-events-none" style="padding-top: -10vh;">
+        <div class="lg:hidden absolute inset-0 flex items-start justify-center z-20 pointer-events-none" style="padding-top: 20px;">
             <img 
                 src="./assets/imagens-para-sessoes/imagemdefundo-pagina-captura.webp?v=1.1" 
                 alt="Maestro Expert" 

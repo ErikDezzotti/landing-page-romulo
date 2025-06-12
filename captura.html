@@ -15,6 +15,7 @@
     <!-- Preload de recursos críticos para mobile -->
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" as="style">
     <link rel="preload" href="https://cdn.tailwindcss.com" as="script">
+    <link rel="preload" href="./assets/imagens-para-sessoes/imagemdefundo-pagina-captura.webp?v=1.1" as="image" fetchpriority="high" imagesizes="100vw">
     
     <!-- Preconnect para domínios externos -->
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
@@ -456,6 +457,19 @@
             let scrolled = (winScroll / height) * 100;
             document.getElementById("progressBar").style.width = scrolled + "%";
         }, {passive: true});
+        
+        // Pré-carregamento de imagem crítica para melhorar LCP
+        (function() {
+            const preloadMainImage = new Image();
+            preloadMainImage.src = './assets/imagens-para-sessoes/imagemdefundo-pagina-captura.webp?v=1.1';
+            preloadMainImage.importance = 'high';
+            preloadMainImage.onload = function() {
+                // Quando a imagem estiver carregada, informa ao navegador que o LCP está pronto
+                if ('LargestContentfulPaint' in window.performance) {
+                    performance.mark('lcp-loaded');
+                }
+            };
+        })();
     </script>
 
     <!-- Hero Section -->
@@ -492,6 +506,7 @@
                 class="hidden lg:block h-[95%] w-auto object-contain object-bottom transform translate-y-[0%] translate-x-[-15%] scale-110 transition-transform duration-300 maestro-image-desktop"
                 style="filter: drop-shadow(0 0 30px rgba(255, 215, 0, 0.2));"
                 fetchpriority="high"
+                decoding="async"
             >
         </div>
 
@@ -503,6 +518,7 @@
                 class="h-[40vh] xs:h-[43vh] sm:h-[46vh] md:h-[50vh] w-auto object-contain object-top transform translate-y-[2%] scale-110 transition-transform duration-300"
                 style="filter: drop-shadow(0 0 30px rgba(255, 215, 0, 0.2));"
                 fetchpriority="high"
+                decoding="async"
             >
         </div>
 
@@ -915,6 +931,33 @@
     </section>
     <!-- Scripts otimizados para performance mobile -->
     <script src="/router.js" defer></script>
+    
+    <!-- Otimização para LCP (Largest Contentful Paint) -->
+    <script>
+        // Otimização específica para o LCP - Renderização de imagem principal
+        (function() {
+            if ('requestIdleCallback' in window) {
+                requestIdleCallback(function() {
+                    // Após carregar a imagem principal, otimizar outras partes
+                    const styles = document.createElement('style');
+                    styles.innerHTML = `
+                        @media (max-width: 768px) {
+                            img[fetchpriority="high"] {
+                                will-change: auto;
+                                contain: paint;
+                            }
+                        }
+                    `;
+                    document.head.appendChild(styles);
+                    
+                    // Marca no Performance API que o LCP foi otimizado
+                    if (window.performance && performance.mark) {
+                        performance.mark('lcp-optimized');
+                    }
+                }, {timeout: 2000});
+            }
+        })();
+    </script>
     
     <!-- Carregamento otimizado de IMask para mobile -->
     <script>

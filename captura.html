@@ -83,7 +83,7 @@
             overscroll-behavior-y: none;
             -webkit-tap-highlight-color: transparent;
         }
-        
+
         /* Otimização para conteúdo abaixo da dobra */
         @media (max-width: 768px) {
             .below-fold {
@@ -916,130 +916,163 @@
             </div>
         </div>
     </section>
-    <!-- Scripts otimizados para performance mobile -->
-    <script src="/router.js" defer></script>
-    
-    <!-- Carregamento otimizado de IMask para mobile -->
+    <!-- Script Unificado e Otimizado para Formulário -->
     <script>
-        // Otimização para carregamento de IMask
+        // Variáveis globais para IMask e controle
+        let phoneMask = null;
+        let isFormSubmitting = false;
+
+        // Inicialização quando DOM carregar
         document.addEventListener('DOMContentLoaded', function() {
             const phoneInput = document.getElementById('telefone');
+            const submitBtn = document.getElementById('submitBtn');
             
-            if (!phoneInput) return;
-            
-            // Carregar IMask sob demanda ao focar no campo
-            phoneInput.addEventListener('focus', function initMaskOnFocus() {
-                // Remover o listener para não executar novamente
-                phoneInput.removeEventListener('focus', initMaskOnFocus);
-                
-                // Carregar IMask dinamicamente
-                const script = document.createElement('script');
-                script.src = 'https://unpkg.com/imask';
-                script.async = true;
-                
-                script.onload = function() {
-                    if (typeof IMask !== 'undefined') {
-                        IMask(phoneInput, {
-                mask: '(00) 00000-0000'
-                        });
-                    }
-                };
-                
-                document.head.appendChild(script);
-            }, {once: true}); // once: true garante que o evento executa apenas uma vez
-            });
-
             // Validação de email
             function isValidEmail(email) {
                 const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
                 return re.test(email);
             }
 
-            // Manipulador do formulário
-            document.getElementById('submitBtn').addEventListener('click', async function(e) {
-                e.preventDefault();
-                
-                const submitBtn = this;
-                const feedbackMessage = document.getElementById('feedbackMessage');
-                const nomeInput = document.getElementById('nome');
-                const emailInput = document.getElementById('email');
-                
-                // Reset visual state
-                [nomeInput, phoneInput, emailInput].forEach(input => {
-                    input.style.border = '2px solid transparent';
-                });
-                feedbackMessage.classList.add('hidden');
-                feedbackMessage.textContent = '';
-
-                // Validações de campo
-                if (!nomeInput.value.trim()) {
-                    nomeInput.style.border = '2px solid rgba(239, 68, 68, 0.5)';
-                    feedbackMessage.className = 'mt-4 p-4 rounded-xl text-center font-medium bg-red-100/90 text-red-800';
-                    feedbackMessage.textContent = 'Ops! Esqueceu de nos dizer seu nome';
-                    feedbackMessage.classList.remove('hidden');
-                    return;
+            // Carregar e inicializar IMask
+            function initPhoneMask() {
+                if (phoneInput && !phoneMask) {
+                    const script = document.createElement('script');
+                    script.src = 'https://unpkg.com/imask';
+                    script.async = true;
+                    
+                    script.onload = function() {
+                        if (typeof IMask !== 'undefined') {
+                            phoneMask = IMask(phoneInput, {
+                                mask: '(00) 00000-0000'
+                            });
+                        }
+                    };
+                    
+                    document.head.appendChild(script);
                 }
+            }
 
-                if (!phoneMask.unmaskedValue || phoneMask.unmaskedValue.length < 11) {
-                    phoneInput.style.border = '2px solid rgba(239, 68, 68, 0.5)';
-                    feedbackMessage.className = 'mt-4 p-4 rounded-xl text-center font-medium bg-red-100/90 text-red-800';
-                    feedbackMessage.textContent = 'Ei! Coloca seu WhatsApp certinho pra eu poder te chamar 📱';
-                    feedbackMessage.classList.remove('hidden');
-                    return;
-                }
+            // Inicializar máscara no primeiro foco
+            if (phoneInput) {
+                phoneInput.addEventListener('focus', initPhoneMask, { once: true });
+            }
 
-                if (!emailInput.value.trim() || !isValidEmail(emailInput.value.trim())) {
-                    emailInput.style.border = '2px solid rgba(239, 68, 68, 0.5)';
-                    feedbackMessage.className = 'mt-4 p-4 rounded-xl text-center font-medium bg-red-100/90 text-red-800';
-                    feedbackMessage.textContent = 'Hmm... Esse e-mail não parece certo. Dá uma conferida? 📧';
-                    feedbackMessage.classList.remove('hidden');
-                    return;
-                }
-
-                // Desabilita o botão e mostra loading
-                submitBtn.disabled = true;
-                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
-                
-                try {
-                    const response = await fetch('/submit-form', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({
-                            name: nomeInput.value.trim(),
-                            phone: phoneMask.unmaskedValue,
-                            email: emailInput.value.trim()
-                        })
+            // ÚNICO Manipulador do formulário
+            if (submitBtn) {
+                submitBtn.addEventListener('click', async function(e) {
+                    e.preventDefault();
+                    
+                    // Prevenir múltiplas submissões
+                    if (isFormSubmitting) return;
+                    isFormSubmitting = true;
+                    
+                    const feedbackMessage = document.getElementById('feedbackMessage');
+                    const nomeInput = document.getElementById('nome');
+                    const emailInput = document.getElementById('email');
+                    
+                    // Reset visual state
+                    [nomeInput, phoneInput, emailInput].forEach(input => {
+                        if (input) input.style.border = '2px solid transparent';
                     });
                     
-                    const result = await response.json();
-                    
-                    if (response.ok && result.success) {
-                        // Sucesso - Dispara evento e mostra mensagem
-                        fbq('track', 'Lead');
-                        feedbackMessage.className = 'mt-4 p-4 rounded-xl text-center font-medium bg-green-100 text-green-800';
-                        feedbackMessage.textContent = 'Boa! Tudo certo com seu cadastro. 🎉';
-                        feedbackMessage.classList.remove('hidden');
-                        
-                        // Redireciona após 2 segundos
-                        setTimeout(() => {
-                            window.location.href = '/lp-ob';
-                        }, 2000);
-                    } else {
-                        // Se a resposta não foi ok ou success é false, trata como erro
-                        throw new Error(result.message || 'Falha no envio');
+                    if (feedbackMessage) {
+                        feedbackMessage.classList.add('hidden');
+                        feedbackMessage.textContent = '';
                     }
-                } catch (error) {
-                    console.error('Erro:', error);
-                    // Reseta o botão
-                    submitBtn.disabled = false;
-                    submitBtn.innerHTML = '<span class="relative z-10">QUERO COMEÇAR AGORA!</span><div class="absolute inset-0 bg-gradient-to-r from-yellow-400 to-gold opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>';
+
+                    // Obter valores dos campos
+                    const nome = nomeInput ? nomeInput.value.trim() : '';
+                    const email = emailInput ? emailInput.value.trim() : '';
+                    const telefone = phoneInput ? phoneInput.value.trim() : '';
                     
-                    // Mantém o erro oculto, já que sabemos que está funcionando
-                    feedbackMessage.classList.add('hidden');
+                    // Validações de campo
+                    if (!nome) {
+                        showError(nomeInput, feedbackMessage, 'Ops! Esqueceu de nos dizer seu nome');
+                        isFormSubmitting = false;
+                        return;
+                    }
+
+                    // Validar telefone (com ou sem máscara)
+                    const telefoneNumbers = telefone.replace(/\D/g, '');
+                    if (!telefoneNumbers || telefoneNumbers.length < 11) {
+                        showError(phoneInput, feedbackMessage, 'Ei! Coloca seu WhatsApp certinho pra eu poder te chamar 📱');
+                        isFormSubmitting = false;
+                        return;
+                    }
+
+                    if (!email || !isValidEmail(email)) {
+                        showError(emailInput, feedbackMessage, 'Hmm... Esse e-mail não parece certo. Dá uma conferida? 📧');
+                        isFormSubmitting = false;
+                        return;
+                    }
+
+                    // Desabilita o botão e mostra loading
+                    submitBtn.disabled = true;
+                    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
+                    
+                    try {
+                        const response = await fetch('/submit-form', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify({
+                                name: nome,
+                                phone: telefoneNumbers,
+                                email: email
+                            })
+                        });
+                        
+                        const result = await response.json();
+                        
+                        if (response.ok && result.success) {
+                            // Sucesso - Dispara evento e mostra mensagem
+                            if (typeof fbq === 'function') {
+                                fbq('track', 'Lead');
+                            }
+                            
+                            if (feedbackMessage) {
+                                feedbackMessage.className = 'mt-4 p-4 rounded-xl text-center font-medium bg-green-100 text-green-800';
+                                feedbackMessage.textContent = 'Boa! Tudo certo com seu cadastro. 🎉';
+                                feedbackMessage.classList.remove('hidden');
+                            }
+                            
+                            // Redireciona após 2 segundos
+                            setTimeout(() => {
+                                window.location.href = '/lp-ob';
+                            }, 2000);
+                        } else {
+                            throw new Error(result.message || 'Falha no envio');
+                        }
+                    } catch (error) {
+                        console.error('Erro:', error);
+                        // Reseta o botão
+                        submitBtn.disabled = false;
+                        submitBtn.innerHTML = '<span class="relative z-10">QUERO COMEÇAR AGORA!</span><div class="absolute inset-0 bg-gradient-to-r from-yellow-400 to-gold opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>';
+                        
+                        // Mostra erro genérico
+                        if (feedbackMessage) {
+                            feedbackMessage.className = 'mt-4 p-4 rounded-xl text-center font-medium bg-red-100/90 text-red-800';
+                            feedbackMessage.textContent = 'Ops! Algo deu errado. Tente novamente em alguns segundos.';
+                            feedbackMessage.classList.remove('hidden');
+                        }
+                    } finally {
+                        isFormSubmitting = false;
+                    }
+                });
+            }
+
+            // Função para mostrar erros
+            function showError(input, feedbackElement, message) {
+                if (input) {
+                    input.style.border = '2px solid rgba(239, 68, 68, 0.5)';
                 }
-            });
+                if (feedbackElement) {
+                    feedbackElement.className = 'mt-4 p-4 rounded-xl text-center font-medium bg-red-100/90 text-red-800';
+                    feedbackElement.textContent = message;
+                    feedbackElement.classList.remove('hidden');
+                }
+            }
         });
     </script>
     <script>
@@ -1114,96 +1147,43 @@
     </script>
 </body>
 <script>
-    // Manipulador do formulário - Otimizado para performance
-    document.getElementById('submitBtn')?.addEventListener('click', async function(e) {
-        e.preventDefault();
-        
-        const submitBtn = this;
-        const feedbackMessage = document.getElementById('feedbackMessage');
-        const nome = document.getElementById('nome')?.value || '';
-        const email = document.getElementById('email')?.value || '';
-        const telefone = document.getElementById('telefone')?.value || '';
-
-        // Validação básica
-        if (!nome || !email || !telefone) {
-            if (feedbackMessage) {
-            feedbackMessage.className = 'mt-4 p-4 rounded-xl text-center font-medium bg-red-100/90 text-red-800';
-            feedbackMessage.textContent = 'Por favor, preencha todos os campos.';
-            feedbackMessage.classList.remove('hidden');
+    // Processamento de URL otimizado e eventos de scroll
+    document.addEventListener('DOMContentLoaded', function() {
+        // Processar links HTML
+        const links = document.querySelectorAll('a[href]');
+        for (let i = 0; i < links.length; i++) {
+            const link = links[i];
+            const href = link.getAttribute('href');
+            if (href && href.endsWith('.html')) {
+                link.setAttribute('href', href.replace('.html', ''));
             }
-            return;
         }
         
-        // Desabilita o botão e mostra loading
-        submitBtn.disabled = true;
-        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
+        // Delegação de eventos para scroll suave
+        document.addEventListener('click', function(e) {
+            const anchor = e.target.closest('a[href^="#"]');
+            if (anchor) {
+                e.preventDefault();
+                const targetId = anchor.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'center'
+                    });
+                }
+            }
+        });
         
-        try {
-            // Formata o telefone para envio (apenas números)
-            const telefoneFormatado = telefone.replace(/\D/g, '');
-            
-            const response = await fetch('/submit-form', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    nome,
-                    email,
-                    telefone: telefoneFormatado
-                })
+        // Otimizações para mobile
+        if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+            // Aplicar otimizações para dispositivos móveis
+            document.querySelectorAll('.below-fold').forEach(function(el) {
+                el.style.contentVisibility = 'auto';
+                el.style.containIntrinsicSize = '1px 5000px';
             });
-            
-            const result = await response.json();
-            
-            if (result.success) {
-                // Dispara evento de conversão do Facebook Pixel
-                if (typeof fbq === 'function') {
-                fbq('track', 'Lead');
-                }
-                
-                if (feedbackMessage) {
-                feedbackMessage.className = 'mt-4 p-4 rounded-xl text-center font-medium bg-green-100 text-green-800';
-                feedbackMessage.textContent = 'Cadastro realizado com sucesso! Redirecionando...';
-                feedbackMessage.classList.remove('hidden');
-                }
-                
-                // Redireciona para página de obrigado
-                setTimeout(() => {
-                    window.location.href = '/lp-ob';
-                }, 2000);
-            } else {
-                throw new Error(result.message || 'Erro ao processar cadastro');
-            }
-        } catch (error) {
-            console.error('Erro:', error);
-            // Reseta o botão
-            submitBtn.disabled = false;
-            submitBtn.innerHTML = '<span class="relative z-10">QUERO COMEÇAR AGORA!</span><div class="absolute inset-0 bg-gradient-to-r from-yellow-400 to-gold opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>';
-            
-            // Mantém o erro oculto, já que sabemos que está funcionando
-            if (feedbackMessage) {
-            feedbackMessage.classList.add('hidden');
-            }
         }
-    });
-</script>
-<script>
-    // Otimização de eventos de scroll - Usando delegação de eventos para economizar memória
-    document.addEventListener('click', function(e) {
-        // Verificar se o elemento clicado é um link com href começando com #
-        const anchor = e.target.closest('a[href^="#"]');
-        if (anchor) {
-            e.preventDefault();
-            const targetId = anchor.getAttribute('href');
-            const targetElement = document.querySelector(targetId);
-            
-            if (targetElement) {
-                // Rolagem suave com performance otimizada
-                targetElement.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'center'
-                });
-            }
-            }
     });
 </script>
 </html>

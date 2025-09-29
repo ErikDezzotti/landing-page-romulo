@@ -1718,8 +1718,8 @@
 
                             <!-- Bônus Grid -->
                         <div class="space-y-8 mb-16">
-                            <!-- Bônus Ultra Exclusivo - Primeira Hora -->
-                            <div class="glass-card p-8 rounded-2xl border-2 border-red-500/30 relative">
+                            <!-- Bônus Ultra Exclusivo - Primeira Hora - ESCONDIDO -->
+                            <div class="glass-card p-8 rounded-2xl border-2 border-red-500/30 relative" style="display: none;">
                                 <!-- Badge de Urgência Máxima -->
                                 <div class="absolute -top-6 left-1/2 -translate-x-1/2 z-20 whitespace-nowrap">
                                     <div class="bg-gradient-to-r from-red-600 to-red-500 px-6 py-2 rounded-full text-white text-sm font-bold shadow-lg flex items-center gap-2">
@@ -1804,7 +1804,7 @@
                                     });
                                 </script>
 
-                                <div class="flex items-start gap-6 mt-4">
+                                <div class="flex items-start gap-6 mt-4" style="display: none;">
                                     <div class="w-16 h-16 bg-red-500/10 rounded-full flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-all">
                                         <i class="fas fa-wand-magic-sparkles text-red-500 text-2xl"></i>
                                     </div>
@@ -1813,9 +1813,9 @@
                                             <h3 class="text-2xl font-bold">Batuta Personalizada Premium</h3>
                                         </div>
                                         <p class="text-gray-400 mb-3">
-                                            Receba uma batuta exclusiva feita sob medida para que você 
-                                            <span class="text-red-400 font-semibold">conduza a orquestra com precisão e autoridade</span>, 
-                                            garantindo seu lugar entre os 
+                                            Receba uma batuta exclusiva feita sob medida para que você
+                                            <span class="text-red-400 font-semibold">conduza a orquestra com precisão e autoridade</span>,
+                                            garantindo seu lugar entre os
                                             <span class="text-red-400 font-semibold">10 primeiros maestros</span>
                                         </p>
                                         <div class="flex items-center gap-4">
@@ -1849,7 +1849,7 @@
                                     <!-- Badge Primeiro Dia -->
                                     <div class="absolute -top-3 left-4">
                                         <div class="bg-gradient-to-r from-purple-600 to-indigo-600 px-4 py-1 rounded-full text-white text-xs font-bold">
-                                            APENAS NO PRIMEIRO DIA
+                                            BÔNUS EXCLUSIVO
                                 </div>
                                     </div>
 
@@ -1880,7 +1880,7 @@
                                     <!-- Badge Primeiro Dia -->
                                     <div class="absolute -top-3 left-4">
                                         <div class="bg-gradient-to-r from-gold to-yellow-500 px-4 py-1 rounded-full text-darker text-xs font-bold">
-                                            APENAS NO PRIMEIRO DIA
+                                            BÔNUS EXCLUSIVO
                                         </div>
                                     </div>
 
@@ -1911,7 +1911,7 @@
                                     <!-- Badge Primeiro Dia -->
                                     <div class="absolute -top-3 left-4">
                                         <div class="bg-gradient-to-r from-gold to-yellow-500 px-4 py-1 rounded-full text-darker text-xs font-bold">
-                                            APENAS NO PRIMEIRO DIA
+                                            BÔNUS EXCLUSIVO
                                         </div>
                                     </div>
 
@@ -2428,8 +2428,8 @@
 
                                 <!-- Bônus Items -->
                                 <div class="space-y-3 max-w-5xl mx-auto">
-                                    <!-- Batuta Premium (Vermelho - Primeira Hora) -->
-                                    <div class="flex items-center justify-between p-3 rounded-xl bg-gradient-to-r from-red-500/5 to-transparent border border-red-500/30">
+                                    <!-- Batuta Premium (Vermelho - Primeira Hora) - ESCONDIDO -->
+                                    <div class="flex items-center justify-between p-3 rounded-xl bg-gradient-to-r from-red-500/5 to-transparent border border-red-500/30" style="display: none;">
                                         <div class="flex items-center gap-3 text-left">
                                             <i class="fas fa-wand-magic-sparkles text-red-500"></i>
                                             <span class="text-white">Batuta Personalizada Premium</span>
@@ -2548,15 +2548,61 @@
                                     </div>
                                 </div>
                                 
-                                <!-- Preço Final -->
-                                <div class="text-center space-y-2">
-                                    <span class="text-red-500 line-through text-lg">De R$ 1.297</span>
-                                    <div class="text-4xl font-black">
-                                        <span class="bg-gradient-to-r from-gold to-yellow-500 bg-clip-text text-transparent">
-                                            12x de R$ 61,74 apenas
-                                        </span>
+                                <!-- Preço Final - Design Premium Sexy -->
+                                <div class="text-center py-12 relative">
+                                    <!-- Glow Effect Background -->
+                                    <div class="absolute inset-0 bg-gradient-to-r from-gold/20 via-yellow-500/15 to-gold/20 blur-3xl animate-pulse"></div>
+
+                                    <!-- Preço Principal - Sexy & Elegant -->
+                                    <div class="relative">
+                                        <!-- Badge Premium -->
+                                        <div class="inline-block mb-6">
+                                            <div class="bg-gradient-to-r from-gold/20 to-yellow-500/20 backdrop-blur-sm px-4 py-1.5 rounded-full border border-gold/30">
+                                                <span class="text-gold text-xs font-medium tracking-[0.2em] uppercase">Oferta Limitada</span>
+                                            </div>
+                                        </div>
+
+                                        <!-- Valor Mensal - Hero Style -->
+                                        <div class="relative">
+                                            <!-- Preço Container -->
+                                            <div class="flex items-baseline justify-center gap-2 mb-4">
+                                                <span class="text-white/40 text-2xl font-extralight">R$</span>
+                                                <span class="relative">
+                                                    <!-- Número Principal em Branco -->
+                                                    <span class="text-8xl md:text-9xl font-bold text-white">87</span>
+                                                    <!-- Efeito de Brilho -->
+                                                    <div class="absolute -inset-4 bg-gradient-to-r from-white/10 to-white/5 blur-2xl opacity-60"></div>
+                                                </span>
+                                                <div class="flex flex-col items-start">
+                                                    <span class="text-white text-2xl font-light">/mês</span>
+                                                </div>
+                                            </div>
+
+                                            <!-- Micro-copy Premium -->
+                                            <div class="space-y-3">
+                                                <!-- Valor por dia com destaque -->
+                                                <div class="flex items-center justify-center gap-3">
+                                                    <div class="h-px w-12 bg-gradient-to-r from-transparent to-gold/30"></div>
+                                                    <span class="text-white/80 text-sm font-light tracking-wide">
+                                                        Menos que um <span class="text-gold font-semibold">café</span> por dia
+                                                    </span>
+                                                    <div class="h-px w-12 bg-gradient-to-l from-transparent to-gold/30"></div>
+                                                </div>
+
+                                                <!-- Features do pagamento -->
+                                                <div class="flex items-center justify-center gap-6 text-xs">
+                                                    <div class="flex items-center gap-1.5 text-emerald-400/80">
+                                                        <i class="fas fa-check-circle text-emerald-400"></i>
+                                                        <span>Acesso Imediato</span>
+                                                    </div>
+                                                    <div class="flex items-center gap-1.5 text-emerald-400/80">
+                                                        <i class="fas fa-shield-alt text-emerald-400"></i>
+                                                        <span>Garantia 7 dias</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <p class="text-white text-lg">ou R$ 597 à vista</p>
                                 </div>
                             </div>
 
